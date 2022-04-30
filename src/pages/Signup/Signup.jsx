@@ -37,10 +37,10 @@ const Signup = () => {
     username,
     password,
     password2,
-    phone_number,
-    name,
-    company_registration_number,
-    store_name,
+    // phone_number,
+    // name,
+    // company_registration_number,
+    // store_name,
   } = inputValue;
 
   const regEx = (target, targetName) => {
