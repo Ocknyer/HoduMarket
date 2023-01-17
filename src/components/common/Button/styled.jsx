@@ -1,79 +1,49 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+const setSize = (size) => {
+  switch (size) {
+    case "lg":
+      return css`
+        padding: 19px 0;
+        font-size: 24px;
+        line-height: 30px;
+      `;
+    case "md":
+      return css`
+        padding: 19px 0;
+        font-size: 18px;
+        line-height: 22px;
+      `;
+    case "sm":
+      return css`
+        padding: 17px 0;
+        line-height: 20px;
+      `;
+    default:
+      return css`
+        padding: 10px 0;
+      `;
+  }
+};
 
 export const Btn = styled.button`
-  width: ${({ size }) => {
-    switch (size) {
-      case "xs":
-        return "80px";
-      case "sm":
-        return "166px";
-      case "md":
-        return "480px";
-      case "lg":
-        return "220px";
-      default:
-        return "100%";
-    }
-  }};
+  width: ${({ width }) => width || "80px"};
+  padding: ${({ padding }) => padding};
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: ${({ fw }) => fw || "500"};
+  background: ${({ bc }) => bc || "#21BF48"};
+  color: ${({ color }) => color || "white"};
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 
-  height: ${({ size }) => {
-    switch (size) {
-      case "xs":
-        return "40px";
-      case "sm":
-        return "54px";
-      case "md":
-        return "60px";
-      case "lg":
-        return "68px";
-      default:
-        return "40px";
-    }
-  }};
+  &:disabled {
+    background-color: #c4c4c4;
+    cursor: not-allowed;
+  }
 
-  border: ${({ state }) => {
-    switch (state) {
-      case "disabeld":
-        return "none";
-      case "active":
-        return "1px solid";
-      default:
-        return "none";
-    }
-  }};
-
-  border-color: ${({ state }) =>
-    state === "disabled" ? "none" : "var(--greyC4)"};
-
-  border-radius: ${({ size }) => {
-    switch (size) {
-      case "xs":
-        return "26px";
-      case "sm":
-        return "32px";
-      case "md":
-        return "30px";
-      case "lg":
-        return "44px";
-      default:
-        return "44px";
-    }
-  }};
-
-  background-color: ${({ state }) => {
-    switch (state) {
-      case "active":
-        return "#fff";
-      case "disabled":
-        return "var(--main-disabled-color)";
-      default:
-        return "var(--main-color)";
-    }
-  }};
-
-  font-weight: ${({ size }) => (size === "xs" ? "400" : "500")};
-
-  color: ${({ state }) => (state === "active" ? "var(--grey76)" : "#fff")};
+  ${({ size }) => setSize(size)}
 `;
 
 export default Btn;
