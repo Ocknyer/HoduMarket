@@ -3,7 +3,21 @@ import styled from "styled-components";
 export const FooterWrapper = styled.div`
   width: 1280px;
   padding: 55px 0;
-  margin: 0 auto;
+  position: fixed;
+  transform: translate(-50%, 0);
+  left: 50%;
+  bottom: 0;
+
+  .inner-data {
+    font-size: 14px;
+    color: var(--grey76);
+    padding-top: 30px;
+    line-height: 24px;
+
+    > h3 {
+      font-weight: 700;
+    }
+  }
 `;
 
 export const InnerHeader = styled.div`
@@ -20,6 +34,10 @@ export const InnerHeader = styled.div`
     > a {
       font-size: 14px;
       color: black;
+    }
+
+    .bold {
+      font-weight: 700;
     }
   }
 
