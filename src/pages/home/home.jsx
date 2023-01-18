@@ -1,3 +1,4 @@
+import Footer from "../../components/common/Footer/Footer";
 import Header from "../../components/header/Header";
 
 const Home = () => {
@@ -5,6 +6,7 @@ const Home = () => {
     <div>
       <Header />
       Home
+      <Footer />
     </div>
   );
 };
