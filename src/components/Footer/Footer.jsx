@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { FooterWrapper, InnerHeader } from "./styled";
 
-import insta from "../../../assets/img/icon-insta.svg";
-import facebook from "../../../assets/img/icon-fb.svg";
-import youtube from "../../../assets/img/icon-yt.svg";
+import insta from "../../assets/img/icon-insta.svg";
+import facebook from "../../assets/img/icon-fb.svg";
+import youtube from "../../assets/img/icon-yt.svg";
 
 const Footer = () => {
   return (

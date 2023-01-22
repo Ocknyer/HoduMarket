@@ -26,9 +26,8 @@ const setSize = (size) => {
   }
 };
 
-export const Button = styled.button`
+const Button = styled.button`
   width: ${({ width }) => width || "80px"};
-  padding: ${({ padding }) => padding};
   line-height: 20px;
   font-size: 16px;
   font-weight: ${({ fw }) => fw || "500"};
@@ -45,3 +44,5 @@ export const Button = styled.button`
 
   ${({ size }) => setSize(size)}
 `;
+
+export default Button;
