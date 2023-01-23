@@ -12,18 +12,6 @@ export const LoginWrapper = styled.div`
     margin-bottom: 70px;
   }
 
-  .btn-wrapper {
-    width: 100%;
-
-    > button {
-      width: 50%;
-      padding: 20px;
-      font-size: 18px;
-      border: 1px solid var(--greyC4);
-      border-radius: 10px;
-    }
-  }
-
   .link-wrapper {
     display: flex;
     gap: 16px;
@@ -51,7 +39,7 @@ export const LoginSection = styled.section`
 
     &::placeholder {
       font-size: 16px;
-      /* color: var(--grey76); */
+      color: var(--grey76);
     }
 
     &:nth-child(2) {
