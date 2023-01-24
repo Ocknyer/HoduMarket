@@ -1,5 +1,7 @@
+import { SignUpWrapper } from "./styled";
+
 const UserSignUp = () => {
-  return <div>UserSignUp</div>;
+  return <SignUpWrapper>UserSignUp</SignUpWrapper>;
 };
 
 export default UserSignUp;
