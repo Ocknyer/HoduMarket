@@ -22,7 +22,7 @@ export const LoginWrapper = styled.div`
   }
 `;
 
-export const LoginSection = styled.section`
+export const LoginSection = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -30,6 +30,7 @@ export const LoginSection = styled.section`
   border: 1px solid var(--greyC4);
   border-radius: 10px;
   margin-bottom: 30px;
+  background-color: #fff;
 
   > input {
     height: 60px;

@@ -11,7 +11,10 @@ const UserLogin = () => {
   return (
     <LoginWrapper>
       <img src={logo} alt="" />
-      <UserTab />
+      <UserTab>
+        <button type="button">구매회원 로그인</button>
+        <button type="button">판매회원 로그인</button>
+      </UserTab>
       <LoginSection>
         <input type="text" placeholder="아이디" />
         <input type="text" placeholder="비밀번호" />
