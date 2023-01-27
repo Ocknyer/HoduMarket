@@ -10,14 +10,14 @@ import UserTab from "../UserTab/UserTab";
 const UserLogin = () => {
   return (
     <LoginWrapper>
-      <img src={logo} alt="" />
+      <img src={logo} alt="호두마켓 로고" />
       <UserTab>
         <button type="button">구매회원 로그인</button>
         <button type="button">판매회원 로그인</button>
       </UserTab>
       <LoginSection>
-        <input type="text" placeholder="아이디" />
-        <input type="text" placeholder="비밀번호" />
+        <input type="type" id="id" placeholder="아이디" />
+        <input type="password" id="password" placeholder="비밀번호" />
         <Button width="100%" size="md">
           로그인
         </Button>
