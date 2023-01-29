@@ -29,18 +29,25 @@ const UserTab = styled.div`
     font-size: 18px;
     font-weight: 700;
     transform: translate(0, -60px);
-    background-color: #fff;
+    background-color: #f2f2f2;
     position: absolute;
+    cursor: pointer;
 
-    &:nth-child(1) {
-      z-index: 100;
-    }
-
+    ${({ userType }) =>
+      userType === "buyer"
+        ? `
+      &:nth-child(1) {
+        z-index: 100;
+        background-color: #fff;
+      }
+    `
+        : `
     &:nth-child(2) {
       z-index: -1;
       left: 50%;
       background-color: #f2f2f2;
-    }
+    } 
+    `}
   }
 `;
 
