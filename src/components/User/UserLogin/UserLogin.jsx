@@ -7,7 +7,7 @@ import Button from "../../../components/common/Button/Button";
 import { Link } from "react-router-dom";
 import UserTab from "../UserTab/UserTab";
 
-const UserLogin = ({ userType, formData, onChange }) => {
+const UserLogin = ({ userType, input, handleUserType, onChange }) => {
   return (
     <LoginWrapper>
       <img src={logo} alt="호두마켓 로고" />
@@ -20,8 +20,18 @@ const UserLogin = ({ userType, formData, onChange }) => {
         </button>
       </UserTab>
       <LoginSection>
-        <input type="type" id="id" placeholder="아이디" />
-        <input type="password" id="password" placeholder="비밀번호" />
+        <input
+          type="type"
+          id="id"
+          onChange={onChange}
+          placeholder="아이디"
+        />
+        <input
+          type="password"
+          id="password"
+          onChange={onChange}
+          placeholder="비밀번호"
+        />
         <Button width="100%" size="md">
           로그인
         </Button>

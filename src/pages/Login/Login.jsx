@@ -1,20 +1,35 @@
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { userTypeValue } from "../../atoms";
 import UserLogin from "../../components/User/UserLogin/UserLogin";
-import useForm from "../../hooks/useForm";
 
 const Login = () => {
-  const { formData, onChangeHandler } = useForm({
+  const [input, setInput] = useState({
     username: "",
     password: "",
     login_type: "",
   });
 
-  const userType = formData.login_type;
+  const { username, password, login_type } = input;
+
+  const [userType, setUserType] = useRecoilState(userTypeValue);
+
+  const handleData = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
+
+  const handleUserType = () => {
+    setUserType("SELLER");
+    console.log(userType);
+  };
 
   return (
     <UserLogin
       userType={userType}
-      formData={formData}
-      onChange={onChangeHandler}
+      formData={input}
+      onTypeChange={handleUserType}
+      onChange={handleData}
     />
   );
 };

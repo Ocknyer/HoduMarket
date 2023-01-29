@@ -3,7 +3,7 @@ import styled from "styled-components";
 const UserTab = styled.div`
   width: 550px;
   position: relative;
-  margin-top: 76px;
+  top: 70px;
 
   &::after {
     content: "";
@@ -12,8 +12,8 @@ const UserTab = styled.div`
     position: absolute;
     width: 5px;
     height: 19px;
-    bottom: -20px;
     left: 50%;
+    top: 5px;
     transform: translateX(-50%);
     background-color: #fff;
     z-index: 400;
@@ -30,11 +30,12 @@ const UserTab = styled.div`
     font-weight: 700;
     transform: translate(0, -60px);
     background-color: #f2f2f2;
-    position: absolute;
+    position: relative;
     cursor: pointer;
+    z-index: -1;
 
     ${({ userType }) =>
-      userType === "buyer"
+      userType === "BUYER"
         ? `
       &:nth-child(1) {
         z-index: 100;
@@ -43,9 +44,8 @@ const UserTab = styled.div`
     `
         : `
     &:nth-child(2) {
-      z-index: -1;
-      left: 50%;
-      background-color: #f2f2f2;
+      z-index: 100;
+      background-color: #fff;
     } 
     `}
   }
