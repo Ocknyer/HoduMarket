@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userTypeValue } from "../../atoms";
 import UserLogin from "../../components/User/UserLogin/UserLogin";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [input, setInput] = useState({
     username: "",
     password: "",
@@ -17,6 +20,7 @@ const Login = () => {
   const handleData = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
+    console.log(input);
   };
 
   const handleUserType = () => {
@@ -24,12 +28,17 @@ const Login = () => {
     console.log(userType);
   };
 
+  const handleLogin = () => {
+    navigate("/");
+  };
+
   return (
     <UserLogin
       userType={userType}
-      formData={input}
       onTypeChange={handleUserType}
       onChange={handleData}
+      onSubmit={handleLogin}
+      re
     />
   );
 };

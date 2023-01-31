@@ -22,7 +22,7 @@ export const LoginWrapper = styled.div`
   }
 `;
 
-export const LoginSection = styled.form`
+export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
