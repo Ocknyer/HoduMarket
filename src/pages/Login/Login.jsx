@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import postUserLogin from "../../api/login/postUserLogin";
 import { userTypeValue } from "../../atoms";
 import UserLogin from "../../components/User/UserLogin/UserLogin";
 
@@ -11,10 +12,11 @@ const Login = () => {
   const [input, setInput] = useState({
     username: "",
     password: "",
-    login_type: userType,
   });
 
-  const { username, password, login_type } = input;
+  const { username, password } = input;
+
+  console.log(username, password);
 
   const handleData = (e) => {
     const { name, value } = e.target;
@@ -30,8 +32,20 @@ const Login = () => {
 
   console.log(input);
 
-  const handleLogin = () => {
-    navigate("/");
+  const handleLogin = (e) => {
+    e.preventDefault();
+    postUserLogin({
+      username: username,
+      password: password,
+      login_type: userType,
+    })
+      .then((data) => {
+        console.log(data);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -40,7 +54,6 @@ const Login = () => {
       onClick={handleUserType}
       onChange={handleData}
       onSubmit={handleLogin}
-      value={input}
     />
   );
 };
