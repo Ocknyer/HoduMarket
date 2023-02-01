@@ -21,6 +21,7 @@ const UserTab = styled.div`
 
   > button {
     width: 50%;
+    position: relative;
     padding: 20px 0 30px 0;
     border: 1px solid var(--greyC4);
     border-bottom: none;
@@ -30,25 +31,23 @@ const UserTab = styled.div`
     font-weight: 700;
     transform: translate(0, -60px);
     background-color: #f2f2f2;
-    position: relative;
     cursor: pointer;
-    z-index: -1;
+  }
 
-    ${({ userType }) =>
-      userType === "BUYER"
-        ? `
-      &:nth-child(1) {
+  ${({ userType }) =>
+    userType === "BUYER"
+      ? `
+      button:nth-child(1) {
         z-index: 100;
         background-color: #fff;
       }
     `
-        : `
-    &:nth-child(2) {
-      z-index: 100;
-      background-color: #fff;
-    } 
+      : `
+      button:nth-child(2) {
+        z-index: 100;
+        background-color: #fff;
+      } 
     `}
-  }
 `;
 
 export default UserTab;

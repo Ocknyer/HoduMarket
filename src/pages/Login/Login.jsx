@@ -6,16 +6,15 @@ import UserLogin from "../../components/User/UserLogin/UserLogin";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [userType, setUserType] = useRecoilState(userTypeValue);
 
   const [input, setInput] = useState({
     username: "",
     password: "",
-    login_type: "",
+    login_type: userType,
   });
 
   const { username, password, login_type } = input;
-
-  const [userType, setUserType] = useRecoilState(userTypeValue);
 
   const handleData = (e) => {
     const { name, value } = e.target;
@@ -23,10 +22,13 @@ const Login = () => {
     console.log(input);
   };
 
-  const handleUserType = () => {
-    setUserType("SELLER");
-    console.log(userType);
+  const handleUserType = (e) => {
+    e.target.id === "BUYER"
+      ? setUserType("BUYER")
+      : setUserType("SELLER");
   };
+
+  console.log(input);
 
   const handleLogin = () => {
     navigate("/");
@@ -35,10 +37,10 @@ const Login = () => {
   return (
     <UserLogin
       userType={userType}
-      onTypeChange={handleUserType}
+      onClick={handleUserType}
       onChange={handleData}
       onSubmit={handleLogin}
-      re
+      value={input}
     />
   );
 };

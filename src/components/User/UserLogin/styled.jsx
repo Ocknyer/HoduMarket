@@ -31,6 +31,7 @@ export const LoginForm = styled.form`
   border-radius: 10px;
   margin-bottom: 30px;
   background-color: #fff;
+  z-index: 99;
 
   > input {
     height: 60px;

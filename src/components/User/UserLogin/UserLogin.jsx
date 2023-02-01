@@ -9,8 +9,8 @@ import UserTab from "../UserTab/UserTab";
 
 const UserLogin = ({
   userType,
-  input,
-  handleUserType,
+  value,
+  onClick,
   onChange,
   onSubmit,
 }) => {
@@ -18,10 +18,10 @@ const UserLogin = ({
     <LoginWrapper>
       <img src={logo} alt="호두마켓 로고" />
       <UserTab userType={userType}>
-        <button type="button" onClick={handleUserType}>
+        <button type="button" id="BUYER" onClick={onClick}>
           구매회원 로그인
         </button>
-        <button type="button" onClick={handleUserType}>
+        <button type="button" id="SELLER" onClick={onClick}>
           판매회원 로그인
         </button>
       </UserTab>
@@ -29,16 +29,18 @@ const UserLogin = ({
         <input
           type="type"
           id="id"
-          value={input}
+          value={value}
           onChange={onChange}
           placeholder="아이디"
+          required
         />
         <input
           type="password"
           id="password"
-          value={input}
+          value={value}
           onChange={onChange}
           placeholder="비밀번호"
+          required
         />
         <Button width="100%" size="md">
           로그인
