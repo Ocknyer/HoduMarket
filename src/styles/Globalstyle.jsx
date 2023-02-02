@@ -43,6 +43,7 @@ const GlobalStyle = createGlobalStyle`
     --greyC4: #c4c4c4;
     --grey76 : #767676;
     --greyDB : #dbdbdb;
+    --greyF2 : #f2f2f2;
   }
 `;
 

@@ -44,6 +44,18 @@ export const HeaderWrapper = styled.header`
     display: flex;
     gap: 26px;
     margin-left: auto;
+    align-items: center;
+
+    > button {
+      display: flex;
+      width: 168px;
+      height: 54px;
+      font-size: 18px;
+      padding: 11px 20px;
+      margin-left: 4px;
+      gap: 8px;
+      align-items: center;
+    }
   }
 `;
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import postUserLogin from "../../api/login/postUserLogin";
@@ -7,11 +7,7 @@ import UserLogin from "../../components/User/UserLogin/UserLogin";
 
 const Login = () => {
   const navigate = useNavigate();
-  const unRef = useRef();
-  const pwRef = useRef();
-
   const [userType, setUserType] = useRecoilState(userTypeValue);
-
   const [inputValue, setInputValue] = useState({
     username: "",
     password: "",
@@ -28,6 +24,8 @@ const Login = () => {
     e.target.id === "BUYER"
       ? setUserType("BUYER")
       : setUserType("SELLER");
+
+    console.log(userType);
   };
 
   const handleLogin = (e) => {
