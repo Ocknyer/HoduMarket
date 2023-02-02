@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import postUserLogin from "../../api/login/postUserLogin";
@@ -7,21 +7,21 @@ import UserLogin from "../../components/User/UserLogin/UserLogin";
 
 const Login = () => {
   const navigate = useNavigate();
+  const unRef = useRef();
+  const pwRef = useRef();
+
   const [userType, setUserType] = useRecoilState(userTypeValue);
 
-  const [input, setInput] = useState({
+  const [inputValue, setInputValue] = useState({
     username: "",
     password: "",
   });
-
-  const { username, password } = input;
-
-  console.log(username, password);
+  const { username, password } = inputValue;
 
   const handleData = (e) => {
     const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-    console.log(input);
+    setInputValue({ ...inputValue, [name]: value });
+    console.log(inputValue);
   };
 
   const handleUserType = (e) => {
@@ -30,17 +30,17 @@ const Login = () => {
       : setUserType("SELLER");
   };
 
-  console.log(input);
-
   const handleLogin = (e) => {
     e.preventDefault();
+
     postUserLogin({
-      username: username,
-      password: password,
+      username,
+      password,
       login_type: userType,
     })
       .then((data) => {
         console.log(data);
+        localStorage.setItem("token", data.token);
         navigate("/");
       })
       .catch((error) => {
