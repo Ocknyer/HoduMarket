@@ -22,11 +22,11 @@ const ProductList = () => {
   return (
     <ProductListWrapper>
       <h2 className="ir">상품리스트</h2>
-      <>
+      {/* <>
         {productData.map((item) => (
           <ProductCard item={item} />
         ))}
-      </>
+      </> */}
     </ProductListWrapper>
   );
 };
