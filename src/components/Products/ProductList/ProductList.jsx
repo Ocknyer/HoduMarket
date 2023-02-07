@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { getProductList } from "../../../api/axios-api";
-import ProductCard from "../ProductCard/ProductCard";
-import { ProductListWrapper } from "./styled";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getProductList } from '../../../api/axios-api';
+import ProductCard from '../ProductCard/ProductCard';
+import { ProductListWrapper } from './styled';
 
 const ProductList = () => {
-  const [productData, setProductData] = useState({});
+  const [productData, setProductData] = useState([]);
 
   useEffect(() => {
     getProductList()
@@ -21,12 +21,10 @@ const ProductList = () => {
 
   return (
     <ProductListWrapper>
-      <h2 className="ir">상품리스트</h2>
-      {/* <>
-        {productData.map((item) => (
-          <ProductCard item={item} />
-        ))}
-      </> */}
+      <h2 className='ir'>상품리스트</h2>
+      {productData.map((data) => (
+        <ProductCard data={data} />
+      ))}
     </ProductListWrapper>
   );
 };

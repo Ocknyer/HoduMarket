@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FooterWrapper = styled.div`
   width: 1280px;
@@ -7,6 +7,7 @@ export const FooterWrapper = styled.div`
   transform: translate(-50%, 0);
   left: 50%;
   bottom: 0;
+  background-color: #fff;
 
   .inner-data {
     font-size: 14px;
