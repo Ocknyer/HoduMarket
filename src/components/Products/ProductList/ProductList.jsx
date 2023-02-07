@@ -23,7 +23,7 @@ const ProductList = () => {
     <ProductListWrapper>
       <h2 className='ir'>상품리스트</h2>
       {productData.map((data) => (
-        <ProductCard data={data} />
+        <ProductCard data={data} key={data.product_id} />
       ))}
     </ProductListWrapper>
   );

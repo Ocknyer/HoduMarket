@@ -3,10 +3,8 @@ import styled from 'styled-components';
 export const FooterWrapper = styled.div`
   width: 1280px;
   padding: 55px 0;
-  position: fixed;
-  transform: translate(-50%, 0);
-  left: 50%;
   bottom: 0;
+  margin: 0 auto;
   background-color: #fff;
 
   .inner-data {
