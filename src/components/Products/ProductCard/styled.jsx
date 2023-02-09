@@ -23,12 +23,14 @@ const ProductCardWrapper = styled.div`
     font-size: 18px;
     line-height: 22px;
     margin-bottom: 10px;
+    color: black;
   }
 
   .price {
     font-size: 24px;
     font-weight: 700;
     line-height: 30px;
+    color: black;
 
     > span {
       font-size: 16px;
