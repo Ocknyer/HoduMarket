@@ -4,7 +4,7 @@ const ProductCardWrapper = styled.div`
   width: 380px;
   height: 490px;
 
-  > img {
+  .product-img {
     width: 380px;
     height: 380px;
     border-radius: 10px;
