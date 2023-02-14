@@ -4,7 +4,7 @@ import ProductCardWrapper from './styled';
 const ProductCard = ({ data }) => {
   return (
     <ProductCardWrapper>
-      <Link to='/productdetail'>
+      <Link to={`/product/${data.product_id}`}>
         <img className='product-img' src={data.image} alt='' />
         <p className='store-name'>{data.store_name}</p>
         <p className='product-name'>{data.product_name}</p>

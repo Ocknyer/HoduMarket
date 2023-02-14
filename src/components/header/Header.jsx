@@ -13,7 +13,9 @@ const Header = ({ userType }) => {
 
   return (
     <HeaderWrapper>
-      <img src={logo} alt='호두마켓 로고' className='logo' />
+      <Link to='/'>
+        <img src={logo} alt='호두마켓 로고' className='logo' />
+      </Link>
       <form>
         <input
           className='inp-search'
