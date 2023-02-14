@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 const Header = ({ userType }) => {
   console.log(userType);
 
+  const token = localStorage.getItem('token');
+
   return (
     <HeaderWrapper>
       <img src={logo} alt='호두마켓 로고' className='logo' />
@@ -28,11 +30,19 @@ const Header = ({ userType }) => {
                 <img src={cart} alt='' /> 장바구니
               </IconWrapper>
             </Link>
-            <Link to='/mypage'>
-              <IconWrapper>
-                <img src={mypage} alt='' /> 마이페이지
-              </IconWrapper>
-            </Link>
+            {!token ? (
+              <Link to='/login'>
+                <IconWrapper>
+                  <img src={mypage} alt='' /> 로그인
+                </IconWrapper>
+              </Link>
+            ) : (
+              <Link to='/mypage'>
+                <IconWrapper>
+                  <img src={mypage} alt='' /> 마이페이지
+                </IconWrapper>
+              </Link>
+            )}
           </>
         ) : (
           <>
