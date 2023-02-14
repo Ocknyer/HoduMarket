@@ -17,8 +17,6 @@ const ProductList = () => {
       });
   }, []);
 
-  console.log(productData);
-
   return (
     <ProductListWrapper>
       <h2 className='ir'>상품리스트</h2>
