@@ -1,9 +1,16 @@
-import styled from "styled-components";
-import searchIcon from "../../assets/img/icon-search.svg";
+import styled from 'styled-components';
+import searchIcon from '../../assets/img/icon-search.svg';
 
 export const HeaderWrapper = styled.header`
-  max-width: 1280px;
+  width: 100%;
   height: 90px;
+  background-color: #fff;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+`;
+
+export const InnerWrapper = styled.div`
+  width: 1280px;
+  height: 100%;
   display: flex;
   align-items: center;
   margin: 0 auto;
