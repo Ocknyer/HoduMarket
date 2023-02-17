@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
 import { getProductDetail } from '../../api/axios-api';
-import { quantityValue } from '../../atoms';
 import ProductDetail from '../../components/Products/ProductDetail/ProductDetail';
 
 const Product = () => {
   const { id } = useParams();
   const [productData, setProductData] = useState();
-  const [quantity, setQuantity] = useRecoilState(quantityValue);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     getProductDetail(id)
