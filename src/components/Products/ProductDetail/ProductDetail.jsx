@@ -19,7 +19,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   return (
     <DefaultWrapper>
       <h2 className='ir'>
-        {productData.product_name}상품 디테일 페이지
+        {productData.product_name + ' 상품 디테일 페이지'}
       </h2>
       <ProductDetailWrapper>
         <img src={productData.image} alt='' />
