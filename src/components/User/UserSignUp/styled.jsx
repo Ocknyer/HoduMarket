@@ -23,11 +23,34 @@ export const SignupForm = styled.form`
   margin-bottom: 30px;
   background-color: #fff;
   z-index: 99;
+`;
+
+export const InputBox = styled.div`
+  /* display: flex; */
+  /* flex-direction: column; */
+  gap: 12px;
+  margin-bottom: 12px;
+
+  > label {
+    display: block;
+    font-size: 16px;
+    color: var(--grey76);
+    margin-bottom: 10px;
+  }
 
   > input {
-    height: 60px;
-    border: none;
-    border-bottom: 1px solid var(--greyC4);
-    margin-bottom: 6px;
+    float: left;
+    height: 54px;
+    border: 1px solid var(--greyC4);
+    border-radius: 5px;
+  }
+
+  .id-inp {
+    display: flex;
+    width: 100%;
+  }
+
+  .valid-btn {
+    display: flex;
   }
 `;

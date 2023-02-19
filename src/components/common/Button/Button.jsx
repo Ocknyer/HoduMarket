@@ -1,20 +1,20 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const setSize = (size) => {
   switch (size) {
-    case "lg":
+    case 'lg':
       return css`
         padding: 19px 0;
         font-size: 24px;
         line-height: 30px;
       `;
-    case "md":
+    case 'md':
       return css`
         padding: 19px 0;
         font-size: 18px;
         line-height: 22px;
       `;
-    case "sm":
+    case 'sm':
       return css`
         padding: 17px 0;
         line-height: 20px;
@@ -27,12 +27,11 @@ const setSize = (size) => {
 };
 
 const Button = styled.button`
-  width: ${({ width }) => width || "80px"};
-  line-height: 20px;
+  width: ${({ width }) => width || '80px'};
   font-size: 16px;
-  font-weight: ${({ fw }) => fw || "500"};
-  background: ${({ bc }) => bc || "#21BF48"};
-  color: ${({ color }) => color || "white"};
+  font-weight: ${({ fw }) => fw || '500'};
+  background: ${({ bc }) => bc || '#21BF48'};
+  color: ${({ color }) => color || 'white'};
   border: none;
   border-radius: 5px;
   cursor: pointer;

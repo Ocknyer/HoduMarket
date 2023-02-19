@@ -1,13 +1,13 @@
 import logo from '../../../assets/img/Logo-hodu.png';
 import Button from '../../common/Button/Button';
 import UserTab from '../UserTab/UserTab';
-import { SignupForm, SignUpWrapper } from './styled';
+import { InputBox, SignupForm, SignUpWrapper } from './styled';
 
-const UserSignUp = ({ onClick }) => {
+const UserSignUp = ({ userType, onClick }) => {
   return (
     <SignUpWrapper>
       <img src={logo} alt='호두마켓 로고' />
-      <UserTab>
+      <UserTab userType={userType}>
         <button type='button' id='BUYER' onClick={onClick}>
           구매회원 로그인
         </button>
@@ -16,36 +16,41 @@ const UserSignUp = ({ onClick }) => {
         </button>
       </UserTab>
       <SignupForm>
-        <label>
-          아이디
-          <input type='text' />
-          <Button size='sm' width='122px'>
+        <InputBox>
+          <label>아이디</label>
+          <input type='text' className='id-inp' />
+          <Button
+            size='sm'
+            width='122px'
+            type='button'
+            className='valid-btn'
+          >
             중복확인
           </Button>
-        </label>
-        <label>
-          비밀번호
+        </InputBox>
+        <InputBox>
+          <label>비밀번호</label>
+          <input type='text' className='pw-inp' />
+        </InputBox>
+        <InputBox>
+          <label>비밀번호 재확인</label>
+          <input type='text' className='pwv-inp' />
+        </InputBox>
+        <InputBox>
+          <label>이름</label>
+          <input type='text' className='name-inp' />
+        </InputBox>
+        <InputBox>
+          <label>휴대폰번호</label>
           <input type='text' />
-        </label>
-        <label>
-          비밀번호 재확인
-          <input type='text' />
-        </label>
-        <label>
-          이름
-          <input type='text' />
-        </label>
-        <label>
-          휴대폰번호
           <input type='text' />
           <input type='text' />
-          <input type='text' />
-        </label>
-        <label>
-          이메일
+        </InputBox>
+        <InputBox>
+          <label>이메일</label>
           <input type='text' />@
           <input type='text' />
-        </label>
+        </InputBox>
       </SignupForm>
       <input type='checkbox' />
       <p>

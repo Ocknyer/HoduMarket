@@ -15,7 +15,10 @@ const Signup = () => {
 
   return (
     <>
-      <UserSignUp onClick={handleUserType}></UserSignUp>
+      <UserSignUp
+        userType={userType}
+        onClick={handleUserType}
+      ></UserSignUp>
     </>
   );
 };
