@@ -47,10 +47,13 @@ export const InputBox = styled.div`
 
   .id-inp {
     display: flex;
-    width: 100%;
+    width: 346px;
+    margin-right: 12px;
   }
 
   .valid-btn {
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;

@@ -42,9 +42,9 @@ const UserSignUp = ({ userType, onClick }) => {
         </InputBox>
         <InputBox>
           <label>휴대폰번호</label>
-          <input type='text' />
-          <input type='text' />
-          <input type='text' />
+          <input type='text' className='pn-inp' />
+          <input type='text' className='pn-inp' />
+          <input type='text' className='pn-inp' />
         </InputBox>
         <InputBox>
           <label>이메일</label>
