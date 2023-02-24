@@ -48,15 +48,19 @@ const UserSignUp = ({ userType, onClick }) => {
         </InputBox>
         <InputBox>
           <label>이메일</label>
-          <input type='text' />@
-          <input type='text' />
+          <input type='text' className='email-inp' />
+          <p className='at'>@</p>
+          <input type='text' className='email-inp' />
         </InputBox>
       </SignupForm>
-      <input type='checkbox' />
-      <p>
-        호두샵의 이용약관 및 개인정보처리방침에 대한 내용을 확인하였고
-        동의합니다.
-      </p>
+      <div className='check-box'>
+        <input type='checkbox' />
+        <label className='check-privacy'>
+          호두샵의 <span>이용약관</span> 및{' '}
+          <span>개인정보처리방침</span>에 대한 내용을 확인하였고
+          동의합니다.
+        </label>
+      </div>
       <Button size='md' width='480px' bc='#c4c4c4'>
         가입하기
       </Button>
