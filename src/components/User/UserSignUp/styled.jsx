@@ -89,6 +89,10 @@ export const InputBox = styled.div`
     margin: 0 11px;
   }
 
+  #company-num {
+    width: 346px;
+  }
+
   > button {
     margin-left: auto;
     height: 54px;

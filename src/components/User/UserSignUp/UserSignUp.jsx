@@ -52,6 +52,17 @@ const UserSignUp = ({ userType, onClick }) => {
           <p className='at'>@</p>
           <input type='text' className='email-inp' />
         </InputBox>
+        <InputBox>
+          <label htmlFor='company-num'>사업자 등록번호</label>
+          <input type='text' id='company-num' />
+          <Button size='sm' width='122px'>
+            인증
+          </Button>
+        </InputBox>
+        <InputBox>
+          <label htmlFor='store-name'>스토어 이름</label>
+          <input type='text' />
+        </InputBox>
       </SignupForm>
       <div className='check-box'>
         <input type='checkbox' />
