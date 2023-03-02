@@ -67,6 +67,10 @@ export const InputBox = styled.div`
     border-radius: 5px;
   }
 
+  .id-inp {
+    width: 346px;
+  }
+
   .pwv-inp {
     margin-bottom: 50px;
   }

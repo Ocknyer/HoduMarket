@@ -9,8 +9,10 @@ const Signup = () => {
     e.target.id === 'BUYER'
       ? setUserType('BUYER')
       : setUserType('SELLER');
+  };
 
-    console.log(userType);
+  const handleSignUp = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -18,6 +20,7 @@ const Signup = () => {
       <UserSignUp
         userType={userType}
         onClick={handleUserType}
+        onSubmit={handleSignUp}
       ></UserSignUp>
     </>
   );
