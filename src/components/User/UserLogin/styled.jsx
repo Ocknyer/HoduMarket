@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const LoginWrapper = styled.div`
   width: 550px;
@@ -38,6 +38,7 @@ export const LoginForm = styled.form`
     border: none;
     border-bottom: 1px solid var(--greyC4);
     margin-bottom: 6px;
+    padding: 17px 16px;
 
     &::placeholder {
       font-size: 16px;
@@ -45,7 +46,14 @@ export const LoginForm = styled.form`
     }
 
     &:nth-child(2) {
-      margin-bottom: 36px;
+      margin-bottom: ${(props) => (props.errorMsg ? '0' : '36px')};
     }
+  }
+
+  .error-msg {
+    font-size: 16px;
+    line-height: 20px;
+    margin: 26px 0;
+    color: #eb5757;
   }
 `;

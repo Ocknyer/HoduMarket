@@ -101,4 +101,20 @@ export const InputBox = styled.div`
     margin-left: auto;
     height: 54px;
   }
+
+  .username-error {
+    color: ${(props) =>
+      props.usernameMsg === '이미 사용 중인 아이디입니다.'
+        ? '#EB5757'
+        : '#21BF48'};
+    margin-bottom: 10px;
+  }
+
+  .password-error {
+    color: ${(props) =>
+      props.passwordMsg === '비밀번호가 일치하지 않습니다.'
+        ? '#EB5757'
+        : '#21BF48'};
+    margin-bottom: 10px;
+  }
 `;

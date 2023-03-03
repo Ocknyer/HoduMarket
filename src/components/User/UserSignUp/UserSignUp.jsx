@@ -9,6 +9,9 @@ const UserSignUp = ({
   onSubmit,
   onChange,
   onDoubleCheck,
+  usernameMsg,
+  passwordMsg,
+  passwordCheck,
 }) => {
   return (
     <SignUpWrapper>
@@ -22,7 +25,7 @@ const UserSignUp = ({
         </button>
       </UserTab>
       <SignupForm onSubmit={onSubmit}>
-        <InputBox>
+        <InputBox usernameMsg={usernameMsg}>
           <label>아이디</label>
           <input
             type='text'
@@ -39,24 +42,31 @@ const UserSignUp = ({
           >
             중복확인
           </Button>
+          {usernameMsg ? (
+            <p className='username-error'>{usernameMsg}</p>
+          ) : null}
         </InputBox>
         <InputBox>
           <label>비밀번호</label>
           <input
-            type='text'
+            type='password'
             className='pw-inp'
             name='password'
             onChange={onChange}
           />
         </InputBox>
-        <InputBox>
+        <InputBox passwordMsg={passwordMsg}>
           <label>비밀번호 재확인</label>
           <input
-            type='text'
+            type='password'
             className='pwv-inp'
             name='password2'
             onChange={onChange}
+            onKeyUp={passwordCheck}
           />
+          {passwordMsg ? (
+            <p className='password-error'>{passwordMsg}</p>
+          ) : null}
         </InputBox>
         <InputBox>
           <label>이름</label>

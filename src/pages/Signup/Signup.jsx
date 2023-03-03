@@ -9,6 +9,9 @@ import UserSignUp from '../../components/User/UserSignUp/UserSignUp';
 const Signup = () => {
   const navigate = useNavigate();
   const [userType, setUserType] = useRecoilState(userTypeValue);
+  const [usernameMsg, setUsernameMsg] = useState('');
+  const [passwordMsg, setPasswordMsg] = useState('');
+
   const [inputValue, setInputValue] = useState({
     username: '',
     password: '',
@@ -53,8 +56,27 @@ const Signup = () => {
   const handleDoubleCheck = (e) => {
     e.preventDefault();
 
-    postDoubleCheck({ username });
+    postDoubleCheck({ username })
+      .then((data) => {
+        setUsernameMsg(data.Success);
+      })
+      .catch((error) => {
+        if (error.request.response.includes('사용 중인')) {
+          setUsernameMsg('이미 사용 중인 아이디입니다.');
+        }
+      });
   };
+
+  const passwordCheck = () => {
+    console.log(password, password2);
+    if (password !== password2) {
+      setPasswordMsg('비밀번호가 일치하지 않습니다.');
+    } else {
+      setPasswordMsg('비밀번호가 일치합니다.');
+    }
+  };
+
+  console.log(passwordMsg);
 
   return (
     <>
@@ -64,6 +86,9 @@ const Signup = () => {
         onChange={handleData}
         onSubmit={handleSignUp}
         onDoubleCheck={handleDoubleCheck}
+        usernameMsg={usernameMsg}
+        passwordMsg={passwordMsg}
+        passwordCheck={passwordCheck}
       ></UserSignUp>
     </>
   );

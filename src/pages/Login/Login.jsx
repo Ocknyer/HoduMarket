@@ -8,6 +8,7 @@ import UserLogin from '../../components/User/UserLogin/UserLogin';
 const Login = () => {
   const navigate = useNavigate();
   const [userType, setUserType] = useRecoilState(userTypeValue);
+  const [errorMsg, setErrorMsg] = useState('');
   const [inputValue, setInputValue] = useState({
     username: '',
     password: '',
@@ -17,15 +18,12 @@ const Login = () => {
   const handleData = (e) => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
-    console.log(inputValue);
   };
 
   const handleUserType = (e) => {
     e.target.id === 'BUYER'
       ? setUserType('BUYER')
       : setUserType('SELLER');
-
-    console.log(userType);
   };
 
   const handleLogin = (e) => {
@@ -42,7 +40,9 @@ const Login = () => {
         navigate('/');
       })
       .catch((error) => {
-        console.log(error);
+        if (error.request.status === 401) {
+          setErrorMsg('아이디 또는 비밀번호가 일치하지 않습니다.');
+        }
       });
   };
 
@@ -52,6 +52,7 @@ const Login = () => {
       onClick={handleUserType}
       onChange={handleData}
       onSubmit={handleLogin}
+      errorMsg={errorMsg}
     />
   );
 };
