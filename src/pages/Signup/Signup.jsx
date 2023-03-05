@@ -37,13 +37,7 @@ const Signup = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    postSignUpBuyer({
-      username,
-      password,
-      password2,
-      phone_number,
-      name,
-    })
+    postSignUpBuyer(inputValue)
       .then((data) => {
         console.log(data);
         navigate('/login');
