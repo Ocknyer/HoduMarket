@@ -72,7 +72,7 @@ export const InputBox = styled.div`
   }
 
   .pwv-inp {
-    margin-bottom: 50px;
+    margin-bottom: ${(props) => (props.passwordMsg ? null : '50px')};
   }
 
   .pn-inp {
