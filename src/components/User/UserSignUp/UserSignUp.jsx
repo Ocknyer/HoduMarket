@@ -79,24 +79,30 @@ const UserSignUp = ({
         </InputBox>
         <InputBox>
           <label>휴대폰번호</label>
-          <input
-            type='text'
-            className='pn-inp'
-            name='phone_number'
-            onChange={onChange}
-          />
           {/* <input
             type='text'
             className='pn-inp'
             name='phone_number'
             onChange={onChange}
+          /> */}
+          <select className='pn-select'>
+            <option value='1'>010</option>
+            <option value='1'>011</option>
+            <option value='1'>016</option>
+            <option value='1'>017</option>
+          </select>
+          <input
+            type='text'
+            className='pn-inp'
+            name='phone_number'
+            onChange={onChange}
           />
           <input
             type='text'
             className='pn-inp'
             name='phone_number'
             onChange={onChange}
-          /> */}
+          />
         </InputBox>
         <InputBox>
           <label>이메일</label>

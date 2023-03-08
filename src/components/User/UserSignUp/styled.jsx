@@ -75,6 +75,15 @@ export const InputBox = styled.div`
     margin-bottom: ${(props) => (props.passwordMsg ? null : '50px')};
   }
 
+  .pn-select {
+    width: 152px;
+    height: 54px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid var(--greyC4);
+    border-radius: 5px;
+  }
+
   .pn-inp {
     width: 152px;
 
