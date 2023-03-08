@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import checkOnIcon from '../../../assets/img/icon-check-on.svg';
+import checkOffIcon from '../../../assets/img/icon-check-off.svg';
 
 export const SignUpWrapper = styled.div`
   max-width: 550px;
@@ -69,6 +71,11 @@ export const InputBox = styled.div`
 
   .id-inp {
     width: 346px;
+  }
+
+  .pw-inp,
+  .pwv-inp {
+    background: url(${checkOffIcon}) no-repeat center right 16px;
   }
 
   .pwv-inp {
