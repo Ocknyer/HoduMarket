@@ -67,6 +67,10 @@ export const InputBox = styled.div`
     margin-bottom: 12px;
     border: 1px solid var(--greyC4);
     border-radius: 5px;
+
+    &:focus {
+      outline: 1px solid var(--main-color);
+    }
   }
 
   .id-inp {
