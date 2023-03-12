@@ -9,7 +9,7 @@ export const SignUpWrapper = styled.div`
   margin: 100px auto;
   justify-content: center;
 
-  > img {
+  > a {
     margin-bottom: 70px;
   }
 
@@ -75,11 +75,27 @@ export const InputBox = styled.div`
 
   .id-inp {
     width: 346px;
+
+    &:focus {
+      outline: 1px solid
+        ${(props) =>
+          props.usernameMsg === '이미 사용 중인 아이디입니다.'
+            ? '#EB5757'
+            : '#21BF48'};
+    }
   }
 
   .pw-inp,
   .pwv-inp {
     background: url(${checkOffIcon}) no-repeat center right 16px;
+
+    &:focus {
+      outline: 1px solid
+        ${(props) =>
+          props.passwordMsg === '비밀번호가 일치합니다.'
+            ? '#21BF48'
+            : '#EB5757'};
+    }
   }
 
   .pwv-inp {

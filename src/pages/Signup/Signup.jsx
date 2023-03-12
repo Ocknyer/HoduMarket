@@ -168,6 +168,8 @@ const Signup = () => {
         onDoubleCheck={handleDoubleCheck}
         usernameMsg={usernameMsg}
         passwordMsg={passwordMsg}
+        errors={errors}
+        isValid={isValid}
         passwordCheck={passwordCheck}
       ></UserSignUp>
     </>
