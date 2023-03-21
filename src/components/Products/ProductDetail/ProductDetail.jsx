@@ -16,6 +16,8 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const price = productData.price.toLocaleString();
   const priceSum = (productData.price * quantity).toLocaleString();
 
+  console.log(productData);
+
   return (
     <DefaultWrapper>
       <h2 className='ir'>

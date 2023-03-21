@@ -11,6 +11,7 @@ const ProductList = () => {
     getProductList()
       .then((data) => {
         setProductData(data.results);
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);
