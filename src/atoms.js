@@ -8,3 +8,8 @@ export const userTypeValue = atom({
   default: 'BUYER',
   effects_UNSTABLE: [persistAtom],
 });
+
+export const searchProducts = atom({
+  key: 'search_data',
+  default: [],
+});

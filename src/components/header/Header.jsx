@@ -5,16 +5,51 @@ import mypage from '../../assets/img/icon-user.svg';
 import sellerCenter from '../../assets/img/icon-shopping-bag.svg';
 import Button from '../common/Button/Button';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import search from '../../api/search/search';
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { searchProducts } from '../../atoms';
 
 const Header = ({ userType }) => {
   const token = localStorage.getItem('token');
-
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+
+  const [inputValue, setInputValue] = useState('');
+  const [searchData, setSearchData] = useRecoilState(searchProducts);
+
+  const handleData = (e) => {
+    setInputValue(e.target.value);
+  };
 
   const handleSellerCenter = () => {
     navigate('/sellercenter');
+  };
+
+  const searchProduct = () => {
+    search(inputValue)
+      .then((data) => {
+        setSearchData(data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  console.log(searchData);
+
+  const onSubmitSearch = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      search(inputValue)
+        .then((data) => {
+          setSearchData(data.results);
+          console.log(searchData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -29,8 +64,14 @@ const Header = ({ userType }) => {
               className='inp-search'
               type='text'
               placeholder='상품을 검색해보세요!'
+              onInput={handleData}
+              onKeyDown={onSubmitSearch}
             />
-            <button className='btn-search' type='button'></button>
+            <button
+              className='btn-search'
+              type='button'
+              onClick={searchProduct}
+            ></button>
           </form>
           <div className='icon-group'>
             {userType === 'BUYER' ? (
