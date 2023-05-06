@@ -19,6 +19,16 @@ export const InnerWrapper = styled.div`
     width: 124px;
   }
 
+  .logo-seller {
+    width: 80px;
+  }
+
+  .tit-seller-center {
+    font-size: 30px;
+    font-weight: 500;
+    margin-left: 16px;
+  }
+
   > form {
     position: relative;
     width: 400px;

@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Product from './pages/Product/Product';
 import Signup from './pages/Signup/Signup';
+import SellerCenter from './pages/SellerCenter/SellerCenter';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/product/:id' element={<Product />} />
+          <Route path='/sellercenter' element={<SellerCenter />} />
           <Route path='/cart' element={<Cart />} />
         </Route>
         <Route path='/login' element={<Login />} />
