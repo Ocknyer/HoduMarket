@@ -1,6 +1,7 @@
 import { HeaderWrapper, IconWrapper, InnerWrapper } from './styled';
 import logo from '../../assets/img/Logo-hodu.png';
 import cart from '../../assets/img/icon-shopping-cart.svg';
+import cartGreen from '../../assets/img/icon-shopping-cart-2.svg';
 import mypage from '../../assets/img/icon-user.svg';
 import sellerCenter from '../../assets/img/icon-shopping-bag.svg';
 import Button from '../common/Button/Button';
@@ -78,7 +79,15 @@ const Header = ({ userType }) => {
               <>
                 <Link to='/cart'>
                   <IconWrapper>
-                    <img src={cart} alt='' /> 장바구니
+                    <img
+                      src={
+                        location.pathname === '/cart'
+                          ? cartGreen
+                          : cart
+                      }
+                      alt=''
+                    />
+                    장바구니
                   </IconWrapper>
                 </Link>
                 {!token ? (
