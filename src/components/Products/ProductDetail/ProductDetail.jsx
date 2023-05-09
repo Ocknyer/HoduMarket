@@ -1,8 +1,4 @@
-// import { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { useRecoilState } from 'recoil';
-// import { getProductDetail } from '../../../api/axios-api';
-// import { quantityValue } from '../../../atoms';
+import { useRecoilState } from 'recoil';
 import Button from '../../common/Button/Button';
 import DefaultWrapper from '../../common/Wrapper/DefaultWrapper';
 import {
@@ -11,12 +7,23 @@ import {
   ProductDetailWrapper,
   ProductInfo,
 } from './styled';
+import { cartItems } from '../../../atoms';
+import { QuantityButton } from '../../common/Button/QuantityButton/QuantityButton';
 
 const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const price = productData.price.toLocaleString();
   const priceSum = (productData.price * quantity).toLocaleString();
+  const [cartProducts, setCartProducts] = useRecoilState(cartItems);
 
   console.log(productData);
+
+  const handleToCart = (e) => {
+    e.preventDefault();
+
+    setCartProducts([...cartProducts, productData]);
+  };
+
+  console.log(cartProducts);
 
   return (
     <DefaultWrapper>
@@ -37,19 +44,21 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
 
           <ButtonSection>
             <p className='delivery'>택배배송 / 무료배송</p>
-            <div className='quantity-btn'>
-              <button
-                className='minus-btn'
-                onClick={handleQuantity}
-                name='decrement'
-              ></button>
-              <span className='quantity'>{1}</span>
-              <button
-                className='plus-btn'
-                onClick={handleQuantity}
-                name='increment'
-              ></button>
-            </div>
+            <QuantityButton>
+              <div className='quantity-btn'>
+                <button
+                  className='minus-btn'
+                  onClick={handleQuantity}
+                  name='decrement'
+                ></button>
+                <span className='quantity'>{quantity}</span>
+                <button
+                  className='plus-btn'
+                  onClick={handleQuantity}
+                  name='increment'
+                ></button>
+              </div>
+            </QuantityButton>
             <div className='price-section'>
               <p className='txt-total'>총 상품 금액</p>
               <p className='total-quantity'>
@@ -64,7 +73,12 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
               <Button size='lg' width='100%'>
                 바로 구매
               </Button>
-              <Button size='lg' width='200px' bc='var(--grey76)'>
+              <Button
+                size='lg'
+                width='200px'
+                bc='var(--grey76)'
+                onClick={handleToCart}
+              >
                 장바구니
               </Button>
             </div>

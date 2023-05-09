@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import plusBtn from '../../../assets/img/icon-plus-line.svg';
-import minusBtn from '../../../assets/img/icon-minus-line.svg';
 
 export const ProductDetailWrapper = styled.div`
   height: 600px;
@@ -105,14 +103,6 @@ export const ButtonSection = styled.div`
   }
 
   .quantity-btn {
-    display: flex;
-    width: 150px;
-    height: 50px;
-    position: relative;
-    border: 1px solid var(--greyC4);
-    border-radius: 5px;
-    margin-bottom: 78px;
-
     &::before {
       position: absolute;
       top: -30px;
@@ -129,27 +119,6 @@ export const ButtonSection = styled.div`
       width: 630px;
       height: 2px;
       background-color: var(--greyC4);
-    }
-
-    .plus-btn {
-      background: url(${plusBtn}) no-repeat center;
-      width: 50px;
-      height: 50px;
-      border-left: 1px solid var(--greyC4);
-    }
-
-    .quantity {
-      width: 50px;
-      font-size: 18px;
-      text-align: center;
-      line-height: 50px;
-    }
-
-    .minus-btn {
-      background: url(${minusBtn}) no-repeat center;
-      width: 50px;
-      height: 50px;
-      border-right: 1px solid var(--greyC4);
     }
   }
 `;

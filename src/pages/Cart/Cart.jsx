@@ -1,7 +1,20 @@
+import { useRecoilValue } from 'recoil';
 import DefaultWrapper from '../../components/common/Wrapper/DefaultWrapper';
-import { CartBody, CartHeader, CartWrapper } from './styled';
+import {
+  CartBody,
+  CartHeader,
+  CartItem,
+  CartWrapper,
+} from './styled';
+import { cartItems } from '../../atoms';
+import { QuantityButton } from '../../components/common/Button/QuantityButton/QuantityButton';
+import Button from '../../components/common/Button/Button';
 
 const Cart = () => {
+  const cartProduct = useRecoilValue(cartItems);
+
+  console.log(cartProduct);
+
   return (
     <DefaultWrapper>
       <CartWrapper>
@@ -12,14 +25,50 @@ const Cart = () => {
           <p className='quantity'>수량</p>
           <p className='product-price'>상품금액</p>
         </CartHeader>
-        <CartBody>
-          <p className='text-bold'>
-            장바구니에 담긴 상품이 없습니다.
-          </p>
-          <p className='text-normal'>
-            원하는 상품을 장바구니에 담아보세요!
-          </p>
-        </CartBody>
+        {cartProduct.length > 0 ? (
+          <CartBody cartProduct={cartProduct}>
+            {cartProduct.map((item) => (
+              <CartItem>
+                <input type='checkbox' />
+                <img src={item.image} alt='' />
+                <div className='item-info'>
+                  <p>{item.store_name}</p>
+                  <p>{item.product_name}</p>
+                  <p>{item.price}</p>
+                  <p>택배배송 / 무료배송</p>
+                </div>
+                <QuantityButton>
+                  <div className='quantity-btn'>
+                    <button
+                      className='minus-btn'
+                      // onClick={handleQuantity}
+                      name='decrement'
+                    ></button>
+                    <span className='quantity'>{1}</span>
+                    <button
+                      className='plus-btn'
+                      // onClick={handleQuantity}
+                      name='increment'
+                    ></button>
+                  </div>
+                </QuantityButton>
+                <div className='order-section'>
+                  <p>{item.price}</p>
+                  <Button size='md'>주문하기</Button>
+                </div>
+              </CartItem>
+            ))}
+          </CartBody>
+        ) : (
+          <CartBody>
+            <p className='text-bold'>
+              장바구니에 담긴 상품이 없습니다.
+            </p>
+            <p className='text-normal'>
+              원하는 상품을 장바구니에 담아보세요!
+            </p>
+          </CartBody>
+        )}
       </CartWrapper>
     </DefaultWrapper>
   );

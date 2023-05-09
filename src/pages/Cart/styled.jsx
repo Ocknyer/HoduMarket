@@ -38,7 +38,7 @@ export const CartBody = styled.div`
   flex-direction: column;
   gap: 17px;
   text-align: center;
-  padding: 200px 0;
+  padding: ${({ cartProduct }) => '35px 0' || '200px 0'};
 
   .text-bold {
     font-size: 18px;
@@ -48,5 +48,35 @@ export const CartBody = styled.div`
   .text-normal {
     font-size: 14px;
     color: var(--grey76);
+  }
+`;
+
+export const CartItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 200px;
+  border: 1px solid var(--greyC4);
+  border-radius: 5px;
+  padding: 20px 18px;
+
+  > img {
+    width: 160px;
+    height: 160px;
+    margin: 0 30px 0 40px;
+  }
+
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+    margin-right: auto;
+  }
+
+  .order-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 `;

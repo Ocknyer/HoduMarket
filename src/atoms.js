@@ -13,3 +13,8 @@ export const searchProducts = atom({
   key: 'search_data',
   default: [],
 });
+
+export const cartItems = atom({
+  key: 'cart_items',
+  default: [],
+});
