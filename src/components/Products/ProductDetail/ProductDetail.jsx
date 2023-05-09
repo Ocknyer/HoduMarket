@@ -18,20 +18,26 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const priceSum = (productData.price * quantity).toLocaleString();
   const [cartProducts, setCartProducts] = useRecoilState(cartItems);
   const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
 
   console.log(productData);
 
-  // const handleToCart = (e) => {
-  //   e.preventDefault();
-
-  //   setCartProducts([...cartProducts, productData]);
-  // };
-
   console.log(cartProducts);
 
   const handleModalOpen = () => {
-    setCartProducts([...cartProducts, productData]);
+    setCartProducts([
+      ...cartProducts,
+      {
+        id: productData.product_id,
+        image: productData.image,
+        storeName: productData.store_name,
+        productName: productData.product_name,
+        quantity: quantity,
+        price: productData.price,
+        totalPrice: productData.price * quantity,
+      },
+    ]);
     setIsOpen(true);
   };
 
@@ -40,7 +46,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   };
 
   const navigateToCart = () => {
-    navigate('/cart', { state: { quantity } });
+    navigate('/cart');
   };
 
   return (

@@ -12,15 +12,34 @@ import { QuantityButton } from '../../components/common/Button/QuantityButton/Qu
 import Button from '../../components/common/Button/Button';
 import minus from '../../assets/img/icon-Ellipse-minus.svg';
 import plus from '../../assets/img/icon-Ellipse-plus.svg';
-import { useLocation } from 'react-router-dom';
+
+// const cart = [{id: 1, price: 1000, totalPrice: 2000}, {id: 2, price: 2000, totalPrice: 4000}]
+
+// const sum = {price: 3000, totalPrice: 6000}
 
 const Cart = () => {
   const cartProduct = useRecoilValue(cartItems);
-  const location = useLocation();
 
-  const quantity = location.state.quantity;
+  let totalPaymentPrice = cartProduct
+    .reduce((acc, cur) => {
+      return (acc += cur.totalPrice);
+    }, 0)
+    .toLocaleString();
 
-  console.log(cartProduct);
+  // console.log(cartProduct);
+
+  // const [productQuantity, setProductQuantity] = useState(quantity);
+
+  const handleQuantity = (e) => {
+    console.log(e.target);
+    // console.log(e.target.name);
+    // if (e.target.name === 'increment') {
+    //   setProductQuantity((prev) => prev + 1);
+    // }
+    // if (e.target.name === 'decrement' && quantity > 1) {
+    //   setProductQuantity((prev) => prev - 1);
+    // }
+  };
 
   return (
     <DefaultWrapper>
@@ -36,14 +55,14 @@ const Cart = () => {
           <>
             <CartBody cartProduct={cartProduct}>
               {cartProduct.map((item) => (
-                <CartItem>
+                <CartItem key={item.id}>
                   <input type='checkbox' />
                   <div className='item-section'>
                     <img src={item.image} alt='' />
                     <div className='item-info'>
-                      <p className='store-name'>{item.store_name}</p>
+                      <p className='store-name'>{item.storeName}</p>
                       <p className='product-name'>
-                        {item.product_name}
+                        {item.productName}
                       </p>
                       <p className='product-price'>
                         {item.price.toLocaleString()}원
@@ -56,13 +75,15 @@ const Cart = () => {
                       <div className='quantity-btn'>
                         <button
                           className='minus-btn'
-                          // onClick={handleQuantity}
+                          onClick={handleQuantity}
                           name='decrement'
                         ></button>
-                        <span className='quantity'>{quantity}</span>
+                        <span className='quantity'>
+                          {item.quantity}
+                        </span>
                         <button
                           className='plus-btn'
-                          // onClick={handleQuantity}
+                          onClick={handleQuantity}
                           name='increment'
                         ></button>
                       </div>
@@ -70,7 +91,7 @@ const Cart = () => {
                   </div>
                   <div className='order-section'>
                     <p className='total-price'>
-                      {item.price.toLocaleString()}원
+                      {item.totalPrice.toLocaleString()}원
                     </p>
                     <Button width='130px'>주문하기</Button>
                   </div>
@@ -81,7 +102,8 @@ const Cart = () => {
               <div className='each-section'>
                 <p className='price-text'>총 상품금액</p>
                 <p className='price-num'>
-                  0 <span className='price-text'>원</span>
+                  {totalPaymentPrice + ' '}
+                  <span className='price-text'>원</span>
                 </p>
               </div>
               <img src={minus} alt='마이너스 아이콘' />
@@ -101,7 +123,7 @@ const Cart = () => {
               <div className='payment-section'>
                 <p className='payment-text'>결제 예정 금액</p>
                 <p className='payment-num'>
-                  30,000{' '}
+                  {totalPaymentPrice + ' '}
                   <span className='payment-small-text'>원</span>
                 </p>
               </div>

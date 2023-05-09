@@ -11,7 +11,7 @@ export const ModalWrapper = styled.article`
   height: 200px;
   border: 1px solid var(--greyC4);
   background-color: white;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
