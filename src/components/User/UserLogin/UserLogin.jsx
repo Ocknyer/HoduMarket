@@ -16,7 +16,9 @@ const UserLogin = ({
 }) => {
   return (
     <LoginWrapper>
-      <img src={logo} alt='호두마켓 로고' />
+      <Link to={'/'}>
+        <img src={logo} alt='호두마켓 로고' />
+      </Link>
       <UserTab userType={userType}>
         <button type='button' id='BUYER' onClick={onClick}>
           구매회원 로그인

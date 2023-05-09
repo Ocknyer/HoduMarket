@@ -7,7 +7,7 @@ export const LoginWrapper = styled.div`
   align-items: center;
   margin: 100px auto;
 
-  > img {
+  > a {
     width: 248px;
     margin-bottom: 70px;
   }
