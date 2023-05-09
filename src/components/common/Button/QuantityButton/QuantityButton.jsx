@@ -10,7 +10,6 @@ export const QuantityButton = styled.div`
     position: relative;
     border: 1px solid var(--greyC4);
     border-radius: 5px;
-    margin-bottom: 78px;
 
     .plus-btn {
       background: url(${plusBtn}) no-repeat center;

@@ -103,6 +103,8 @@ export const ButtonSection = styled.div`
   }
 
   .quantity-btn {
+    margin-bottom: 78px;
+
     &::before {
       position: absolute;
       top: -30px;
