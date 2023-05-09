@@ -9,21 +9,39 @@ import {
 } from './styled';
 import { cartItems } from '../../../atoms';
 import { QuantityButton } from '../../common/Button/QuantityButton/QuantityButton';
+import { useState } from 'react';
+import MoveToCart from '../../Modal/MoveToCart';
+import { useNavigate } from 'react-router-dom';
 
 const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const price = productData.price.toLocaleString();
   const priceSum = (productData.price * quantity).toLocaleString();
   const [cartProducts, setCartProducts] = useRecoilState(cartItems);
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   console.log(productData);
 
-  const handleToCart = (e) => {
-    e.preventDefault();
+  // const handleToCart = (e) => {
+  //   e.preventDefault();
 
-    setCartProducts([...cartProducts, productData]);
-  };
+  //   setCartProducts([...cartProducts, productData]);
+  // };
 
   console.log(cartProducts);
+
+  const handleModalOpen = () => {
+    setCartProducts([...cartProducts, productData]);
+    setIsOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
+
+  const navigateToCart = () => {
+    navigate('/cart', { state: { quantity } });
+  };
 
   return (
     <DefaultWrapper>
@@ -77,7 +95,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
                 size='lg'
                 width='200px'
                 bc='var(--grey76)'
-                onClick={handleToCart}
+                onClick={handleModalOpen}
               >
                 장바구니
               </Button>
@@ -85,6 +103,11 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
           </ButtonSection>
         </InfoSection>
       </ProductDetailWrapper>
+      <MoveToCart
+        isOpen={isOpen}
+        handleModalClose={handleModalClose}
+        navigateToCart={navigateToCart}
+      />
     </DefaultWrapper>
   );
 };

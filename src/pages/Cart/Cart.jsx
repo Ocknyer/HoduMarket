@@ -12,9 +12,13 @@ import { QuantityButton } from '../../components/common/Button/QuantityButton/Qu
 import Button from '../../components/common/Button/Button';
 import minus from '../../assets/img/icon-Ellipse-minus.svg';
 import plus from '../../assets/img/icon-Ellipse-plus.svg';
+import { useLocation } from 'react-router-dom';
 
 const Cart = () => {
   const cartProduct = useRecoilValue(cartItems);
+  const location = useLocation();
+
+  const quantity = location.state.quantity;
 
   console.log(cartProduct);
 
@@ -55,7 +59,7 @@ const Cart = () => {
                           // onClick={handleQuantity}
                           name='decrement'
                         ></button>
-                        <span className='quantity'>{1}</span>
+                        <span className='quantity'>{quantity}</span>
                         <button
                           className='plus-btn'
                           // onClick={handleQuantity}

@@ -14,6 +14,11 @@ export const searchProducts = atom({
   default: [],
 });
 
+export const quantity = atom({
+  key: 'product_qauntity',
+  default: 1,
+});
+
 export const cartItems = atom({
   key: 'cart_items',
   default: [],
