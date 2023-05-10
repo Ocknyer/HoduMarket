@@ -30,7 +30,7 @@ const Cart = () => {
           <p className='product-price'>상품금액</p>
         </CartHeader>
         <CartList cartLists={cartLists} />
-        <TotalSection />
+        <TotalSection cartLists={cartLists} />
       </CartWrapper>
     </DefaultWrapper>
   );

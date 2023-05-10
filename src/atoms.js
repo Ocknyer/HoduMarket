@@ -14,9 +14,9 @@ export const searchProducts = atom({
   default: [],
 });
 
-export const quantity = atom({
-  key: 'product_qauntity',
-  default: 1,
+export const totalPaymentPrice = atom({
+  key: 'total_payment_price',
+  default: 0,
 });
 
 export const cartItems = atom({
