@@ -2,9 +2,10 @@ import CartItem from '../CartItem/CartItem';
 import { CartBody } from './styled';
 
 const CartList = ({ cartLists }) => {
+  console.log(cartLists);
   return (
     <>
-      {cartLists.length > 0 ? (
+      {cartLists ? (
         <>
           <CartBody cartLists={cartLists}>
             {cartLists.map((item) => (

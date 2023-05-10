@@ -5,18 +5,14 @@ import getCartItems from '../../api/cart/getCartItems';
 import { useState } from 'react';
 import CartList from '../../components/Cart/CartList/CartList';
 import TotalSection from '../../components/Cart/TotalSection/TotalSection';
-import { useRecoilValue } from 'recoil';
-import { cartItems } from '../../atoms';
 
 const Cart = () => {
-  const cartProducts = useRecoilValue(cartItems);
   const [cartLists, setCartLists] = useState([]);
 
   useEffect(() => {
     getCartItems()
       .then((data) => {
-        setCartLists(data.results);
-        console.log(data);
+        setCartLists(data);
       })
       .catch((error) => {
         console.log(error);

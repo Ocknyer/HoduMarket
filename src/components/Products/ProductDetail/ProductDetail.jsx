@@ -1,25 +1,21 @@
-import { useRecoilState } from 'recoil';
+import { useState, useEffect } from 'react';
 import Button from '../../common/Button/Button';
 import DefaultWrapper from '../../common/Wrapper/DefaultWrapper';
-import { cartItemQuantity, cartItems } from '../../../atoms';
 import { QuantityButton } from '../../common/Button/QuantityButton/QuantityButton';
-import { useState } from 'react';
 import MoveToCart from '../../Modal/MoveToCart';
 import { useNavigate } from 'react-router-dom';
+import postCartItems from '../../../api/cart/postCartItems';
+import getCartItems from '../../../api/cart/getCartItems';
 import {
   ButtonSection,
   InfoSection,
   ProductDetailWrapper,
   ProductInfo,
 } from './styled';
-import postCartItems from '../../../api/cart/postCartItems';
-import getCartItems from '../../../api/cart/getCartItems';
-import { useEffect } from 'react';
 
 const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const price = productData.price.toLocaleString();
   const priceSum = (productData.price * quantity).toLocaleString();
-  const [cartProducts, setCartProducts] = useRecoilState(cartItems);
   const [isOpen, setIsOpen] = useState(false);
   const [cartData, setCartData] = useState([]);
 
@@ -28,7 +24,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   useEffect(() => {
     getCartItems()
       .then((data) => {
-        setCartData(data.results);
+        setCartData(data);
       })
       .catch((error) => {
         console.log(error);
@@ -41,7 +37,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
 
   console.log(isInCart);
   // console.log(productData);
-  // console.log(cartData);
+  console.log(cartData);
 
   const handleModalOpen = () => {
     postCartItems({
@@ -55,21 +51,6 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
       .catch((error) => {
         console.log(error);
       });
-
-    // if (cartProducts.length === 0) {
-    //   setCartProducts([
-    //     ...cartProducts,
-    //     {
-    //       id: productData.product_id,
-    //       image: productData.image,
-    //       storeName: productData.store_name,
-    //       productName: productData.product_name,
-    //       quantity: itemQuantity,
-    //       price: productData.price,
-    //       totalPrice: productData.price * quantity,
-    //     },
-    //   ]);
-    // }
 
     setIsOpen(true);
   };

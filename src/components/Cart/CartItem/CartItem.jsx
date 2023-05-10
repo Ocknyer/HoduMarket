@@ -4,17 +4,18 @@ import Button from '../../common/Button/Button';
 import { CartItemWrapper } from './styled';
 
 const CartItem = ({ item }) => {
+  const { image, store_name, product_name, quantity, price } = item;
+  const totalPrice = (price * quantity).toLocaleString();
+
   return (
     <CartItemWrapper>
       <input type='checkbox' />
       <div className='item-section'>
-        <img src={item.image} alt='' />
+        <img src={image} alt='' />
         <div className='item-info'>
-          <p className='store-name'>{item.storeName}</p>
-          <p className='product-name'>{item.productName}</p>
-          <p className='product-price'>
-            {/* {item.price.toLocaleString()}원 */}
-          </p>
+          <p className='store-name'>{store_name}</p>
+          <p className='product-name'>{product_name}</p>
+          <p className='product-price'>{price.toLocaleString()}원</p>
           <p className='delivery'>택배배송 / 무료배송</p>
         </div>
       </div>
@@ -26,7 +27,7 @@ const CartItem = ({ item }) => {
               // onClick={handleQuantity}
               name='decrement'
             ></button>
-            <span className='quantity'>{item.quantity}</span>
+            <span className='quantity'>{quantity}</span>
             <button
               className='plus-btn'
               // onClick={handleQuantity}
@@ -36,9 +37,7 @@ const CartItem = ({ item }) => {
         </QuantityButton>
       </div>
       <div className='order-section'>
-        <p className='total-price'>
-          {/* {item.totalPrice.toLocaleString()}원 */}
-        </p>
+        <p className='total-price'>{totalPrice}원</p>
         <Button width='130px'>주문하기</Button>
       </div>
     </CartItemWrapper>
