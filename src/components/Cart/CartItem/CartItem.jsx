@@ -2,20 +2,34 @@ import React from 'react';
 import { QuantityButton } from '../../common/Button/QuantityButton/QuantityButton';
 import Button from '../../common/Button/Button';
 import { CartItemWrapper } from './styled';
-import { useSetRecoilState } from 'recoil';
-import { totalPaymentPrice } from '../../../atoms';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { totalPaymentPrice, totalShippingFee } from '../../../atoms';
+import { useEffect } from 'react';
 
 const CartItem = ({ item }) => {
   const { image, store_name, product_name, quantity, price } = item;
 
   const setTotalPaymentPrice = useSetRecoilState(totalPaymentPrice);
-  setTotalPaymentPrice((prev) => prev + price * quantity);
+  const setTotalShippingFee = useSetRecoilState(totalShippingFee);
+  // const shippingFeee = useRecoilValue(totalShippingFee);
+
+  // console.log([item]);
 
   const totalPrice = (price * quantity).toLocaleString();
-
   const shippingFee = item.shipping_fee;
 
-  console.log(shippingFee);
+  useEffect(() => {
+    setTotalPaymentPrice((prev) => prev + price * quantity);
+    setTotalShippingFee((prev) => prev + shippingFee);
+  }, [
+    price,
+    quantity,
+    setTotalPaymentPrice,
+    setTotalShippingFee,
+    shippingFee,
+  ]);
+
+  // console.log(shippingFeee);
 
   return (
     <CartItemWrapper>

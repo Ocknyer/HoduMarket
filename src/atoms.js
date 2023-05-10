@@ -19,6 +19,11 @@ export const totalPaymentPrice = atom({
   default: 0,
 });
 
+export const totalShippingFee = atom({
+  key: 'total_shipping_fee',
+  default: 0,
+});
+
 export const cartItems = atom({
   key: 'cart_items',
   default: [],

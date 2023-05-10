@@ -19,6 +19,19 @@ const Cart = () => {
       });
   }, []);
 
+  const payment = cartLists.reduce(
+    (acc, cur) => {
+      if (cur.is_active) {
+        return (acc = {
+          price: acc.price + cur.price * cur.quantity,
+          shipping_fee: acc.shipping_fee + cur.shipping_fee,
+        });
+      }
+      return acc;
+    },
+    { price: 0, shipping_fee: 0 }
+  );
+
   return (
     <DefaultWrapper>
       <CartWrapper>
@@ -30,7 +43,7 @@ const Cart = () => {
           <p className='product-price'>상품금액</p>
         </CartHeader>
         <CartList cartLists={cartLists} />
-        <TotalSection cartLists={cartLists} />
+        <TotalSection payment={payment} />
       </CartWrapper>
     </DefaultWrapper>
   );
