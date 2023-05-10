@@ -2,34 +2,45 @@ import React from 'react';
 import { QuantityButton } from '../../common/Button/QuantityButton/QuantityButton';
 import Button from '../../common/Button/Button';
 import { CartItemWrapper } from './styled';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { totalPaymentPrice, totalShippingFee } from '../../../atoms';
-import { useEffect } from 'react';
+import putQuantity from '../../../api/cart/putQuantity';
 
-const CartItem = ({ item }) => {
+const CartItem = ({ cartLists, setCartLists, item }) => {
   const { image, store_name, product_name, quantity, price } = item;
-
-  const setTotalPaymentPrice = useSetRecoilState(totalPaymentPrice);
-  const setTotalShippingFee = useSetRecoilState(totalShippingFee);
-  // const shippingFeee = useRecoilValue(totalShippingFee);
-
-  // console.log([item]);
 
   const totalPrice = (price * quantity).toLocaleString();
   const shippingFee = item.shipping_fee;
 
-  useEffect(() => {
-    setTotalPaymentPrice((prev) => prev + price * quantity);
-    setTotalShippingFee((prev) => prev + shippingFee);
-  }, [
-    price,
-    quantity,
-    setTotalPaymentPrice,
-    setTotalShippingFee,
-    shippingFee,
-  ]);
+  const handleQuantity = (e) => {
+    putQuantity(item)
+      .then((data) => {
+        const cartItemIdx = cartLists.findIndex(
+          (el) => el.product_id === data.product_id
+        );
 
-  // console.log(shippingFeee);
+        setCartLists((prev) => {
+          return [...prev].map((item, idx) => {
+            if (e.target.name === 'increment') {
+              return idx === cartItemIdx
+                ? {
+                    ...cartLists[cartItemIdx],
+                    quantity: cartLists[cartItemIdx].quantity + 1,
+                  }
+                : item;
+            } else if (e.target.name === 'decrement') {
+              return idx === cartItemIdx
+                ? {
+                    ...cartLists[cartItemIdx],
+                    quantity: cartLists[cartItemIdx].quantity - 1,
+                  }
+                : item;
+            }
+          });
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <CartItemWrapper>
@@ -52,13 +63,13 @@ const CartItem = ({ item }) => {
           <div className='quantity-btn'>
             <button
               className='minus-btn'
-              // onClick={handleQuantity}
+              onClick={handleQuantity}
               name='decrement'
             ></button>
             <span className='quantity'>{quantity}</span>
             <button
               className='plus-btn'
-              // onClick={handleQuantity}
+              onClick={handleQuantity}
               name='increment'
             ></button>
           </div>
