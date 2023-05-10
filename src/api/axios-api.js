@@ -23,6 +23,8 @@ accessInstance.interceptors.request.use((config) => {
       Authorization: `JWT ${localStorage.getItem('token')}`,
     };
   }
+
+  return config;
 });
 
 export const getProductList = async () => {

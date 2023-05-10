@@ -37,8 +37,6 @@ const Header = ({ userType }) => {
       });
   };
 
-  console.log(searchData);
-
   const onSubmitSearch = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();

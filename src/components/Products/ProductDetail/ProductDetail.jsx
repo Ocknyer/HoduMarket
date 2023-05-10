@@ -1,43 +1,76 @@
 import { useRecoilState } from 'recoil';
 import Button from '../../common/Button/Button';
 import DefaultWrapper from '../../common/Wrapper/DefaultWrapper';
+import { cartItemQuantity, cartItems } from '../../../atoms';
+import { QuantityButton } from '../../common/Button/QuantityButton/QuantityButton';
+import { useState } from 'react';
+import MoveToCart from '../../Modal/MoveToCart';
+import { useNavigate } from 'react-router-dom';
 import {
   ButtonSection,
   InfoSection,
   ProductDetailWrapper,
   ProductInfo,
 } from './styled';
-import { cartItems } from '../../../atoms';
-import { QuantityButton } from '../../common/Button/QuantityButton/QuantityButton';
-import { useState } from 'react';
-import MoveToCart from '../../Modal/MoveToCart';
-import { useNavigate } from 'react-router-dom';
+import postCartItems from '../../../api/cart/postCartItems';
+import getCartItems from '../../../api/cart/getCartItems';
+import { useEffect } from 'react';
 
 const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const price = productData.price.toLocaleString();
   const priceSum = (productData.price * quantity).toLocaleString();
   const [cartProducts, setCartProducts] = useRecoilState(cartItems);
   const [isOpen, setIsOpen] = useState(false);
+  const [cartData, setCartData] = useState([]);
 
   const navigate = useNavigate();
 
-  console.log(productData);
+  useEffect(() => {
+    getCartItems()
+      .then((data) => {
+        setCartData(data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  console.log(cartProducts);
+  const isInCart = cartData.filter(
+    (item) => item.product_id === productData.product_id
+  ).length;
+
+  console.log(isInCart);
+  // console.log(productData);
+  // console.log(cartData);
 
   const handleModalOpen = () => {
-    setCartProducts([
-      ...cartProducts,
-      {
-        id: productData.product_id,
-        image: productData.image,
-        storeName: productData.store_name,
-        productName: productData.product_name,
-        quantity: quantity,
-        price: productData.price,
-        totalPrice: productData.price * quantity,
-      },
-    ]);
+    postCartItems({
+      product_id: productData.product_id,
+      quantity: quantity,
+      check: isInCart,
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // if (cartProducts.length === 0) {
+    //   setCartProducts([
+    //     ...cartProducts,
+    //     {
+    //       id: productData.product_id,
+    //       image: productData.image,
+    //       storeName: productData.store_name,
+    //       productName: productData.product_name,
+    //       quantity: itemQuantity,
+    //       price: productData.price,
+    //       totalPrice: productData.price * quantity,
+    //     },
+    //   ]);
+    // }
+
     setIsOpen(true);
   };
 
@@ -45,7 +78,8 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
     setIsOpen(false);
   };
 
-  const navigateToCart = () => {
+  const navigateToCart = (e) => {
+    e.preventDefault();
     navigate('/cart');
   };
 
@@ -94,8 +128,12 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
               </p>
             </div>
             <div className='btn'>
-              <Button size='lg' width='100%'>
-                바로 구매
+              <Button
+                size='lg'
+                width='100%'
+                disabled={productData.stock > 0 ? false : true}
+              >
+                {productData.stock > 0 ? '바로 구매' : '품절'}
               </Button>
               <Button
                 size='lg'
@@ -111,6 +149,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
       </ProductDetailWrapper>
       <MoveToCart
         isOpen={isOpen}
+        isInCart={isInCart}
         handleModalClose={handleModalClose}
         navigateToCart={navigateToCart}
       />

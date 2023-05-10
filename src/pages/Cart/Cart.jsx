@@ -1,45 +1,27 @@
-import { useRecoilValue } from 'recoil';
 import DefaultWrapper from '../../components/common/Wrapper/DefaultWrapper';
-import {
-  CartBody,
-  CartHeader,
-  CartItem,
-  CartWrapper,
-  TotalSection,
-} from './styled';
+import { CartHeader, CartWrapper } from './styled';
+import { useEffect } from 'react';
+import getCartItems from '../../api/cart/getCartItems';
+import { useState } from 'react';
+import CartList from '../../components/Cart/CartList/CartList';
+import TotalSection from '../../components/Cart/TotalSection/TotalSection';
+import { useRecoilValue } from 'recoil';
 import { cartItems } from '../../atoms';
-import { QuantityButton } from '../../components/common/Button/QuantityButton/QuantityButton';
-import Button from '../../components/common/Button/Button';
-import minus from '../../assets/img/icon-Ellipse-minus.svg';
-import plus from '../../assets/img/icon-Ellipse-plus.svg';
-
-// const cart = [{id: 1, price: 1000, totalPrice: 2000}, {id: 2, price: 2000, totalPrice: 4000}]
-
-// const sum = {price: 3000, totalPrice: 6000}
 
 const Cart = () => {
-  const cartProduct = useRecoilValue(cartItems);
+  const cartProducts = useRecoilValue(cartItems);
+  const [cartLists, setCartLists] = useState([]);
 
-  let totalPaymentPrice = cartProduct
-    .reduce((acc, cur) => {
-      return (acc += cur.totalPrice);
-    }, 0)
-    .toLocaleString();
-
-  // console.log(cartProduct);
-
-  // const [productQuantity, setProductQuantity] = useState(quantity);
-
-  const handleQuantity = (e) => {
-    console.log(e.target);
-    // console.log(e.target.name);
-    // if (e.target.name === 'increment') {
-    //   setProductQuantity((prev) => prev + 1);
-    // }
-    // if (e.target.name === 'decrement' && quantity > 1) {
-    //   setProductQuantity((prev) => prev - 1);
-    // }
-  };
+  useEffect(() => {
+    getCartItems()
+      .then((data) => {
+        setCartLists(data.results);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <DefaultWrapper>
@@ -51,97 +33,8 @@ const Cart = () => {
           <p className='quantity'>수량</p>
           <p className='product-price'>상품금액</p>
         </CartHeader>
-        {cartProduct.length > 0 ? (
-          <>
-            <CartBody cartProduct={cartProduct}>
-              {cartProduct.map((item) => (
-                <CartItem key={item.id}>
-                  <input type='checkbox' />
-                  <div className='item-section'>
-                    <img src={item.image} alt='' />
-                    <div className='item-info'>
-                      <p className='store-name'>{item.storeName}</p>
-                      <p className='product-name'>
-                        {item.productName}
-                      </p>
-                      <p className='product-price'>
-                        {item.price.toLocaleString()}원
-                      </p>
-                      <p className='delivery'>택배배송 / 무료배송</p>
-                    </div>
-                  </div>
-                  <div className='quantity-section'>
-                    <QuantityButton>
-                      <div className='quantity-btn'>
-                        <button
-                          className='minus-btn'
-                          onClick={handleQuantity}
-                          name='decrement'
-                        ></button>
-                        <span className='quantity'>
-                          {item.quantity}
-                        </span>
-                        <button
-                          className='plus-btn'
-                          onClick={handleQuantity}
-                          name='increment'
-                        ></button>
-                      </div>
-                    </QuantityButton>
-                  </div>
-                  <div className='order-section'>
-                    <p className='total-price'>
-                      {item.totalPrice.toLocaleString()}원
-                    </p>
-                    <Button width='130px'>주문하기</Button>
-                  </div>
-                </CartItem>
-              ))}
-            </CartBody>
-            <TotalSection>
-              <div className='each-section'>
-                <p className='price-text'>총 상품금액</p>
-                <p className='price-num'>
-                  {totalPaymentPrice + ' '}
-                  <span className='price-text'>원</span>
-                </p>
-              </div>
-              <img src={minus} alt='마이너스 아이콘' />
-              <div className='each-section'>
-                <p className='price-text'>상품할인</p>
-                <p className='price-num'>
-                  0 <span className='price-text'>원</span>
-                </p>
-              </div>
-              <img src={plus} alt='플러스 아이콘' />
-              <div className='each-section'>
-                <p className='price-text'>배송비</p>
-                <p className='price-num'>
-                  0 <span className='price-text'>원</span>
-                </p>
-              </div>
-              <div className='payment-section'>
-                <p className='payment-text'>결제 예정 금액</p>
-                <p className='payment-num'>
-                  {totalPaymentPrice + ' '}
-                  <span className='payment-small-text'>원</span>
-                </p>
-              </div>
-            </TotalSection>
-            <Button size='lg' width='220px'>
-              주문하기
-            </Button>
-          </>
-        ) : (
-          <CartBody>
-            <p className='text-bold'>
-              장바구니에 담긴 상품이 없습니다.
-            </p>
-            <p className='text-normal'>
-              원하는 상품을 장바구니에 담아보세요!
-            </p>
-          </CartBody>
-        )}
+        <CartList cartLists={cartLists} />
+        <TotalSection />
       </CartWrapper>
     </DefaultWrapper>
   );
