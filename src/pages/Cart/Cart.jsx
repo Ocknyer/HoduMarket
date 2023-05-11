@@ -13,6 +13,7 @@ import deleteCartItem from '../../api/cart/deleteCartItem';
 const Cart = () => {
   const [cartLists, setCartLists] = useState([]);
   const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
+  const [deletedItem, setDeletedItem] = useState();
 
   useEffect(() => {
     getCartItems()
@@ -22,7 +23,7 @@ const Cart = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [deletedItem]);
 
   const payment = [...cartLists].reduce(
     (acc, cur) => {
@@ -46,14 +47,8 @@ const Cart = () => {
 
   const deleteItem = () => {
     deleteCartItem(item_id)
-      .then((data) => {
-        getCartItems()
-          .then((data) => {
-            setCartLists(data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+      .then(() => {
+        setDeletedItem(item_id);
       })
       .catch((error) => {
         console.log(error);
@@ -61,8 +56,8 @@ const Cart = () => {
     setIsOpen(false);
   };
 
-  console.log(item_id);
-  console.log(cartLists);
+  // console.log(item_id);
+  // console.log(cartLists);
 
   return (
     <DefaultWrapper>

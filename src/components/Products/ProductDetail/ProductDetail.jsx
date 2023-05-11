@@ -12,11 +12,15 @@ import {
   ProductDetailWrapper,
   ProductInfo,
 } from './styled';
+import Modal from '../../Modal/Modal';
+import { useRecoilState } from 'recoil';
+import { modalIsOpen } from '../../../atoms';
 
 const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const price = productData.price.toLocaleString();
   const priceSum = (productData.price * quantity).toLocaleString();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
+  const [isIn, setIsIn] = useState([]);
   const [cartData, setCartData] = useState([]);
 
   const navigate = useNavigate();
@@ -29,15 +33,11 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [isIn]);
 
   const isInCart = cartData.filter(
     (item) => item.product_id === productData.product_id
   ).length;
-
-  console.log(isInCart);
-  // console.log(productData);
-  console.log(cartData);
 
   const handleModalOpen = () => {
     postCartItems({
@@ -46,12 +46,11 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
       check: isInCart,
     })
       .then((data) => {
-        console.log(data);
+        setIsIn(data);
       })
       .catch((error) => {
         console.log(error);
       });
-
     setIsOpen(true);
   };
 
@@ -62,6 +61,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const navigateToCart = (e) => {
     e.preventDefault();
     navigate('/cart');
+    setIsOpen(false);
   };
 
   return (
@@ -134,6 +134,26 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
         handleModalClose={handleModalClose}
         navigateToCart={navigateToCart}
       />
+      {isOpen && (
+        <Modal
+          rejectText={'아니오'}
+          resultText={'예'}
+          onClickReject={handleModalClose}
+          onClickResult={navigateToCart}
+        >
+          {isInCart ? (
+            <>
+              이미 장바구니에 담긴 상품입니다. <br /> 장바구니로
+              이동할까요?
+            </>
+          ) : (
+            <>
+              장바구니에 상품을 담았습니다. <br /> 장바구니로
+              이동할까요?
+            </>
+          )}
+        </Modal>
+      )}
     </DefaultWrapper>
   );
 };
