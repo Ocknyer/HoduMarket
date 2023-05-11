@@ -1,11 +1,24 @@
 import React from 'react';
 import { QuantityButton } from '../../common/Button/QuantityButton/QuantityButton';
 import Button from '../../common/Button/Button';
-import { CartItemWrapper } from './styled';
+import Delete from '../../../assets/img/icon-delete.svg';
 import putQuantity from '../../../api/cart/putQuantity';
+import { CartItemWrapper } from './styled';
 
-const CartItem = ({ cartLists, setCartLists, item }) => {
-  const { image, store_name, product_name, quantity, price } = item;
+const CartItem = ({
+  cartLists,
+  setCartLists,
+  item,
+  onClickModal,
+}) => {
+  const {
+    image,
+    store_name,
+    product_name,
+    quantity,
+    price,
+    cart_item_id,
+  } = item;
 
   const totalPrice = (price * quantity).toLocaleString();
   const shippingFee = item.shipping_fee;
@@ -18,6 +31,7 @@ const CartItem = ({ cartLists, setCartLists, item }) => {
         );
 
         setCartLists((prev) => {
+          // eslint-disable-next-line array-callback-return
           return [...prev].map((item, idx) => {
             if (e.target.name === 'increment') {
               return idx === cartItemIdx
@@ -79,6 +93,12 @@ const CartItem = ({ cartLists, setCartLists, item }) => {
         <p className='total-price'>{totalPrice}원</p>
         <Button width='130px'>주문하기</Button>
       </div>
+      <button
+        className='btn-cart-delete'
+        onClick={() => onClickModal('open', cart_item_id)}
+      >
+        <img src={Delete} alt='장바구니 삭제' />
+      </button>
     </CartItemWrapper>
   );
 };

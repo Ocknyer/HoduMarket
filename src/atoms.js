@@ -14,7 +14,12 @@ export const searchProducts = atom({
   default: [],
 });
 
-export const cartItems = atom({
-  key: 'cart_items',
-  default: [],
+export const modalIsOpen = atom({
+  key: 'modal_is_open',
+  default: false,
+});
+
+export const cartItemId = atom({
+  key: 'cart_item_id',
+  default: 0,
 });

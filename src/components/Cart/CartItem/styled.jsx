@@ -8,6 +8,7 @@ export const CartItemWrapper = styled.div`
   border: 1px solid var(--greyC4);
   border-radius: 5px;
   padding: 20px 18px;
+  position: relative;
 
   .item-section {
     width: 50%;
@@ -71,5 +72,11 @@ export const CartItemWrapper = styled.div`
       margin-bottom: 26px;
       color: #eb5757;
     }
+  }
+
+  .btn-cart-delete {
+    position: absolute;
+    top: 18px;
+    right: 18px;
   }
 `;
