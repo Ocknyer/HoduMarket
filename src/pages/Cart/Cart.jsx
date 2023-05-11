@@ -1,5 +1,5 @@
 import DefaultWrapper from '../../components/common/Wrapper/DefaultWrapper';
-import { CartHeader, CartWrapper } from './styled';
+import { CartHeader } from './styled';
 import { useEffect } from 'react';
 import getCartItems from '../../api/cart/getCartItems';
 import { useState } from 'react';
@@ -10,13 +10,15 @@ import { modalIsOpen } from '../../atoms';
 import Modal from '../../components/Modal/Modal';
 import deleteCartItem from '../../api/cart/deleteCartItem';
 import { CheckBox } from '../../components/common/Input/CheckBox';
+import { useNavigate } from 'react-router-dom';
+import { InnerWrapper } from '../../components/common/Wrapper/InnerWrapper';
 
 const Cart = () => {
   const [cartLists, setCartLists] = useState([]);
   const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
   const [deletedItem, setDeletedItem] = useState();
   const [selected, setSelected] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     getCartItems()
@@ -68,9 +70,20 @@ const Cart = () => {
 
   console.log(selected);
 
+  const navigate = useNavigate();
+
+  const MoveToOrder = () => {
+    navigate('/order', {
+      state: {
+        cartLists: cartLists,
+        payment: payment,
+      },
+    });
+  };
+
   return (
     <DefaultWrapper>
-      <CartWrapper>
+      <InnerWrapper>
         <h1>장바구니</h1>
         <CartHeader>
           <CheckBox
@@ -88,8 +101,10 @@ const Cart = () => {
           setCartLists={setCartLists}
           onClickModal={onClickModal}
         />
-        {cartLists.length > 0 && <TotalSection payment={payment} />}
-      </CartWrapper>
+        {cartLists.length > 0 && (
+          <TotalSection payment={payment} MoveToOrder={MoveToOrder} />
+        )}
+      </InnerWrapper>
       {isOpen && (
         <Modal
           rejectText={'취소'}

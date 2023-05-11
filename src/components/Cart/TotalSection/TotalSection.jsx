@@ -3,7 +3,7 @@ import plus from '../../../assets/img/icon-Ellipse-plus.svg';
 import Button from '../../common/Button/Button';
 import { TotalSectionWrapper } from './styled';
 
-const TotalSection = ({ payment }) => {
+const TotalSection = ({ payment, MoveToOrder }) => {
   const { price, shipping_fee } = payment;
 
   const totalPrice = price.toLocaleString();
@@ -43,7 +43,7 @@ const TotalSection = ({ payment }) => {
           </p>
         </div>
       </TotalSectionWrapper>
-      <Button size='lg' width='220px'>
+      <Button size='lg' width='220px' onClick={MoveToOrder}>
         주문하기
       </Button>
     </>

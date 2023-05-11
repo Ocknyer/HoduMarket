@@ -14,7 +14,7 @@ const CartItem = ({
   selected,
 }) => {
   const {
-    is_active,
+    // is_active,
     image,
     store_name,
     product_name,

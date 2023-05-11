@@ -1,19 +1,5 @@
 import styled from 'styled-components';
 
-export const CartWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 54px;
-
-  > h1 {
-    font-size: 36px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 52px;
-  }
-`;
-
 export const CartHeader = styled.div`
   display: flex;
   width: 100%;

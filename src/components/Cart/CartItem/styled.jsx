@@ -14,6 +14,7 @@ export const CartItemWrapper = styled.div`
   .item-section {
     width: 50%;
     display: flex;
+    align-items: center;
 
     > img {
       width: 160px;
