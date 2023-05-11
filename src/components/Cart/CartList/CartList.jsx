@@ -1,7 +1,12 @@
 import CartItem from '../CartItem/CartItem';
 import { CartBody } from './styled';
 
-const CartList = ({ cartLists, setCartLists, onClickModal }) => {
+const CartList = ({
+  cartLists,
+  setCartLists,
+  onClickModal,
+  selected,
+}) => {
   return (
     <>
       {cartLists.length > 0 ? (
@@ -9,6 +14,7 @@ const CartList = ({ cartLists, setCartLists, onClickModal }) => {
           <CartBody cartLists={cartLists}>
             {cartLists.map((item) => (
               <CartItem
+                selected={selected}
                 cartLists={cartLists}
                 setCartLists={setCartLists}
                 onClickModal={onClickModal}

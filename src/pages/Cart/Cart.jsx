@@ -14,6 +14,8 @@ const Cart = () => {
   const [cartLists, setCartLists] = useState([]);
   const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
   const [deletedItem, setDeletedItem] = useState();
+  const [selected, setSelected] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     getCartItems()
@@ -56,20 +58,31 @@ const Cart = () => {
     setIsOpen(false);
   };
 
+  const handleChecked = () => {
+    setSelected((prev) => !prev);
+  };
+
   // console.log(item_id);
   // console.log(cartLists);
+
+  console.log(selected);
 
   return (
     <DefaultWrapper>
       <CartWrapper>
         <h1>장바구니</h1>
         <CartHeader>
-          <input type='checkbox' />
+          <input
+            type='checkbox'
+            onChange={handleChecked}
+            checked={isActive}
+          />
           <p className='product-info'>상품정보</p>
           <p className='quantity'>수량</p>
           <p className='product-price'>상품금액</p>
         </CartHeader>
         <CartList
+          selected={selected}
           cartLists={cartLists}
           setCartLists={setCartLists}
           onClickModal={onClickModal}

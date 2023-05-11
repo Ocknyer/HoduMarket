@@ -10,8 +10,10 @@ const CartItem = ({
   setCartLists,
   item,
   onClickModal,
+  selected,
 }) => {
   const {
+    is_active,
     image,
     store_name,
     product_name,
@@ -58,7 +60,7 @@ const CartItem = ({
 
   return (
     <CartItemWrapper>
-      <input type='checkbox' />
+      <input type='checkbox' checked={is_active} />
       <div className='item-section'>
         <img src={image} alt='' />
         <div className='item-info'>
@@ -67,7 +69,7 @@ const CartItem = ({
           <p className='product-price'>{price.toLocaleString()}원</p>
           <p className='delivery'>
             {shippingFee > 0
-              ? shippingFee.toLocaleString() + ' 원'
+              ? '택배배송 / ' + shippingFee.toLocaleString() + ' 원'
               : '무료배송'}
           </p>
         </div>

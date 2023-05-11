@@ -25,6 +25,9 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
 
   const navigate = useNavigate();
 
+  // const totalPrice = (productData.price * quantity).toLocaleString();
+  const shippingFee = productData.shipping_fee;
+
   useEffect(() => {
     getCartItems()
       .then((data) => {
@@ -82,7 +85,11 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
           </ProductInfo>
 
           <ButtonSection>
-            <p className='delivery'>택배배송 / 무료배송</p>
+            <p className='delivery'>
+              {shippingFee > 0
+                ? '택배배송 / ' + shippingFee.toLocaleString() + ' 원'
+                : '무료배송'}
+            </p>
             <QuantityButton>
               <div className='quantity-btn'>
                 <button
