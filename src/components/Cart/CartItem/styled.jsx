@@ -3,11 +3,12 @@ import styled from 'styled-components';
 export const CartItemWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 200px;
   border: 1px solid var(--greyC4);
   border-radius: 5px;
-  padding: 20px 18px;
+  padding: 20px 30px;
   position: relative;
 
   .item-section {

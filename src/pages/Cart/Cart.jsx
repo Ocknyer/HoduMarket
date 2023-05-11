@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil';
 import { modalIsOpen } from '../../atoms';
 import Modal from '../../components/Modal/Modal';
 import deleteCartItem from '../../api/cart/deleteCartItem';
+import { CheckBox } from '../../components/common/Input/CheckBox';
 
 const Cart = () => {
   const [cartLists, setCartLists] = useState([]);
@@ -72,10 +73,10 @@ const Cart = () => {
       <CartWrapper>
         <h1>장바구니</h1>
         <CartHeader>
-          <input
-            type='checkbox'
+          <CheckBox
+            type={'checkbox'}
             onChange={handleChecked}
-            checked={isActive}
+            // checked={isActive}
           />
           <p className='product-info'>상품정보</p>
           <p className='quantity'>수량</p>

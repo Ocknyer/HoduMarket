@@ -4,6 +4,7 @@ import Button from '../../common/Button/Button';
 import Delete from '../../../assets/img/icon-delete.svg';
 import putQuantity from '../../../api/cart/putQuantity';
 import { CartItemWrapper } from './styled';
+import { CheckBox } from '../../common/Input/CheckBox';
 
 const CartItem = ({
   cartLists,
@@ -60,7 +61,11 @@ const CartItem = ({
 
   return (
     <CartItemWrapper>
-      <input type='checkbox' checked={is_active} />
+      <CheckBox
+        type={'checkbox'}
+        // checked={is_active}
+        onChange={() => console.log('checked')}
+      />
       <div className='item-section'>
         <img src={image} alt='' />
         <div className='item-info'>
