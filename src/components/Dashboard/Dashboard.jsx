@@ -6,8 +6,17 @@ import {
 } from './styleld';
 import DefaultWrapper from '../common/Wrapper/DefaultWrapper';
 import Plus from '../../assets/img/icon-plus.svg';
+import { useLocation } from 'react-router-dom';
 
-const Dashboard = () => {
+const Dashboard = ({
+  onClickSalesProduct,
+  onClickOrderShip,
+  onClickAsk,
+  onClickStats,
+  onClickSetting,
+}) => {
+  const location = useLocation();
+
   return (
     <DefaultWrapper>
       <DashboardHeader>
@@ -26,11 +35,52 @@ const Dashboard = () => {
       <DashboardBody>
         <nav>
           <DashboardSidebar>
-            <li className='active'>판매중인 상품</li>
-            <li>주문/배송</li>
-            <li>문의/리뷰</li>
-            <li>통계</li>
-            <li>스토어 설정</li>
+            <li
+              className={
+                location.pathname.includes('salesproduct')
+                  ? 'active'
+                  : null
+              }
+              onClick={onClickSalesProduct}
+            >
+              판매중인 상품
+            </li>
+            <li
+              className={
+                location.pathname.includes('ordership')
+                  ? 'active'
+                  : null
+              }
+              onClick={onClickOrderShip}
+            >
+              주문/배송
+            </li>
+            <li
+              className={
+                location.pathname.includes('ask') ? 'active' : null
+              }
+              onClick={onClickAsk}
+            >
+              문의/리뷰
+            </li>
+            <li
+              className={
+                location.pathname.includes('stats') ? 'active' : null
+              }
+              onClick={onClickStats}
+            >
+              통계
+            </li>
+            <li
+              className={
+                location.pathname.includes('setting')
+                  ? 'active'
+                  : null
+              }
+              onClick={onClickSetting}
+            >
+              스토어 설정
+            </li>
           </DashboardSidebar>
         </nav>
         <DashboardMain>

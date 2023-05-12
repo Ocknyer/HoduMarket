@@ -7,6 +7,11 @@ import Product from './pages/Product/Product';
 import Signup from './pages/Signup/Signup';
 import SellerCenter from './pages/SellerCenter/SellerCenter';
 import Order from './pages/Order/Order';
+import SalesProduct from './components/Dashboard/SalesProduct/SalesProduct';
+import OrderShip from './components/Dashboard/OrderShip/OrderShip';
+import Ask from './components/Dashboard/Ask/Ask';
+import Stats from './components/Dashboard/Stats/Stats';
+import Setting from './components/Dashboard/Setting/Setting';
 
 function App() {
   return (
@@ -15,7 +20,22 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/product/:id' element={<Product />} />
-          <Route path='/sellercenter' element={<SellerCenter />} />
+          <Route path='/sellercenter' element={<SellerCenter />}>
+            <Route
+              path='/sellercenter/salesproduct'
+              element={<SalesProduct />}
+            />
+            <Route
+              path='/sellercenter/ordership'
+              element={<OrderShip />}
+            />
+            <Route path='/sellercenter/ask' element={<Ask />} />
+            <Route path='/sellercenter/stats' element={<Stats />} />
+            <Route
+              path='/sellercenter/setting'
+              element={<Setting />}
+            />
+          </Route>
           <Route path='/cart' element={<Cart />} />
           <Route path='/order' element={<Order />} />
         </Route>

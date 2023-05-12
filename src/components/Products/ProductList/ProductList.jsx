@@ -20,6 +20,8 @@ const ProductList = () => {
       });
   }, []);
 
+  console.log(productData);
+
   return (
     <>
       {searchData.length < 1 ? (
