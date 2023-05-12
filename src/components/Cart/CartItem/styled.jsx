@@ -20,12 +20,13 @@ export const CartItemWrapper = styled.div`
       width: 160px;
       height: 160px;
       margin: 0 30px 0 40px;
+      border-radius: 5px;
     }
 
     .item-info {
       display: flex;
       flex-direction: column;
-      align-items: start;
+      text-align: left;
       margin-right: auto;
 
       .store-name {
@@ -49,7 +50,6 @@ export const CartItemWrapper = styled.div`
       .delivery {
         font-size: 14px;
         color: var(--grey76);
-        margin-bottom: 52px;
       }
     }
   }

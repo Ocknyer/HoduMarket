@@ -35,6 +35,7 @@ export const ItemInfo = styled.div`
     width: 104px;
     height: 104px;
     margin-left: 8px;
+    border-radius: 5px;
   }
 
   .text-info {

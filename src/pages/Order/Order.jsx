@@ -4,8 +4,9 @@ import {
   InnerWrapper,
   InnerHeader,
 } from '../../components/common/Wrapper/InnerWrapper';
-import OrderList from '../../components/Order/OrderList';
+import OrderList from '../../components/Order/OrderList/OrderList';
 import { TotalPaymentSection } from './styled';
+import UserInfo from '../../components/Order/UserInfo/UserInfo';
 
 const Order = () => {
   const location = useLocation();
@@ -31,6 +32,7 @@ const Order = () => {
             총 주문금액 <span>{totalPayment.toLocaleString()}원</span>
           </p>
         </TotalPaymentSection>
+        <UserInfo />
       </InnerWrapper>
     </DefaultWrapper>
   );
