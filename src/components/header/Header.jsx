@@ -24,7 +24,7 @@ const Header = ({ userType }) => {
   };
 
   const handleSellerCenter = () => {
-    navigate('/sellercenter');
+    navigate('/sellercenter/salesproduct');
   };
 
   const searchProduct = () => {
@@ -53,7 +53,7 @@ const Header = ({ userType }) => {
 
   return (
     <HeaderWrapper>
-      {location.pathname !== '/sellercenter' ? (
+      {!location.pathname.includes('/sellercenter') ? (
         <InnerWrapper>
           <Link to='/'>
             <img src={logo} alt='호두마켓 로고' className='logo' />

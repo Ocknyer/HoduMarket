@@ -7,8 +7,14 @@ import {
 import DefaultWrapper from '../common/Wrapper/DefaultWrapper';
 import Plus from '../../assets/img/icon-plus.svg';
 import { useLocation } from 'react-router-dom';
+import SalesProduct from './SalesProduct/SalesProduct';
+import OrderShip from './OrderShip/OrderShip';
+import Stats from './Stats/Stats';
+import Setting from './Setting/Setting';
+import Ask from './Ask/Ask';
 
 const Dashboard = ({
+  sellerProduct,
   onClickSalesProduct,
   onClickOrderShip,
   onClickAsk,
@@ -90,6 +96,17 @@ const Dashboard = ({
             <p className='edit-product'>수정</p>
             <p className='delete-product'>삭제</p>
           </div>
+          {location.pathname === '/sellercenter/salesproduct' && (
+            <SalesProduct sellerProduct={sellerProduct} />
+          )}
+          {location.pathname === '/sellercenter/ordership' && (
+            <OrderShip />
+          )}
+          {location.pathname === '/sellercenter/stats' && <Stats />}
+          {location.pathname === '/sellercenter/ask' && <Ask />}
+          {location.pathname === '/sellercenter/setting' && (
+            <Setting />
+          )}
         </DashboardMain>
       </DashboardBody>
     </DefaultWrapper>
