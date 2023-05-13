@@ -9,6 +9,11 @@ const Product = () => {
   const [productData, setProductData] = useState();
   const [quantity, setQuantity] = useState(1);
 
+  console.log(id);
+
+  const token = localStorage.getItem('token');
+  console.log(token);
+
   useEffect(() => {
     getProductDetail(id)
       .then((data) => {
