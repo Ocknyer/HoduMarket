@@ -4,13 +4,17 @@ import { RecoilRoot } from 'recoil';
 import App from './App';
 import Globalstyle from './styles/GlobalStyle';
 import './index.css';
+import theme from './styles/theme';
+import { ThemeProvider } from '@mui/material';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-      <Globalstyle />
-      <App />
+      <ThemeProvider theme={theme}>
+        <Globalstyle />
+        <App />
+      </ThemeProvider>
     </RecoilRoot>
   </React.StrictMode>
 );
