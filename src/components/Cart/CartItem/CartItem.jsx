@@ -3,8 +3,8 @@ import { QuantityButton } from '../../common/Button/QuantityButton/QuantityButto
 import Button from '../../common/Button/Button';
 import Delete from '../../../assets/img/icon-delete.svg';
 import putQuantity from '../../../api/cart/putQuantity';
-import { CartItemWrapper } from './styled';
 import { CheckBox } from '../../common/Input/CheckBox';
+import { Box, Typography } from '@mui/material';
 
 const CartItem = ({
   cartLists,
@@ -60,26 +60,89 @@ const CartItem = ({
   };
 
   return (
-    <CartItemWrapper>
-      <CheckBox
-        type={'checkbox'}
-        // checked={is_active}
-        onChange={() => console.log('checked')}
-      />
-      <div className='item-section'>
-        <img src={image} alt='' />
-        <div className='item-info'>
-          <p className='store-name'>{store_name}</p>
-          <p className='product-name'>{product_name}</p>
-          <p className='product-price'>{price.toLocaleString()}원</p>
-          <p className='delivery'>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        border: '1px solid ',
+        borderColor: 'border.primary',
+        p: '20px 30px',
+        width: '1280px',
+        borderRadius: '10px',
+        position: 'relative',
+      }}
+    >
+      <Box
+        sx={{
+          width: '50%',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <CheckBox
+          type={'checkbox'}
+          // checked={is_active}
+          onChange={() => console.log('checked')}
+        />
+        <Box
+          sx={{
+            width: '160px',
+            height: '160px',
+            margin: '0 30px 0 40px',
+          }}
+        >
+          <img
+            src={image}
+            alt=''
+            style={{
+              width: '160px',
+              height: '160px',
+              borderRadius: '5px',
+            }}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            textAlign: 'left',
+          }}
+        >
+          <Typography
+            variant='h6'
+            color='text.secondary'
+            component='p'
+            mb='10px'
+          >
+            {store_name}
+          </Typography>
+          <Typography variant='h4' mb='10px'>
+            {product_name}
+          </Typography>
+          <Typography
+            className='product-price'
+            fontWeight='700'
+            mb='40px'
+          >
+            {price.toLocaleString()}원
+          </Typography>
+          <Typography
+            variant='h5'
+            color='text.secondary'
+            component='p'
+          >
             {shippingFee > 0
               ? '택배배송 / ' + shippingFee.toLocaleString() + ' 원'
               : '무료배송'}
-          </p>
-        </div>
-      </div>
-      <div className='quantity-section'>
+          </Typography>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          width: '20%',
+        }}
+      >
         <QuantityButton>
           <div className='quantity-btn'>
             <button
@@ -95,18 +158,40 @@ const CartItem = ({
             ></button>
           </div>
         </QuantityButton>
-      </div>
-      <div className='order-section'>
-        <p className='total-price'>{totalPrice}원</p>
-        <Button width='130px'>주문하기</Button>
-      </div>
-      <button
-        className='btn-cart-delete'
-        onClick={() => onClickModal('open', cart_item_id)}
+      </Box>
+      <Box
+        sx={{
+          width: '20%',
+          textAlign: 'center',
+          gap: '260x',
+        }}
       >
-        <img src={Delete} alt='장바구니 삭제' />
-      </button>
-    </CartItemWrapper>
+        <Typography
+          variant='h4'
+          component='p'
+          color='text.red'
+          fontWeight='700'
+          mb='26px'
+        >
+          {totalPrice}원
+        </Typography>
+        <Button width='130px'>주문하기</Button>
+      </Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '18px',
+          right: '18px',
+        }}
+      >
+        <button
+          className='btn-cart-delete'
+          onClick={() => onClickModal('open', cart_item_id)}
+        >
+          <img src={Delete} alt='장바구니 삭제' />
+        </button>
+      </Box>
+    </Box>
   );
 };
 

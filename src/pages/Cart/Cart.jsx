@@ -12,6 +12,7 @@ import deleteCartItem from '../../api/cart/deleteCartItem';
 import { CheckBox } from '../../components/common/Input/CheckBox';
 import { useNavigate } from 'react-router-dom';
 import { InnerWrapper } from '../../components/common/Wrapper/InnerWrapper';
+import { Typography } from '@mui/material';
 
 const Cart = () => {
   const [cartLists, setCartLists] = useState([]);
@@ -84,7 +85,7 @@ const Cart = () => {
   return (
     <DefaultWrapper>
       <InnerWrapper>
-        <h1>장바구니</h1>
+        <Typography variant='h1'>장바구니</Typography>
         <CartHeader>
           <CheckBox
             type={'checkbox'}

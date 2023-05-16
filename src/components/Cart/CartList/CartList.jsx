@@ -1,5 +1,5 @@
+import { Box, Typography } from '@mui/material';
 import CartItem from '../CartItem/CartItem';
-import { CartBody } from './styled';
 
 const CartList = ({
   cartLists,
@@ -11,7 +11,17 @@ const CartList = ({
     <>
       {cartLists.length > 0 ? (
         <>
-          <CartBody cartLists={cartLists}>
+          <Box
+            cartLists={cartLists}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '17px',
+              width: '100%',
+              m: '0',
+              p: '35px 0',
+            }}
+          >
             {cartLists.map((item) => (
               <CartItem
                 selected={selected}
@@ -22,17 +32,21 @@ const CartList = ({
                 item={item}
               />
             ))}
-          </CartBody>
+          </Box>
         </>
       ) : (
-        <CartBody>
-          <p className='text-bold'>
+        <Box p='200px 0' textAlign='center'>
+          <Typography variant='h4' fontWeight='700' mb='17px'>
             장바구니에 담긴 상품이 없습니다.
-          </p>
-          <p className='text-normal'>
+          </Typography>
+          <Typography
+            variant='h6'
+            component='p'
+            color='text.secondary'
+          >
             원하는 상품을 장바구니에 담아보세요!
-          </p>
-        </CartBody>
+          </Typography>
+        </Box>
       )}
     </>
   );
