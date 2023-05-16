@@ -8,16 +8,29 @@ const theme = createTheme({
     text: {
       primary: '#000',
       secondary: '#767676',
+      red: '#eb5757',
+    },
+    border: {
+      primary: '#c4c4c4',
+    },
+    grey: {
+      primary: '#f2f2f2',
     },
   },
 
-  // overrides: {
-  //   MuiCardMedia: {
-  //     contained: {
-  //       border: '1px solid #c4c4c4',
-  //     },
-  //   },
-  // },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        containedPrimary: {
+          color: 'white',
+          fontSize: '16px',
+        },
+        sizeLarge: {
+          height: '60px',
+        },
+      },
+    },
+  },
 
   typography: {
     fontFamily: '"Spoqa Han Sans Neo", sans-serif',

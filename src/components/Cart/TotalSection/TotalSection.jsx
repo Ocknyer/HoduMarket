@@ -1,7 +1,7 @@
+import { Box, Typography } from '@mui/material';
 import minus from '../../../assets/img/icon-Ellipse-minus.svg';
 import plus from '../../../assets/img/icon-Ellipse-plus.svg';
 import Button from '../../common/Button/Button';
-import { TotalSectionWrapper } from './styled';
 
 const TotalSection = ({ payment, MoveToOrder }) => {
   const { price, shipping_fee } = payment;
@@ -10,39 +10,77 @@ const TotalSection = ({ payment, MoveToOrder }) => {
   const totalShipping = shipping_fee.toLocaleString();
   const totalPaymentPrice = (price + shipping_fee).toLocaleString();
 
+  const eachSectionStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
+    width: '20%',
+  };
+
   return (
     <>
-      <TotalSectionWrapper>
-        <div className='each-section'>
-          <p className='price-text'>총 상품금액</p>
-          <p className='price-num'>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+          height: '150px',
+          backgroundColor: 'grey.primary',
+          borderRadius: '10px',
+          p: '46px 0',
+          mb: '40px',
+        }}
+      >
+        <Box sx={eachSectionStyle}>
+          <Typography variant='h5' component='p' mb='11px'>
+            총 상품금액
+          </Typography>
+          <Typography variant='h3' component='p'>
             {totalPrice}
-            <span className='price-text'> 원</span>
-          </p>
-        </div>
+            <Typography component='span' variant='h5'>
+              {' '}
+              원
+            </Typography>
+          </Typography>
+        </Box>
         <img src={minus} alt='마이너스 아이콘' />
-        <div className='each-section'>
-          <p className='price-text'>상품할인</p>
-          <p className='price-num'>
-            0 <span className='price-text'>원</span>
-          </p>
-        </div>
+        <Box sx={eachSectionStyle}>
+          <Typography variant='h5' component='p' mb='11px'>
+            상품 할인
+          </Typography>
+          <Typography variant='h3' component='p'>
+            0{' '}
+            <Typography component='span' variant='h5'>
+              원
+            </Typography>
+          </Typography>
+        </Box>
         <img src={plus} alt='플러스 아이콘' />
-        <div className='each-section'>
-          <p className='price-text'>배송비</p>
-          <p className='price-num'>
+        <Box sx={eachSectionStyle}>
+          <Typography variant='h5' component='p' mb='11px'>
+            배송비
+          </Typography>
+          <Typography variant='h3' component='p'>
             {totalShipping}
-            <span className='price-text'> 원</span>
-          </p>
-        </div>
-        <div className='payment-section'>
-          <p className='payment-text'>결제 예정 금액</p>
-          <p className='payment-num'>
+            <Typography component='span' variant='h5'>
+              {' '}
+              원
+            </Typography>
+          </Typography>
+        </Box>
+        <Box sx={{ ...eachSectionStyle, width: '25%' }}>
+          <Typography variant='h5' component='p' mb='5px'>
+            결제 예정 금액
+          </Typography>
+          <Typography variant='h1' component='p' color='text.red'>
             {totalPaymentPrice}
-            <span className='payment-small-text'> 원</span>
-          </p>
-        </div>
-      </TotalSectionWrapper>
+            <Typography component='span' variant='h4'>
+              {' '}
+              원
+            </Typography>
+          </Typography>
+        </Box>
+      </Box>
       <Button size='lg' width='220px' onClick={MoveToOrder}>
         주문하기
       </Button>
