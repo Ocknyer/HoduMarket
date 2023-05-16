@@ -5,8 +5,8 @@ import {
   InnerHeader,
 } from '../../components/common/Wrapper/InnerWrapper';
 import OrderList from '../../components/Order/OrderList/OrderList';
-import { TotalPaymentSection } from './styled';
 import UserInfo from '../../components/Order/UserInfo/UserInfo';
+import { Box, Typography } from '@mui/material';
 
 const Order = () => {
   const location = useLocation();
@@ -27,11 +27,24 @@ const Order = () => {
           <span className='price'>주문금액</span>
         </InnerHeader>
         <OrderList cartData={cartData} />
-        <TotalPaymentSection>
-          <p className='total-price'>
-            총 주문금액 <span>{totalPayment.toLocaleString()}원</span>
-          </p>
-        </TotalPaymentSection>
+        <Box
+          sx={{
+            ml: 'auto',
+            fontSize: '14px',
+            mt: '30px',
+          }}
+        >
+          <Typography variant='h4' component='p' fontWeight='500'>
+            총 주문금액{' '}
+            <Typography
+              variant='h3'
+              component='span'
+              color='text.red'
+            >
+              {totalPayment.toLocaleString()}원
+            </Typography>
+          </Typography>
+        </Box>
         <UserInfo />
       </InnerWrapper>
     </DefaultWrapper>
