@@ -9,6 +9,7 @@ import Modal from '../../Modal/Modal';
 import { useRecoilState } from 'recoil';
 import { modalIsOpen } from '../../../atoms';
 import { Box, Container, Divider, Typography } from '@mui/material';
+import ProductTabs from '../ProductTabs';
 
 const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const price = productData.price.toLocaleString();
@@ -230,6 +231,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
           </Box>
         </Box>
       </Container>
+      <ProductTabs />
       {isOpen && (
         <Modal
           rejectText={'아니오'}
