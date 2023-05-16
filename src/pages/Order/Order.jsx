@@ -19,7 +19,7 @@ const Order = () => {
   return (
     <DefaultWrapper>
       <InnerWrapper>
-        <h1>주문하기</h1>
+        <Typography variant='h1'>주문하기</Typography>
         <InnerHeader>
           <span className='product-info'>상품정보</span>
           <span className='discount'>할인</span>

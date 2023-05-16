@@ -44,34 +44,6 @@ export const PaymentSection = styled.section`
   display: flex;
   margin-top: 70px;
   gap: 40px;
-
-  .payment-method {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
-  .final-payment {
-    display: flex;
-    flex-direction: column;
-
-    > h2 {
-      border: none;
-    }
-  }
-`;
-
-export const PaymentMethodBox = styled.div`
-  width: 100%;
-  display: flex;
-  padding: 18px 8px;
-  gap: 20px;
-  border-bottom: 2px solid var(--greyC4);
-
-  > label {
-    display: flex;
-    gap: 10px;
-  }
 `;
 
 export const PaymentBox = styled.div`
@@ -110,27 +82,6 @@ export const PaymentBox = styled.div`
       font-size: 24px;
       font-weight: 700;
       color: #eb5757;
-    }
-  }
-
-  .agree-order {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 190px;
-    border-radius: 10px;
-    background-color: var(--greyF2);
-    padding: 30px;
-
-    .agree {
-      max-width: 100%;
-      font-size: 16px;
-      line-height: 20px;
-      margin-bottom: 30px;
-
-      > input {
-        margin-right: 10px;
-      }
     }
   }
 `;
