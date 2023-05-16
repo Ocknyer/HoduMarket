@@ -12,7 +12,6 @@ const CartList = ({
       {cartLists.length > 0 ? (
         <>
           <Box
-            cartLists={cartLists}
             sx={{
               display: 'flex',
               flexDirection: 'column',
