@@ -7,7 +7,7 @@ import Button from "../common/Button/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import search from "../../api/search/search";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { searchProducts } from "../../atoms";
 import { Box, IconButton, InputBase, Paper, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -19,6 +19,7 @@ const Header = ({ userType }) => {
 
   const [inputValue, setInputValue] = useState("");
   const [searchData, setSearchData] = useRecoilState(searchProducts);
+  const resetSearchData = useResetRecoilState(searchProducts);
 
   const handleData = (e) => {
     setInputValue(e.target.value);
@@ -44,12 +45,17 @@ const Header = ({ userType }) => {
       search(inputValue)
         .then((data) => {
           setSearchData(data.results);
-          console.log(searchData);
+          navigate("/");
         })
         .catch((error) => {
           console.log(error);
         });
     }
+  };
+
+  const onClickHome = () => {
+    resetSearchData();
+    setInputValue("");
   };
 
   const iconWrapper = {
@@ -81,7 +87,7 @@ const Header = ({ userType }) => {
     >
       {!location.pathname.includes("/sellercenter") ? (
         <Box sx={innerWrapper}>
-          <Link to="/">
+          <Link to="/" onClick={() => onClickHome()}>
             <Box
               component="img"
               src={logo}
@@ -108,6 +114,7 @@ const Header = ({ userType }) => {
                 flex: 1,
               }}
               placeholder="상품을 검색해 보세요!"
+              value={inputValue}
               onInput={handleData}
               onKeyDown={onSubmitSearch}
             />
