@@ -1,17 +1,18 @@
 import { useLocation } from "react-router-dom";
-import DefaultWrapper from "../../components/common/Wrapper/DefaultWrapper";
+import DefaultWrapper from "../components/common/Wrapper/DefaultWrapper";
 import {
   InnerWrapper,
   InnerHeader,
-} from "../../components/common/Wrapper/InnerWrapper";
-import OrderList from "../../components/Order/OrderList";
-import UserInfo from "../../components/Order/UserInfo";
+} from "../components/common/Wrapper/InnerWrapper";
+import OrderList from "../components/Order/OrderList";
+import UserInfo from "../components/Order/UserInfo";
 import { Box, Typography } from "@mui/material";
 
 const Order = () => {
   const location = useLocation();
 
   const cartData = location.state.cartLists;
+  const payment = location.state.payment;
   const totalPayment =
     location.state.payment.price + location.state.payment.shipping_fee;
 
@@ -40,7 +41,7 @@ const Order = () => {
             </Typography>
           </Typography>
         </Box>
-        <UserInfo />
+        <UserInfo payment={payment} totalPayment={totalPayment} />
       </InnerWrapper>
     </DefaultWrapper>
   );

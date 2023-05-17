@@ -1,4 +1,4 @@
-import { HeaderWrapper, IconWrapper, InnerWrapper } from "./styled";
+import { HeaderWrapper, InnerWrapper } from "./styled";
 import logo from "../../assets/img/Logo-hodu.png";
 import cart from "../../assets/img/icon-shopping-cart.svg";
 import cartGreen from "../../assets/img/icon-shopping-cart-2.svg";
@@ -10,6 +10,7 @@ import search from "../../api/search/search";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { searchProducts } from "../../atoms";
+import { Box } from "@mui/material";
 
 const Header = ({ userType }) => {
   const token = localStorage.getItem("token");
@@ -51,6 +52,15 @@ const Header = ({ userType }) => {
     }
   };
 
+  const iconWrapper = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
+    alignItems: "center",
+    fontSize: "12px",
+    color: "text.grey",
+  };
+
   return (
     <HeaderWrapper>
       {!location.pathname.includes("/sellercenter") ? (
@@ -76,34 +86,34 @@ const Header = ({ userType }) => {
             {userType === "BUYER" ? (
               <>
                 <Link to="/cart">
-                  <IconWrapper>
+                  <Box sx={iconWrapper}>
                     <img
                       src={location.pathname === "/cart" ? cartGreen : cart}
                       alt=""
                     />
                     장바구니
-                  </IconWrapper>
+                  </Box>
                 </Link>
                 {!token ? (
                   <Link to="/login">
-                    <IconWrapper>
+                    <Box sx={iconWrapper}>
                       <img src={mypage} alt="" /> 로그인
-                    </IconWrapper>
+                    </Box>
                   </Link>
                 ) : (
                   <Link to="/mypage">
-                    <IconWrapper>
+                    <Box sx={iconWrapper}>
                       <img src={mypage} alt="" /> 마이페이지
-                    </IconWrapper>
+                    </Box>
                   </Link>
                 )}
               </>
             ) : (
               <>
                 <Link to="/mypage">
-                  <IconWrapper>
+                  <Box sx={iconWrapper}>
                     <img src={mypage} alt="" /> 마이페이지
-                  </IconWrapper>
+                  </Box>
                 </Link>
                 <Button onClick={handleSellerCenter}>
                   <img src={sellerCenter} alt="" />

@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import Button from "../common/Button/Button";
 
-const UserInfo = () => {
+const UserInfo = ({ payment, totalPayment }) => {
   const flexBox = { display: "flex", flexDirection: "column" };
   const textBox = {
     display: "flex",
@@ -66,6 +66,7 @@ const UserInfo = () => {
       </Typography>
       {ordererData.map((item) => (
         <Box
+          key={item.id}
           sx={{
             display: "flex",
             alignItems: "center",
@@ -84,6 +85,7 @@ const UserInfo = () => {
       </Typography>
       {shippingData.map((item) => (
         <Box
+          key={item.id}
           sx={{
             display: "flex",
             alignItems: "center",
@@ -152,15 +154,15 @@ const UserInfo = () => {
           >
             <Box sx={textBox}>
               <p>- 상품금액</p>
-              <span>{}원</span>
+              <span>{payment.price.toLocaleString()}원</span>
             </Box>
             <Box sx={textBox}>
               <p>- 할인금액</p>
-              <span>{}원</span>
+              <span>{0}원</span>
             </Box>
             <Box sx={{ ...textBox, mb: "5px" }}>
               <p>- 배송비</p>
-              <span>{}원</span>
+              <span>{payment.shipping_fee.toLocaleString()}원</span>
             </Box>
             <Box
               sx={{
@@ -172,7 +174,7 @@ const UserInfo = () => {
             >
               <Typography>- 결제금액</Typography>
               <Typography variant="h3" component="span" color="text.red">
-                {}원
+                {totalPayment.toLocaleString()}원
               </Typography>
             </Box>
             <Box

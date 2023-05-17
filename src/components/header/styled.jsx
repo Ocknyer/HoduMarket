@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import searchIcon from '../../assets/img/icon-search.svg';
+import styled from "styled-components";
+import searchIcon from "../../assets/img/icon-search.svg";
 
 export const HeaderWrapper = styled.header`
   width: 100%;
@@ -73,18 +73,5 @@ export const InnerWrapper = styled.div`
       gap: 8px;
       align-items: center;
     }
-  }
-`;
-
-export const IconWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 12px;
-  color: var(--grey76);
-
-  > img {
-    width: 32px;
-    margin-bottom: 4px;
   }
 `;
