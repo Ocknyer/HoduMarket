@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import postUserLogin from "../api/login/postUserLogin";
 import { userTypeValue } from "../atoms";
-import UserLogin from "../components/User/UserLogin/UserLogin";
+import UserLogin from "../components/User/UserLogin";
 
 const Login = () => {
   const navigate = useNavigate();
   const [tempUserType, setTempUserType] = useState("BUYER");
-  const [userType, setUserType] = useRecoilState(userTypeValue);
+  const setUserType = useSetRecoilState(userTypeValue);
+
   const [errorMsg, setErrorMsg] = useState("");
   const [inputValue, setInputValue] = useState({
     username: "",

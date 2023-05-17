@@ -30,6 +30,9 @@ const theme = createTheme({
         sizeLarge: {
           height: "60px",
         },
+        sizeMedium: {
+          height: "56px",
+        },
       },
     },
 

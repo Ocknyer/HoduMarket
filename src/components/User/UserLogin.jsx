@@ -1,9 +1,7 @@
-import logo from "../../../assets/img/Logo-hodu.png";
-import { LoginForm } from "../../../components/User/UserLogin/styled";
-// import Button from '../../../components/common/Button/Button';
+import logo from "../../assets/img/Logo-hodu.png";
 import { Link } from "react-router-dom";
-import UserTab from "../UserTab/UserTab";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import UserTab from "./UserTab";
+import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 
 const UserLogin = ({ tempUserType, onClick, onChange, onSubmit, errorMsg }) => {
   return (
@@ -17,7 +15,12 @@ const UserLogin = ({ tempUserType, onClick, onChange, onSubmit, errorMsg }) => {
       }}
     >
       <Link to={"/"}>
-        <img src={logo} alt="호두마켓 로고" style={{ marginBottom: "70px" }} />
+        <Box
+          component="img"
+          src={logo}
+          alt="호두마켓 로고"
+          sx={{ marginBottom: "70px" }}
+        />
       </Link>
       <UserTab tempUserType={tempUserType}>
         <button type="button" id="BUYER" onClick={onClick}>
@@ -27,16 +30,32 @@ const UserLogin = ({ tempUserType, onClick, onChange, onSubmit, errorMsg }) => {
           판매회원 로그인
         </button>
       </UserTab>
-      <LoginForm onSubmit={onSubmit} errorMsg={errorMsg}>
+      <Paper
+        component="form"
+        onSubmit={onSubmit}
+        errorMsg={errorMsg}
+        elevation={0}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          p: "35px 34px",
+          mb: "30px",
+          border: "1px solid var(--greyC4)",
+          backgroundColor: "#fff",
+          borderRadius: "10px",
+          zIndex: "99",
+        }}
+      >
         <TextField
           type="type"
           id="id"
           name="username"
           onChange={onChange}
-          placeholder="아이디"
+          label="아이디"
           required
           sx={{
-            mb: "6px",
+            mb: "15px",
           }}
         />
         <TextField
@@ -44,7 +63,7 @@ const UserLogin = ({ tempUserType, onClick, onChange, onSubmit, errorMsg }) => {
           id="password"
           name="password"
           onChange={onChange}
-          placeholder="비밀번호"
+          label="비밀번호"
           required
           sx={{
             mb: errorMsg ? "0" : "36px",
@@ -64,7 +83,7 @@ const UserLogin = ({ tempUserType, onClick, onChange, onSubmit, errorMsg }) => {
         >
           로그인
         </Button>
-      </LoginForm>
+      </Paper>
       <Box>
         <Link
           to="/signup"

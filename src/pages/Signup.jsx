@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import postDoubleCheck from "../api/login/postDoubleCheck";
 import { postSignUpBuyer } from "../api/login/postSignUp";
 import { userTypeValue } from "../atoms";
-import UserSignUp from "../components/User/UserSignUp/UserSignUp";
+import UserSignUp from "../components/User/UserSignUp";
 
 const Signup = () => {
   const initialState = {
@@ -18,7 +18,8 @@ const Signup = () => {
   };
 
   const navigate = useNavigate();
-  const [userType, setUserType] = useRecoilState(userTypeValue);
+  const setUserType = useSetRecoilState(userTypeValue);
+  const [tempUserType, setTempUserType] = useState("BUYER");
   const [usernameMsg, setUsernameMsg] = useState("");
   const [passwordMsg, setPasswordMsg] = useState("");
   const [errors, setErrors] = useState({ ...initialState });
@@ -91,7 +92,7 @@ const Signup = () => {
             "핸드폰번호는 01*으로 시작해야 하는 10~11자리 숫자여야 합니다.",
         });
       } else if (
-        userType === "SELLER" &&
+        tempUserType === "SELLER" &&
         name === "company_registration_number"
       ) {
         setErrors({
@@ -105,7 +106,7 @@ const Signup = () => {
         [name]: "",
       });
     }
-    if (userType === "SELLER") {
+    if (tempUserType === "SELLER") {
     }
   };
 
@@ -115,7 +116,9 @@ const Signup = () => {
   // };
 
   const handleUserType = (e) => {
-    e.target.id === "BUYER" ? setUserType("BUYER") : setUserType("SELLER");
+    e.target.id === "BUYER"
+      ? setTempUserType("BUYER")
+      : setTempUserType("SELLER");
   };
 
   const handleSignUp = (e) => {
@@ -157,7 +160,7 @@ const Signup = () => {
   return (
     <>
       <UserSignUp
-        userType={userType}
+        tempUserType={tempUserType}
         onClick={handleUserType}
         onChange={handleData}
         onSubmit={handleSignUp}
