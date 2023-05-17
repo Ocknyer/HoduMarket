@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
-const Globalstyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   ${reset}
 
   * {
@@ -43,7 +43,8 @@ const Globalstyle = createGlobalStyle`
     --greyC4: #c4c4c4;
     --grey76 : #767676;
     --greyDB : #dbdbdb;
+    --greyF2 : #f2f2f2;
   }
 `;
 
-export default Globalstyle;
+export default GlobalStyle;
