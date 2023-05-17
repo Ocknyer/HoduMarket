@@ -1,5 +1,5 @@
-import Button from '../common/Button/Button';
-import { ModalWrapper } from './styled';
+import { Box, Typography } from "@mui/material";
+import Button from "../common/Button/Button";
 
 const Modal = ({
   children,
@@ -10,13 +10,33 @@ const Modal = ({
 }) => {
   return (
     <>
-      <ModalWrapper>
-        <p>{children}</p>
-        <div className='btn-box'>
+      <Box
+        component="article"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          lineHeight: "24px",
+          width: "360px",
+          height: "200px",
+          border: "1px solid var(--greyC4)",
+          backgroundColor: "white",
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <Typography variant="h5" mb="20px">
+          {children}
+        </Typography>
+        <Box display="flex" gap="10px">
           <Button onClick={onClickReject}>{rejectText}</Button>
           <Button onClick={onClickResult}>{resultText}</Button>
-        </div>
-      </ModalWrapper>
+        </Box>
+      </Box>
     </>
   );
 };
