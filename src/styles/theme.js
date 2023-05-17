@@ -32,6 +32,14 @@ const theme = createTheme({
         },
       },
     },
+
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontWeight: "500",
+        },
+      },
+    },
   },
 
   typography: {

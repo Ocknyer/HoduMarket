@@ -7,11 +7,11 @@ import Product from "./pages/Product";
 import Signup from "./pages/Signup";
 import SellerCenter from "./pages/SellerCenter";
 import Order from "./pages/Order";
-import SalesProduct from "./components/Dashboard/SalesProduct/SalesProduct";
-import OrderShip from "./components/Dashboard/OrderShip/OrderShip";
-import Ask from "./components/Dashboard/Ask/Ask";
-import Stats from "./components/Dashboard/Stats/Stats";
-import Setting from "./components/Dashboard/Setting/Setting";
+import SalesProduct from "./components/Dashboard/DashboardItems/SalesProduct";
+import OrderShip from "./components/Dashboard/DashboardItems/OrderShip";
+import Ask from "./components/Dashboard/DashboardItems/Ask";
+import Stats from "./components/Dashboard/DashboardItems/Stats";
+import Setting from "./components/Dashboard/DashboardItems/Setting";
 
 function App() {
   return (

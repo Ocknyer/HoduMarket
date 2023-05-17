@@ -9,24 +9,18 @@ const SellerCenter = () => {
   const navigate = useNavigate();
   const [sellerProduct, setSellerProduct] = useState([]);
 
-  const onClickSalesProduct = () => {
-    navigate("/sellercenter/salesproduct");
-  };
-
-  const onClickOrderShip = () => {
-    navigate("/sellercenter/ordership");
-  };
-
-  const onClickAsk = () => {
-    navigate("/sellercenter/ask");
-  };
-
-  const onClickStats = () => {
-    navigate("/sellercenter/stats");
-  };
-
-  const onClickSetting = () => {
-    navigate("/sellercenter/setting");
+  const onClickUpdate = (text) => {
+    if (text === "판매중인 상품") {
+      navigate("/sellercenter/salesproduct");
+    } else if (text === "주문/배송") {
+      navigate("/sellercenter/ordership");
+    } else if (text === "문의/리뷰") {
+      navigate("/sellercenter/ask");
+    } else if (text === "통계") {
+      navigate("/sellercenter/stats");
+    } else if (text === "스토어 설정") {
+      navigate("/sellercenter/setting");
+    }
   };
 
   useEffect(() => {
@@ -42,14 +36,7 @@ const SellerCenter = () => {
 
   return (
     <>
-      <Dashboard
-        sellerProduct={sellerProduct}
-        onClickSalesProduct={onClickSalesProduct}
-        onClickOrderShip={onClickOrderShip}
-        onClickAsk={onClickAsk}
-        onClickStats={onClickStats}
-        onClickSetting={onClickSetting}
-      />
+      <Dashboard onClickUpdate={onClickUpdate} sellerProduct={sellerProduct} />
     </>
   );
 };

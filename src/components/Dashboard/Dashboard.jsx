@@ -1,87 +1,146 @@
-import {
-  DashboardHeader,
-  DashboardSidebar,
-  DashboardBody,
-  DashboardMain,
-} from "./styled";
 import DefaultWrapper from "../common/Wrapper/DefaultWrapper";
-import Plus from "../../assets/img/icon-plus.svg";
 import { useLocation } from "react-router-dom";
-import SalesProduct from "./SalesProduct/SalesProduct";
-import OrderShip from "./OrderShip/OrderShip";
-import Stats from "./Stats/Stats";
-import Setting from "./Setting/Setting";
-import Ask from "./Ask/Ask";
+import SalesProduct from "./DashboardItems/SalesProduct";
+import OrderShip from "./DashboardItems/OrderShip";
+import Stats from "./DashboardItems/Stats";
+import Setting from "./DashboardItems/Setting";
+import Ask from "./DashboardItems/Ask";
+import {
+  Box,
+  Button,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { ControlPoint } from "@mui/icons-material";
 
-const Dashboard = ({
-  sellerProduct,
-  onClickSalesProduct,
-  onClickOrderShip,
-  onClickAsk,
-  onClickStats,
-  onClickSetting,
-}) => {
+const Dashboard = ({ sellerProduct, onClickUpdate }) => {
   const location = useLocation();
+
+  const pathname = location.pathname;
 
   return (
     <DefaultWrapper>
-      <DashboardHeader>
-        <h2>
-          대시보드 <span>백엔드글로벌</span>
-        </h2>
-        <button className="btn-add-product">
-          <img src={Plus} alt="상품 추가 아이콘" className="icon-plus" />
+      <Box
+        component="section"
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          m: "38px 0",
+        }}
+      >
+        <Typography variant="h1">
+          대시보드{" "}
+          <Typography
+            variant="h2"
+            fontWeight="500"
+            component="span"
+            color="primary.main"
+          >
+            백엔드글로벌
+          </Typography>
+        </Typography>
+        <Button
+          variant="contained"
+          disableElevation
+          startIcon={<ControlPoint />}
+          sx={{
+            width: "168px",
+            height: "54px",
+            fontSize: "18px",
+          }}
+        >
           상품 업로드
-        </button>
-      </DashboardHeader>
-      <DashboardBody>
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          gap: "30px",
+        }}
+      >
         <nav>
-          <DashboardSidebar>
-            <li
-              className={
-                location.pathname.includes("salesproduct") ? "active" : null
-              }
-              onClick={onClickSalesProduct}
-            >
-              판매중인 상품
-            </li>
-            <li
-              className={
-                location.pathname.includes("ordership") ? "active" : null
-              }
-              onClick={onClickOrderShip}
-            >
-              주문/배송
-            </li>
-            <li
-              className={location.pathname.includes("ask") ? "active" : null}
-              onClick={onClickAsk}
-            >
-              문의/리뷰
-            </li>
-            <li
-              className={location.pathname.includes("stats") ? "active" : null}
-              onClick={onClickStats}
-            >
-              통계
-            </li>
-            <li
-              className={
-                location.pathname.includes("setting") ? "active" : null
-              }
-              onClick={onClickSetting}
-            >
-              스토어 설정
-            </li>
-          </DashboardSidebar>
+          <List
+            component="ul"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              width: "250px",
+              p: "0",
+              gap: "10px",
+            }}
+          >
+            {[
+              {
+                id: 1,
+                text: "판매중인 상품",
+                pathname: "/sellercenter/salesproduct",
+              },
+              { id: 2, text: "주문/배송", pathname: "/sellercenter/ordership" },
+              { id: 3, text: "문의/리뷰", pathname: "/sellercenter/ask" },
+              { id: 4, text: "통계", pathname: "/sellercenter/stats" },
+              { id: 5, text: "스토어 설정", pathname: "/sellercenter/setting" },
+            ].map((item, idx) => (
+              <ListItem
+                key={idx}
+                sx={{
+                  p: "0",
+                }}
+              >
+                <ListItemButton
+                  id={item.id}
+                  selected={pathname === item.pathname ? true : false}
+                  onClick={() => onClickUpdate(item.text)}
+                  sx={{
+                    borderRadius: "5px",
+                    "&.Mui-selected": {
+                      backgroundColor: "#21BF48",
+                    },
+                    "&.Mui-selected:hover": {
+                      backgroundColor: "#21BF48",
+                    },
+                    "&.Mui-focusVisible": {
+                      backgroundColor: "#21BF48",
+                    },
+                    ":hover": {
+                      backgroundColor: "#effff3",
+                    },
+                  }}
+                >
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
         </nav>
-        <DashboardMain>
-          <div className="data-header">
-            <p className="product-info">상품정보</p>
-            <p className="product-price">판매가격</p>
-            <p className="edit-product">수정</p>
-            <p className="delete-product">삭제</p>
-          </div>
+        <Box
+          component="section"
+          sx={{
+            width: "100%",
+            border: "1px solid",
+            borderColor: "border.primary",
+            borderRadius: "5px",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              p: "18px 0",
+              textAlign: "center",
+              fontSize: "18px",
+              borderBottom: "1px solid",
+              borderColor: "border.primary",
+            }}
+          >
+            <Typography width="50%">상품정보</Typography>
+            <Typography width="30%">판매가격</Typography>
+            <Typography width="10%">수정</Typography>
+            <Typography width="10%">삭제</Typography>
+          </Box>
           {location.pathname === "/sellercenter/salesproduct" && (
             <SalesProduct sellerProduct={sellerProduct} />
           )}
@@ -89,8 +148,8 @@ const Dashboard = ({
           {location.pathname === "/sellercenter/stats" && <Stats />}
           {location.pathname === "/sellercenter/ask" && <Ask />}
           {location.pathname === "/sellercenter/setting" && <Setting />}
-        </DashboardMain>
-      </DashboardBody>
+        </Box>
+      </Box>
     </DefaultWrapper>
   );
 };
