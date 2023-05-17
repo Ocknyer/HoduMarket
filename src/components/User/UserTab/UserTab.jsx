@@ -34,8 +34,8 @@ const UserTab = styled.div`
     cursor: pointer;
   }
 
-  ${({ userType }) =>
-    userType === "BUYER"
+  ${({ tempUserType }) =>
+    tempUserType === "BUYER"
       ? `
       button:nth-child(1) {
         z-index: 100;

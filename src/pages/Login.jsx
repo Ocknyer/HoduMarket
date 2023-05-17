@@ -7,6 +7,7 @@ import UserLogin from "../components/User/UserLogin/UserLogin";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [tempUserType, setTempUserType] = useState("BUYER");
   const [userType, setUserType] = useRecoilState(userTypeValue);
   const [errorMsg, setErrorMsg] = useState("");
   const [inputValue, setInputValue] = useState({
@@ -21,7 +22,9 @@ const Login = () => {
   };
 
   const handleUserType = (e) => {
-    e.target.id === "BUYER" ? setUserType("BUYER") : setUserType("SELLER");
+    e.target.id === "BUYER"
+      ? setTempUserType("BUYER")
+      : setTempUserType("SELLER");
   };
 
   const handleLogin = (e) => {
@@ -30,11 +33,12 @@ const Login = () => {
     postUserLogin({
       username,
       password,
-      login_type: userType,
+      login_type: tempUserType,
     })
       .then((data) => {
         console.log(data);
         localStorage.setItem("token", data.token);
+        setUserType(tempUserType === "BUYER" ? "BUYER" : "SELLER");
         navigate("/");
       })
       .catch((error) => {
@@ -46,7 +50,7 @@ const Login = () => {
 
   return (
     <UserLogin
-      userType={userType}
+      tempUserType={tempUserType}
       onClick={handleUserType}
       onChange={handleData}
       onSubmit={handleLogin}
