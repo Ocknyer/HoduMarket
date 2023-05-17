@@ -7,8 +7,8 @@ import Button from "../common/Button/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import search from "../../api/search/search";
 import { useState } from "react";
-import { useRecoilState, useResetRecoilState } from "recoil";
-import { searchProducts } from "../../atoms";
+import { useResetRecoilState, useSetRecoilState } from "recoil";
+import { onSearch, searchProducts } from "../../atoms";
 import { Box, IconButton, InputBase, Paper, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -18,8 +18,9 @@ const Header = ({ userType }) => {
   const location = useLocation();
 
   const [inputValue, setInputValue] = useState("");
-  const [searchData, setSearchData] = useRecoilState(searchProducts);
+  const setSearchData = useSetRecoilState(searchProducts);
   const resetSearchData = useResetRecoilState(searchProducts);
+  const setSearchCount = useSetRecoilState(onSearch);
 
   const handleData = (e) => {
     setInputValue(e.target.value);
@@ -32,6 +33,7 @@ const Header = ({ userType }) => {
   const searchProduct = () => {
     search(inputValue)
       .then((data) => {
+        setSearchCount(true);
         setSearchData(data.results);
       })
       .catch((error) => {
@@ -44,6 +46,7 @@ const Header = ({ userType }) => {
       e.preventDefault();
       search(inputValue)
         .then((data) => {
+          setSearchCount(true);
           setSearchData(data.results);
           navigate("/");
         })
@@ -56,6 +59,7 @@ const Header = ({ userType }) => {
   const onClickHome = () => {
     resetSearchData();
     setInputValue("");
+    setSearchCount(false);
   };
 
   const iconWrapper = {
