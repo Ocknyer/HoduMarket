@@ -1,4 +1,3 @@
-import { HeaderWrapper, InnerWrapper } from "./styled";
 import logo from "../../assets/img/Logo-hodu.png";
 import cart from "../../assets/img/icon-shopping-cart.svg";
 import cartGreen from "../../assets/img/icon-shopping-cart-2.svg";
@@ -10,7 +9,8 @@ import search from "../../api/search/search";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { searchProducts } from "../../atoms";
-import { Box } from "@mui/material";
+import { Box, IconButton, InputBase, Paper, Typography } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Header = ({ userType }) => {
   const token = localStorage.getItem("token");
@@ -61,28 +61,68 @@ const Header = ({ userType }) => {
     color: "text.grey",
   };
 
+  const innerWrapper = {
+    width: "1280px",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    margin: "0 auto",
+  };
+
   return (
-    <HeaderWrapper>
+    <Box
+      component="header"
+      sx={{
+        width: "100%",
+        height: "90px",
+        backgroundColor: "#fff",
+        boxShadow: "0 3px 5px rgba(0, 0, 0, 0.1)",
+      }}
+    >
       {!location.pathname.includes("/sellercenter") ? (
-        <InnerWrapper>
+        <Box sx={innerWrapper}>
           <Link to="/">
-            <img src={logo} alt="호두마켓 로고" className="logo" />
+            <Box
+              component="img"
+              src={logo}
+              alt="호두마켓 로고"
+              width={"124px"}
+            />
           </Link>
-          <form>
-            <input
-              className="inp-search"
-              type="text"
-              placeholder="상품을 검색해보세요!"
+          <Paper
+            component="form"
+            elevation={0}
+            sx={{
+              p: "2px 10px",
+              display: "flex",
+              width: "400px",
+              border: "2px solid",
+              borderColor: "border.main",
+              borderRadius: "50px",
+              ml: "30px",
+            }}
+          >
+            <InputBase
+              sx={{
+                ml: 1,
+                flex: 1,
+              }}
+              placeholder="상품을 검색해 보세요!"
               onInput={handleData}
               onKeyDown={onSubmitSearch}
             />
-            <button
-              className="btn-search"
-              type="button"
-              onClick={searchProduct}
-            ></button>
-          </form>
-          <div className="icon-group">
+            <IconButton type="button" sx={{ p: 1 }} onClick={searchProduct}>
+              <SearchIcon color="primary" />
+            </IconButton>
+          </Paper>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "26px",
+              ml: "auto",
+              alignItems: "center",
+            }}
+          >
             {userType === "BUYER" ? (
               <>
                 <Link to="/cart">
@@ -115,23 +155,34 @@ const Header = ({ userType }) => {
                     <img src={mypage} alt="" /> 마이페이지
                   </Box>
                 </Link>
-                <Button onClick={handleSellerCenter}>
+                <Button
+                  onClick={handleSellerCenter}
+                  width="168px"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                  }}
+                >
                   <img src={sellerCenter} alt="" />
                   판매자 센터
                 </Button>
               </>
             )}
-          </div>
-        </InnerWrapper>
+          </Box>
+        </Box>
       ) : (
-        <InnerWrapper>
+        <Box sx={innerWrapper}>
           <Link to="/">
-            <img src={logo} alt="호두마켓 로고" className="logo-seller" />
+            <Box width="80px" component="img" src={logo} alt="호두마켓 로고" />
           </Link>
-          <h1 className="tit-seller-center">판매자 센터</h1>
-        </InnerWrapper>
+          <Typography variant="h3" fontWeight="500" ml="16px">
+            판매자 센터
+          </Typography>
+        </Box>
       )}
-    </HeaderWrapper>
+    </Box>
   );
 };
 
