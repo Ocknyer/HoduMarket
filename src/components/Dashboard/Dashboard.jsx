@@ -3,15 +3,15 @@ import {
   DashboardSidebar,
   DashboardBody,
   DashboardMain,
-} from './styleld';
-import DefaultWrapper from '../common/Wrapper/DefaultWrapper';
-import Plus from '../../assets/img/icon-plus.svg';
-import { useLocation } from 'react-router-dom';
-import SalesProduct from './SalesProduct/SalesProduct';
-import OrderShip from './OrderShip/OrderShip';
-import Stats from './Stats/Stats';
-import Setting from './Setting/Setting';
-import Ask from './Ask/Ask';
+} from "./styled";
+import DefaultWrapper from "../common/Wrapper/DefaultWrapper";
+import Plus from "../../assets/img/icon-plus.svg";
+import { useLocation } from "react-router-dom";
+import SalesProduct from "./SalesProduct/SalesProduct";
+import OrderShip from "./OrderShip/OrderShip";
+import Stats from "./Stats/Stats";
+import Setting from "./Setting/Setting";
+import Ask from "./Ask/Ask";
 
 const Dashboard = ({
   sellerProduct,
@@ -29,12 +29,8 @@ const Dashboard = ({
         <h2>
           대시보드 <span>백엔드글로벌</span>
         </h2>
-        <button className='btn-add-product'>
-          <img
-            src={Plus}
-            alt='상품 추가 아이콘'
-            className='icon-plus'
-          />
+        <button className="btn-add-product">
+          <img src={Plus} alt="상품 추가 아이콘" className="icon-plus" />
           상품 업로드
         </button>
       </DashboardHeader>
@@ -43,9 +39,7 @@ const Dashboard = ({
           <DashboardSidebar>
             <li
               className={
-                location.pathname.includes('salesproduct')
-                  ? 'active'
-                  : null
+                location.pathname.includes("salesproduct") ? "active" : null
               }
               onClick={onClickSalesProduct}
             >
@@ -53,35 +47,27 @@ const Dashboard = ({
             </li>
             <li
               className={
-                location.pathname.includes('ordership')
-                  ? 'active'
-                  : null
+                location.pathname.includes("ordership") ? "active" : null
               }
               onClick={onClickOrderShip}
             >
               주문/배송
             </li>
             <li
-              className={
-                location.pathname.includes('ask') ? 'active' : null
-              }
+              className={location.pathname.includes("ask") ? "active" : null}
               onClick={onClickAsk}
             >
               문의/리뷰
             </li>
             <li
-              className={
-                location.pathname.includes('stats') ? 'active' : null
-              }
+              className={location.pathname.includes("stats") ? "active" : null}
               onClick={onClickStats}
             >
               통계
             </li>
             <li
               className={
-                location.pathname.includes('setting')
-                  ? 'active'
-                  : null
+                location.pathname.includes("setting") ? "active" : null
               }
               onClick={onClickSetting}
             >
@@ -90,23 +76,19 @@ const Dashboard = ({
           </DashboardSidebar>
         </nav>
         <DashboardMain>
-          <div className='data-header'>
-            <p className='product-info'>상품정보</p>
-            <p className='product-price'>판매가격</p>
-            <p className='edit-product'>수정</p>
-            <p className='delete-product'>삭제</p>
+          <div className="data-header">
+            <p className="product-info">상품정보</p>
+            <p className="product-price">판매가격</p>
+            <p className="edit-product">수정</p>
+            <p className="delete-product">삭제</p>
           </div>
-          {location.pathname === '/sellercenter/salesproduct' && (
+          {location.pathname === "/sellercenter/salesproduct" && (
             <SalesProduct sellerProduct={sellerProduct} />
           )}
-          {location.pathname === '/sellercenter/ordership' && (
-            <OrderShip />
-          )}
-          {location.pathname === '/sellercenter/stats' && <Stats />}
-          {location.pathname === '/sellercenter/ask' && <Ask />}
-          {location.pathname === '/sellercenter/setting' && (
-            <Setting />
-          )}
+          {location.pathname === "/sellercenter/ordership" && <OrderShip />}
+          {location.pathname === "/sellercenter/stats" && <Stats />}
+          {location.pathname === "/sellercenter/ask" && <Ask />}
+          {location.pathname === "/sellercenter/setting" && <Setting />}
         </DashboardMain>
       </DashboardBody>
     </DefaultWrapper>
