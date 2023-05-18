@@ -15,17 +15,19 @@ const MyPage = ({ authorization }) => {
   };
 
   return authorization ? (
-    <DefaultWrapper>
-      <Box
-        sx={{
-          mt: "30px",
-        }}
-      >
-        <Button variant="contained" onClick={handleLogout}>
-          로그아웃
-        </Button>
-      </Box>
-    </DefaultWrapper>
+    <>
+      <DefaultWrapper>
+        <Box
+          sx={{
+            mt: "30px",
+          }}
+        >
+          <Button variant="contained" onClick={handleLogout}>
+            로그아웃
+          </Button>
+        </Box>
+      </DefaultWrapper>
+    </>
   ) : (
     <Navigate to="/" />
   );
