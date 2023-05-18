@@ -13,30 +13,44 @@ import Ask from "./components/Dashboard/DashboardItems/Ask";
 import Stats from "./components/Dashboard/DashboardItems/Stats";
 import Setting from "./components/Dashboard/DashboardItems/Setting";
 import MyPage from "./pages/MyPage";
+import { useRecoilValue } from "recoil";
+import { userTypeValue } from "./atoms";
+import PrivateRoutesSeller from "./components/Router/PrivateRoutesSeller";
+import PrivateRoutes from "./components/Router/PrivateRoutes";
+import PrivateRoutesBuyer from "./components/Router/PrivateRoutesBuyer";
 
 function App() {
+  const userType = useRecoilValue(userTypeValue);
+  const token = localStorage.getItem("token");
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/sellercenter" element={<SellerCenter />}>
-            <Route
-              path="/sellercenter/salesproduct"
-              element={<SalesProduct />}
-            />
-            <Route path="/sellercenter/ordership" element={<OrderShip />} />
-            <Route path="/sellercenter/ask" element={<Ask />} />
-            <Route path="/sellercenter/stats" element={<Stats />} />
-            <Route path="/sellercenter/setting" element={<Setting />} />
+          <Route element={<PrivateRoutesSeller authorization={userType} />}>
+            <Route path="/sellercenter" element={<SellerCenter />}>
+              <Route
+                path="/sellercenter/salesproduct"
+                element={<SalesProduct />}
+              />
+              <Route path="/sellercenter/ordership" element={<OrderShip />} />
+              <Route path="/sellercenter/ask" element={<Ask />} />
+              <Route path="/sellercenter/stats" element={<Stats />} />
+              <Route path="/sellercenter/setting" element={<Setting />} />
+            </Route>
           </Route>
           <Route path="/mypage" element={<MyPage />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<Order />} />
+          <Route element={<PrivateRoutesBuyer authorization={userType} />}>
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/order" element={<Order />} />
+          </Route>
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route element={<PrivateRoutes authorization={token} />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
