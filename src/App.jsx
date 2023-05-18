@@ -12,6 +12,7 @@ import OrderShip from "./components/Dashboard/DashboardItems/OrderShip";
 import Ask from "./components/Dashboard/DashboardItems/Ask";
 import Stats from "./components/Dashboard/DashboardItems/Stats";
 import Setting from "./components/Dashboard/DashboardItems/Setting";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/sellercenter/stats" element={<Stats />} />
             <Route path="/sellercenter/setting" element={<Setting />} />
           </Route>
+          <Route path="/mypage" element={<MyPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<Order />} />
         </Route>
