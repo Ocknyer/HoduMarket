@@ -41,11 +41,11 @@ function App() {
               <Route path="/sellercenter/setting" element={<Setting />} />
             </Route>
           </Route>
-          <Route path="/mypage" element={<MyPage />} />
           <Route element={<PrivateRoutesBuyer authorization={userType} />}>
             <Route path="/cart" element={<Cart />} />
             <Route path="/order" element={<Order />} />
           </Route>
+          <Route path="/mypage" element={<MyPage authorization={token} />} />
         </Route>
         <Route element={<PrivateRoutes authorization={token} />}>
           <Route path="/login" element={<Login />} />
