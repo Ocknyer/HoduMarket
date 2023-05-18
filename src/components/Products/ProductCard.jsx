@@ -5,6 +5,7 @@ const ProductCard = ({ data }) => {
   return (
     <Link to={`/product/${data.product_id}`}>
       <Card
+        elevation={0}
         sx={{
           maxWidth: 380,
           maxHeight: 500,
@@ -15,6 +16,7 @@ const ProductCard = ({ data }) => {
           sx={{
             width: 380,
             height: 380,
+            borderRadius: "5px",
           }}
           image={data.image}
           title={data.product_name}

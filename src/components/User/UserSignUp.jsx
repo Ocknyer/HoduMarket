@@ -20,14 +20,14 @@ const UserSignUp = ({
   onSubmit,
   onChange,
   onDoubleCheck,
+  crnCheck,
   usernameMsg,
   passwordMsg,
+  crnMsg,
   errors,
-  isValid,
+  valid,
   passwordCheck,
 }) => {
-  // console.log(errors, isValid);
-
   const inputFlexBox = {
     display: "flex",
     width: "100%",
@@ -86,9 +86,9 @@ const UserSignUp = ({
               label="아이디"
               type="text"
               name="username"
-              width="100%"
               onChange={onChange}
               helperText={usernameMsg}
+              required
               sx={{
                 display: "flex",
                 flex: 1,
@@ -100,6 +100,7 @@ const UserSignUp = ({
               type="button"
               onClick={onDoubleCheck}
               disableElevation
+              required
               sx={{
                 width: "122px",
               }}
@@ -112,6 +113,8 @@ const UserSignUp = ({
             type="password"
             name="password"
             onChange={onChange}
+            helperText={errors.password}
+            required
           />
           <TextField
             label="비밀번호 확인"
@@ -120,6 +123,7 @@ const UserSignUp = ({
             onChange={onChange}
             onKeyUp={passwordCheck}
             helperText={passwordMsg ? passwordMsg : null}
+            required
             sx={{
               mb: "10px",
             }}
@@ -128,16 +132,17 @@ const UserSignUp = ({
             label="이름"
             type="text"
             name="name"
-            width="100%"
             onChange={onChange}
+            required
           />
 
           <TextField
             label="휴대폰 번호"
             type="number"
-            width="100%"
             name="phone_number"
             onChange={onChange}
+            helperText={errors.phone_number}
+            required
           />
           <TextField label="이메일" type="text" />
           {tempUserType === "SELLER" ? (
@@ -146,6 +151,12 @@ const UserSignUp = ({
                 <TextField
                   label="사업자 등록번호"
                   type="text"
+                  name="company_registration_number"
+                  onChange={onChange}
+                  helperText={
+                    crnMsg ? crnMsg : errors.company_registration_number
+                  }
+                  required
                   sx={{
                     display: "flex",
                     flex: 1,
@@ -155,12 +166,19 @@ const UserSignUp = ({
                   variant="contained"
                   size="medium"
                   disableElevation
+                  onClick={crnCheck}
                   sx={{ width: "122px" }}
                 >
                   인증
                 </Button>
               </Box>
-              <TextField label="스토어 이름" type="text" width="100%" />
+              <TextField
+                label="스토어 이름"
+                type="text"
+                name="store_name"
+                onChange={onChange}
+                required
+              />
             </>
           ) : null}
         </Box>
@@ -201,6 +219,7 @@ const UserSignUp = ({
         // bc="#c4c4c4"
         onClick={onSubmit}
         disableElevation
+        disabled={valid ? false : true}
         sx={{
           width: "480px",
         }}

@@ -37,7 +37,6 @@ const Login = () => {
       login_type: tempUserType,
     })
       .then((data) => {
-        console.log(data);
         localStorage.setItem("token", data.token);
         setUserType(tempUserType === "BUYER" ? "BUYER" : "SELLER");
         navigate("/");

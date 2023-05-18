@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+// import { useSetRecoilState } from "recoil";
 import postDoubleCheck from "../api/login/postDoubleCheck";
-import { postSignUpBuyer } from "../api/login/postSignUp";
-import { userTypeValue } from "../atoms";
+import { postSignUpBuyer, postSignUpSeller } from "../api/login/postSignUp";
+// import { userTypeValue } from "../atoms";
 import UserSignUp from "../components/User/UserSignUp";
+import postCrnCheck from "../api/login/postCrnCheck";
 
 const Signup = () => {
   const initialState = {
@@ -18,12 +19,14 @@ const Signup = () => {
   };
 
   const navigate = useNavigate();
-  const setUserType = useSetRecoilState(userTypeValue);
   const [tempUserType, setTempUserType] = useState("BUYER");
+
   const [usernameMsg, setUsernameMsg] = useState("");
   const [passwordMsg, setPasswordMsg] = useState("");
+  const [crnMsg, setCrnMsg] = useState("");
   const [errors, setErrors] = useState({ ...initialState });
   const [inputValue, setInputValue] = useState({ ...initialState });
+
   const [isValid, setIsValid] = useState({
     username: false,
     password: false,
@@ -33,6 +36,8 @@ const Signup = () => {
     company_registration_number: false,
     store_name: false,
   });
+
+  const [valid, setValid] = useState(false);
 
   const {
     username,
@@ -48,7 +53,9 @@ const Signup = () => {
     if (targetName === "username") {
       return /^[a-z]+[a-zA-Z0-9]{5,19}$/g.test(target);
     } else if (targetName === "password") {
-      return /^(?=.*[a-z])(?=.*[0-9]).{8,16}$/g.test(target);
+      return /^(?=.*[a-zA-Z])(?=.*[!@#$%&^*+=-])(?=.*[0-9]).{8,16}$/g.test(
+        target
+      );
     } else if (targetName === "password2") {
       return target !== password ? false : true;
     } else if (targetName === "phone_number") {
@@ -64,7 +71,7 @@ const Signup = () => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
 
-    if (!regEx(value, name)) {
+    if (regEx(value, name)) {
       setIsValid({
         ...isValid,
         [name]: true,
@@ -78,7 +85,7 @@ const Signup = () => {
       } else if (name === "password") {
         setErrors({
           ...errors,
-          [name]: "비밀번호는 8자 이상, 영소문자를 포함해야 합니다.",
+          [name]: "비밀번호는 8자 이상, 영소문자, 특수문자를 포함해야 합니다.",
         });
       } else if (name === "password2" && value !== password) {
         setErrors({
@@ -95,18 +102,17 @@ const Signup = () => {
         tempUserType === "SELLER" &&
         name === "company_registration_number"
       ) {
-        setErrors({
-          ...errors,
-          [name]: "사업자등록번호는 10자리로 이루어진 숫자입니다.",
-        });
+        // setErrors({
+        //   ...errors,
+        //   [name]: "사업자등록번호는 10자리로 이루어진 숫자입니다.",
+        // });
+        setCrnMsg("사업자등록번호는 10자리로 이루어진 숫자입니다.");
       }
     } else {
       setErrors({
         ...errors,
         [name]: "",
       });
-    }
-    if (tempUserType === "SELLER") {
     }
   };
 
@@ -124,14 +130,24 @@ const Signup = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    postSignUpBuyer(inputValue)
-      .then((data) => {
-        console.log(data);
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (tempUserType === "BUYER") {
+      postSignUpBuyer(inputValue)
+        .then((data) => {
+          console.log(data);
+          navigate("/login");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (tempUserType === "SELLER") {
+      postSignUpSeller(inputValue)
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const handleDoubleCheck = (e) => {
@@ -157,6 +173,44 @@ const Signup = () => {
     }
   };
 
+  const crnCheck = (e) => {
+    e.preventDefault();
+
+    postCrnCheck({ company_registration_number })
+      .then((data) => {
+        setCrnMsg("사용 가능한 사업자등록번호입니다.");
+      })
+      .catch((error) => {
+        if (error.request.response.includes("이미 등록된")) {
+          setCrnMsg("이미 등록된 사업자등록번호입니다.");
+        }
+      });
+  };
+
+  useEffect(() => {
+    if (tempUserType === "BUYER") {
+      if (
+        isValid.password === true &&
+        isValid.password2 === true &&
+        isValid.phone_number === true &&
+        isValid.username === true
+      ) {
+        setValid(true);
+      }
+    } else if (tempUserType === "SELLER") {
+      if (
+        isValid.password === true &&
+        isValid.password2 === true &&
+        isValid.phone_number === true &&
+        isValid.username === true &&
+        isValid.company_registration_number === true &&
+        isValid.name === true
+      ) {
+        setValid(true);
+      }
+    }
+  }, [isValid, tempUserType]);
+
   return (
     <>
       <UserSignUp
@@ -165,10 +219,12 @@ const Signup = () => {
         onChange={handleData}
         onSubmit={handleSignUp}
         onDoubleCheck={handleDoubleCheck}
+        crnCheck={crnCheck}
         usernameMsg={usernameMsg}
         passwordMsg={passwordMsg}
+        crnMsg={crnMsg}
         errors={errors}
-        isValid={isValid}
+        valid={valid}
         passwordCheck={passwordCheck}
       ></UserSignUp>
     </>

@@ -79,7 +79,7 @@ const UserLogin = ({ tempUserType, onClick, onChange, onSubmit, errorMsg }) => {
           width="100%"
           size="large"
           type="submit"
-          // color='white'
+          disableElevation
         >
           로그인
         </Button>
