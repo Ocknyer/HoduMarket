@@ -31,7 +31,7 @@ const Cart = () => {
       });
   }, [deletedItem]);
 
-  const payment = [...cartLists].reduce(
+  const payment = cartLists.reduce(
     (acc, cur) => {
       if (cur.is_active) {
         return (acc = {
@@ -65,11 +65,6 @@ const Cart = () => {
   const handleChecked = () => {
     setSelected((prev) => !prev);
   };
-
-  // console.log(item_id);
-  // console.log(cartLists);
-
-  console.log(selected);
 
   const navigate = useNavigate();
 

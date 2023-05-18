@@ -1,13 +1,7 @@
-import { accessInstance } from '../axios-api';
+import { accessInstance } from "../axios-api";
 
-const putQuantity = async (itemData) => {
-  const { cart_item_id, product_id, quantity, is_active } = itemData;
-
-  const res = await accessInstance.put(`/cart/${cart_item_id}/`, {
-    product_id,
-    quantity,
-    is_active,
-  });
+const putQuantity = async (cart_item_id, itemData) => {
+  const res = await accessInstance.put(`/cart/${cart_item_id}/`, itemData);
   return res.data;
 };
 

@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import plusBtn from '../../../../assets/img/icon-plus-line.svg';
-import minusBtn from '../../../../assets/img/icon-minus-line.svg';
+import styled from "styled-components";
+import plusBtn from "../../../../assets/img/icon-plus-line.svg";
+import minusBtn from "../../../../assets/img/icon-minus-line.svg";
 
 export const QuantityButton = styled.div`
   .quantity-btn {
     display: flex;
     width: 150px;
-    height: 50px;
+    height: 51px;
     position: relative;
     border: 1px solid var(--greyC4);
     border-radius: 5px;

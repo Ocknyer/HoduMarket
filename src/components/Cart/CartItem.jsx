@@ -5,6 +5,9 @@ import Delete from "../../assets/img/icon-delete.svg";
 import putQuantity from "../../api/cart/putQuantity";
 import { CheckBox } from "../common/Input/CheckBox";
 import { Box, Typography } from "@mui/material";
+import { useState } from "react";
+import { useEffect } from "react";
+import getCartItems from "../../api/cart/getCartItems";
 
 const CartItem = ({
   cartLists,
@@ -14,50 +17,45 @@ const CartItem = ({
   selected,
 }) => {
   const {
-    // is_active,
+    is_active,
     image,
     store_name,
     product_name,
+    product_id,
     quantity,
     price,
+    stock,
     cart_item_id,
   } = item;
 
   const totalPrice = (price * quantity).toLocaleString();
   const shippingFee = item.shipping_fee;
 
-  const handleQuantity = (e) => {
-    putQuantity(item)
-      .then((data) => {
-        const cartItemIdx = cartLists.findIndex(
-          (el) => el.product_id === data.product_id
-        );
+  const [formData, setFormData] = useState({
+    product_id: product_id,
+    quantity: quantity,
+    is_active: is_active,
+  });
 
-        setCartLists((prev) => {
-          // eslint-disable-next-line array-callback-return
-          return [...prev].map((item, idx) => {
-            if (e.target.name === "increment") {
-              return idx === cartItemIdx
-                ? {
-                    ...cartLists[cartItemIdx],
-                    quantity: cartLists[cartItemIdx].quantity + 1,
-                  }
-                : item;
-            } else if (e.target.name === "decrement") {
-              return idx === cartItemIdx
-                ? {
-                    ...cartLists[cartItemIdx],
-                    quantity: cartLists[cartItemIdx].quantity - 1,
-                  }
-                : item;
-            }
-          });
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  // const cartItemIdx = cartLists.findIndex(
+  //   (el) => el.product_id === item.product_id
+  // );
+
+  const handleQuantity = (e) => {
+    if (e.target.name === "increment" && quantity <= stock) {
+      setFormData((prev) => ({ ...prev, quantity: prev.quantity + 1 }));
+    } else if (e.target.name === "decrement" && quantity > 0) {
+      setFormData((prev) => ({ ...prev, quantity: prev.quantity - 1 }));
+    }
   };
+
+  useEffect(() => {
+    putQuantity(cart_item_id, formData).then(() => {
+      getCartItems().then((data) => {
+        setCartLists(data);
+      });
+    });
+  }, [cart_item_id, formData, setCartLists]);
 
   return (
     <Box

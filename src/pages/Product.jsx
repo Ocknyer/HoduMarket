@@ -10,7 +10,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
 
   const token = localStorage.getItem("token");
-  console.log(token);
+  // console.log(token);
 
   useEffect(() => {
     getProductDetail(id)
@@ -22,12 +22,13 @@ const Product = () => {
       });
   }, [id]);
 
+  console.log(productData);
+
   const handleQuantity = (e) => {
-    console.log(e.target.name);
-    if (e.target.name === "increment") {
+    if (e.target.name === "increment" && quantity < productData.stock) {
       setQuantity((prev) => prev + 1);
     }
-    if (e.target.name === "decrement" && quantity > 1) {
+    if (e.target.name === "decrement" && quantity > 0) {
       setQuantity((prev) => prev - 1);
     }
   };
