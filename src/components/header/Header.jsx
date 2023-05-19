@@ -79,8 +79,6 @@ const Header = ({ userType }) => {
     margin: "0 auto",
   };
 
-  console.log(location.pathname);
-
   return (
     <Box
       component="header"
