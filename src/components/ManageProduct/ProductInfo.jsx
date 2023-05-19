@@ -1,6 +1,22 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  OutlinedInput,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import UploadBtn from "../../assets/img/icon-img.png";
+import { useState } from "react";
 
 const ProductInfo = () => {
+  const [inputLength, setInputLength] = useState(0);
+
+  const changeInputLength = (e) => {
+    setInputLength(e.target.value.length);
+  };
+
   return (
     <Box
       sx={{
@@ -15,7 +31,12 @@ const ProductInfo = () => {
           상품 이미지
         </Typography>
         <Paper
+          component="label"
+          htmlFor="product_img"
           sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             width: "454px",
             height: "454px",
             mt: "10px",
@@ -23,7 +44,13 @@ const ProductInfo = () => {
             backgroundColor: "primary.grey",
           }}
         >
-          업로드임
+          <input
+            type="file"
+            accept="image/*"
+            id="product_img"
+            style={{ display: "none" }}
+          />
+          <img src={UploadBtn} alt="이미지 업로드 버튼" />
         </Paper>
       </Box>
       <Box
@@ -38,11 +65,23 @@ const ProductInfo = () => {
         <Typography variant="h5" color="text.grey">
           상품명
         </Typography>
-        <TextField />
+        <OutlinedInput
+          onChange={changeInputLength}
+          endAdornment={
+            <InputAdornment position="start">{inputLength}/20</InputAdornment>
+          }
+          inputProps={{
+            maxlength: "20",
+          }}
+        />
+
         <Typography variant="h5" color="text.grey">
           판매가
         </Typography>
-        <TextField sx={{ width: "220px" }} />
+        <OutlinedInput
+          endAdornment={<InputAdornment position="start">원</InputAdornment>}
+          sx={{ width: "220px" }}
+        />
         <Typography variant="h5" color="text.grey">
           배송방법
         </Typography>
@@ -62,11 +101,17 @@ const ProductInfo = () => {
         <Typography variant="h5" color="text.grey">
           기본 배송비
         </Typography>
-        <TextField sx={{ width: "220px" }} />
+        <OutlinedInput
+          endAdornment={<InputAdornment position="start">원</InputAdornment>}
+          sx={{ width: "220px" }}
+        />
         <Typography variant="h5" color="text.grey">
           재고
         </Typography>
-        <TextField sx={{ width: "220px" }} />
+        <OutlinedInput
+          endAdornment={<InputAdornment position="start">개</InputAdornment>}
+          sx={{ width: "220px" }}
+        />
       </Box>
     </Box>
   );

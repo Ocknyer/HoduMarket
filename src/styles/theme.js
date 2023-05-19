@@ -29,6 +29,10 @@ const theme = createTheme({
           color: "white",
           fontSize: "16px",
         },
+        outlinedPrimary: {
+          color: "#767676",
+          border: "1px solid #c4c4c4",
+        },
         sizeLarge: {
           height: "60px",
         },
