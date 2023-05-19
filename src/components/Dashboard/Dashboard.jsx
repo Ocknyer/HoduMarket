@@ -1,5 +1,5 @@
 import DefaultWrapper from "../common/Wrapper/DefaultWrapper";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SalesProduct from "./DashboardItems/SalesProduct";
 import OrderShip from "./DashboardItems/OrderShip";
 import Stats from "./DashboardItems/Stats";
@@ -16,10 +16,20 @@ import {
 } from "@mui/material";
 import { ControlPoint } from "@mui/icons-material";
 
-const Dashboard = ({ sellerProduct, onClickUpdate }) => {
+const Dashboard = ({
+  sellerProduct,
+  onClickUpdate,
+  handleEditProduct,
+  handleDeleteProduct,
+}) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const pathname = location.pathname;
+
+  const handleToAddProduct = () => {
+    navigate("/sellercenter/addproduct");
+  };
 
   return (
     <DefaultWrapper>
@@ -47,6 +57,7 @@ const Dashboard = ({ sellerProduct, onClickUpdate }) => {
           variant="contained"
           disableElevation
           startIcon={<ControlPoint />}
+          onClick={handleToAddProduct}
           sx={{
             width: "168px",
             height: "54px",
@@ -77,12 +88,28 @@ const Dashboard = ({ sellerProduct, onClickUpdate }) => {
               {
                 id: 1,
                 text: "판매중인 상품",
-                pathname: "/sellercenter/salesproduct",
+                pathname: "/sellercenter/dashboard/salesproduct",
               },
-              { id: 2, text: "주문/배송", pathname: "/sellercenter/ordership" },
-              { id: 3, text: "문의/리뷰", pathname: "/sellercenter/ask" },
-              { id: 4, text: "통계", pathname: "/sellercenter/stats" },
-              { id: 5, text: "스토어 설정", pathname: "/sellercenter/setting" },
+              {
+                id: 2,
+                text: "주문/배송",
+                pathname: "/sellercenter/dashboard/ordership",
+              },
+              {
+                id: 3,
+                text: "문의/리뷰",
+                pathname: "/sellercenter/dashboard/ask",
+              },
+              {
+                id: 4,
+                text: "통계",
+                pathname: "/sellercenter/dashboard/stats",
+              },
+              {
+                id: 5,
+                text: "스토어 설정",
+                pathname: "/sellercenter/dashboard/setting",
+              },
             ].map((item, idx) => (
               <ListItem
                 key={idx}
@@ -141,13 +168,21 @@ const Dashboard = ({ sellerProduct, onClickUpdate }) => {
             <Typography width="10%">수정</Typography>
             <Typography width="10%">삭제</Typography>
           </Box>
-          {location.pathname === "/sellercenter/salesproduct" && (
-            <SalesProduct sellerProduct={sellerProduct} />
+          {location.pathname === "/sellercenter/dashboard/salesproduct" && (
+            <SalesProduct
+              sellerProduct={sellerProduct}
+              handleEditProduct={handleEditProduct}
+              handleDeleteProduct={handleDeleteProduct}
+            />
           )}
-          {location.pathname === "/sellercenter/ordership" && <OrderShip />}
-          {location.pathname === "/sellercenter/stats" && <Stats />}
-          {location.pathname === "/sellercenter/ask" && <Ask />}
-          {location.pathname === "/sellercenter/setting" && <Setting />}
+          {location.pathname === "/sellercenter/dashboard/ordership" && (
+            <OrderShip />
+          )}
+          {location.pathname === "/sellercenter/dashboard/stats" && <Stats />}
+          {location.pathname === "/sellercenter/dashboard/ask" && <Ask />}
+          {location.pathname === "/sellercenter/dashboard/setting" && (
+            <Setting />
+          )}
         </Box>
       </Box>
     </DefaultWrapper>

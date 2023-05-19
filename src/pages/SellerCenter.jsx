@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import getSellerProduct from "../api/product/getSellerProduct";
 import { useState } from "react";
+import putProduct from "../api/product/putProduct";
+import deleteSellerProduct from "../api/product/deleteSellerProduct";
 
 const SellerCenter = () => {
   const navigate = useNavigate();
@@ -34,9 +36,40 @@ const SellerCenter = () => {
       });
   }, []);
 
+  const handleEditProduct = (product_id) => {
+    console.log(product_id);
+    putProduct(product_id)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const itemData = {
+    product_name: "product_name",
+    price: "price",
+    shipping_method: "shipping_method",
+    shipping_fee: "shipping_fee",
+    stock: "stock",
+    products_info: "products_info",
+  };
+
+  const handleDeleteProduct = (product_id) => {
+    deleteSellerProduct(product_id).then((data) => {
+      console.log(data);
+    });
+  };
+
   return (
     <>
-      <Dashboard onClickUpdate={onClickUpdate} sellerProduct={sellerProduct} />
+      <Dashboard
+        onClickUpdate={onClickUpdate}
+        sellerProduct={sellerProduct}
+        handleEditProduct={handleEditProduct}
+        handleDeleteProduct={handleDeleteProduct}
+      />
     </>
   );
 };

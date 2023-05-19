@@ -27,7 +27,7 @@ const Header = ({ userType }) => {
   };
 
   const handleSellerCenter = () => {
-    navigate("/sellercenter/salesproduct");
+    navigate("/sellercenter/dashboard/salesproduct");
   };
 
   const searchProduct = () => {
@@ -78,6 +78,8 @@ const Header = ({ userType }) => {
     alignItems: "center",
     margin: "0 auto",
   };
+
+  console.log(location.pathname);
 
   return (
     <Box

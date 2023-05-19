@@ -4,6 +4,8 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#21BF48",
+      grey: "#C4C4C4",
+      lightGrey: "#F2F2F2",
     },
     text: {
       primary: "#000",

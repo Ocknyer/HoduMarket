@@ -18,6 +18,7 @@ import { userTypeValue } from "./atoms";
 import PrivateRoutesSeller from "./components/Router/PrivateRoutesSeller";
 import PrivateRoutes from "./components/Router/PrivateRoutes";
 import PrivateRoutesBuyer from "./components/Router/PrivateRoutesBuyer";
+import AddProduct from "./pages/AddProduct";
 
 function App() {
   const userType = useRecoilValue(userTypeValue);
@@ -30,16 +31,23 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/product/:id" element={<Product />} />
           <Route element={<PrivateRoutesSeller authorization={userType} />}>
-            <Route path="/sellercenter" element={<SellerCenter />}>
+            <Route path="/sellercenter/dashboard" element={<SellerCenter />}>
               <Route
-                path="/sellercenter/salesproduct"
+                path="/sellercenter/dashboard/salesproduct"
                 element={<SalesProduct />}
               />
-              <Route path="/sellercenter/ordership" element={<OrderShip />} />
-              <Route path="/sellercenter/ask" element={<Ask />} />
-              <Route path="/sellercenter/stats" element={<Stats />} />
-              <Route path="/sellercenter/setting" element={<Setting />} />
+              <Route
+                path="/sellercenter/dashboard/ordership"
+                element={<OrderShip />}
+              />
+              <Route path="/sellercenter/dashboard/ask" element={<Ask />} />
+              <Route path="/sellercenter/dashboard/stats" element={<Stats />} />
+              <Route
+                path="/sellercenter/dashboard/setting"
+                element={<Setting />}
+              />
             </Route>
+            <Route path="/sellercenter/addproduct" element={<AddProduct />} />
           </Route>
           <Route element={<PrivateRoutesBuyer authorization={userType} />}>
             <Route path="/cart" element={<Cart />} />

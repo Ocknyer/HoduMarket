@@ -1,7 +1,22 @@
 import { Box, Paper, Typography } from "@mui/material";
 import Button from "../../common/Button/Button";
 
-const SalesProduct = ({ sellerProduct }) => {
+const SalesProduct = ({
+  sellerProduct,
+  handleEditProduct,
+  handleDeleteProduct,
+}) => {
+  console.log(sellerProduct);
+
+  const itemData = {
+    product_name: sellerProduct.product_name,
+    price: sellerProduct.price,
+    shipping_method: sellerProduct.shipping_method,
+    shipping_fee: sellerProduct.shipping_fee,
+    stock: sellerProduct.stock,
+    products_info: sellerProduct.products_info,
+  };
+
   return sellerProduct.map((item) => {
     return (
       <Box
@@ -47,10 +62,14 @@ const SalesProduct = ({ sellerProduct }) => {
           {item.price.toLocaleString()}원
         </Typography>
         <Box width="10%">
-          <Button>수정</Button>
+          <Button onClick={() => handleEditProduct(item.product_id)}>
+            수정
+          </Button>
         </Box>
         <Box width="10%">
-          <Button>삭제</Button>
+          <Button onClick={() => handleDeleteProduct(item.product_id)}>
+            삭제
+          </Button>
         </Box>
       </Box>
     );
