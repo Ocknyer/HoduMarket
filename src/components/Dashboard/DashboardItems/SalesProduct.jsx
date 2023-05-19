@@ -5,6 +5,7 @@ const SalesProduct = ({
   sellerProduct,
   handleEditProduct,
   handleDeleteProduct,
+  handleToEditProduct,
 }) => {
   console.log(sellerProduct);
 
@@ -62,7 +63,8 @@ const SalesProduct = ({
           {item.price.toLocaleString()}원
         </Typography>
         <Box width="10%">
-          <Button onClick={() => handleEditProduct(item.product_id)}>
+          <Button onClick={() => handleToEditProduct(item.product_id)}>
+            {/* <Button onClick={() => handleEditProduct(item.product_id)}> */}
             수정
           </Button>
         </Box>

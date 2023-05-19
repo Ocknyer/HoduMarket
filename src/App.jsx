@@ -19,6 +19,7 @@ import PrivateRoutesSeller from "./components/Router/PrivateRoutesSeller";
 import PrivateRoutes from "./components/Router/PrivateRoutes";
 import PrivateRoutesBuyer from "./components/Router/PrivateRoutesBuyer";
 import AddProduct from "./pages/AddProduct";
+import EditProduct from "./pages/EditProduct";
 
 function App() {
   const userType = useRecoilValue(userTypeValue);
@@ -48,6 +49,7 @@ function App() {
               />
             </Route>
             <Route path="/sellercenter/addproduct" element={<AddProduct />} />
+            <Route path="/sellercenter/editproduct" element={<EditProduct />} />
           </Route>
           <Route element={<PrivateRoutesBuyer authorization={userType} />}>
             <Route path="/cart" element={<Cart />} />

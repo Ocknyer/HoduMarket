@@ -47,6 +47,14 @@ const SellerCenter = () => {
       });
   };
 
+  const handleToEditProduct = (product_id) => {
+    navigate("/sellercenter/editproduct", {
+      state: {
+        product_id,
+      },
+    });
+  };
+
   const itemData = {
     product_name: "product_name",
     price: "price",
@@ -56,6 +64,7 @@ const SellerCenter = () => {
     products_info: "products_info",
   };
 
+  // 모달창 띄워야 함
   const handleDeleteProduct = (product_id) => {
     deleteSellerProduct(product_id).then((data) => {
       console.log(data);
@@ -69,6 +78,7 @@ const SellerCenter = () => {
         sellerProduct={sellerProduct}
         handleEditProduct={handleEditProduct}
         handleDeleteProduct={handleDeleteProduct}
+        handleToEditProduct={handleToEditProduct}
       />
     </>
   );

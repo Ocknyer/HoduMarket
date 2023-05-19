@@ -21,6 +21,7 @@ const Dashboard = ({
   onClickUpdate,
   handleEditProduct,
   handleDeleteProduct,
+  handleToEditProduct,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -173,6 +174,7 @@ const Dashboard = ({
               sellerProduct={sellerProduct}
               handleEditProduct={handleEditProduct}
               handleDeleteProduct={handleDeleteProduct}
+              handleToEditProduct={handleToEditProduct}
             />
           )}
           {location.pathname === "/sellercenter/dashboard/ordership" && (

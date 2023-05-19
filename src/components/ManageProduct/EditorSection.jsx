@@ -1,6 +1,9 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const EditorSection = () => {
+const EditorSection = ({ registProduct }) => {
+  const navigate = useNavigate();
+
   return (
     <Box>
       <Typography variant="h5" color="text.grey">
@@ -28,6 +31,34 @@ const EditorSection = () => {
           에디터 영역
         </Typography>
       </Paper>
+      <Box
+        sx={{
+          display: "flex",
+          mt: "50px",
+          justifyContent: "right",
+        }}
+      >
+        <Button
+          variant="outlined"
+          onClick={() => navigate(-1)}
+          sx={{
+            width: "200px",
+            mr: "14px",
+          }}
+        >
+          취소
+        </Button>
+        <Button
+          variant="contained"
+          onClick={registProduct}
+          disableElevation
+          sx={{
+            width: "200px",
+          }}
+        >
+          저장하기
+        </Button>
+      </Box>
     </Box>
   );
 };
