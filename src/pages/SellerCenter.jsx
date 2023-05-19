@@ -13,15 +13,15 @@ const SellerCenter = () => {
 
   const onClickUpdate = (text) => {
     if (text === "판매중인 상품") {
-      navigate("/sellercenter/salesproduct");
+      navigate("/sellercenter/dashboard/salesproduct");
     } else if (text === "주문/배송") {
-      navigate("/sellercenter/ordership");
+      navigate("/sellercenter/dashboard/ordership");
     } else if (text === "문의/리뷰") {
-      navigate("/sellercenter/ask");
+      navigate("/sellercenter/dashboard/ask");
     } else if (text === "통계") {
-      navigate("/sellercenter/stats");
+      navigate("/sellercenter/dashboard/stats");
     } else if (text === "스토어 설정") {
-      navigate("/sellercenter/setting");
+      navigate("/sellercenter/dashboard/setting");
     }
   };
 
