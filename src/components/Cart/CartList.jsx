@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import CartItem from "./CartItem";
 
-const CartList = ({ cartLists, setCartLists, onClickModal, selected }) => {
+const CartList = ({ cartLists, setCartLists, onClickModal, selected, MoveToOrderOne }) => {
   return (
     <>
       {cartLists.length > 0 ? (
@@ -24,6 +24,7 @@ const CartList = ({ cartLists, setCartLists, onClickModal, selected }) => {
                 onClickModal={onClickModal}
                 key={item.product_id}
                 item={item}
+                MoveToOrderOne={MoveToOrderOne}
               />
             ))}
           </Box>

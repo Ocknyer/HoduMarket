@@ -9,13 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import getCartItems from "../../api/cart/getCartItems";
 
-const CartItem = ({
-  cartLists,
-  setCartLists,
-  item,
-  onClickModal,
-  selected,
-}) => {
+const CartItem = ({ setCartLists, item, onClickModal, selected, MoveToOrderOne }) => {
   const {
     is_active,
     image,
@@ -30,6 +24,8 @@ const CartItem = ({
 
   const totalPrice = (price * quantity).toLocaleString();
   const shippingFee = item.shipping_fee;
+
+  console.log(item);
 
   const [formData, setFormData] = useState({
     product_id: product_id,
@@ -107,12 +103,7 @@ const CartItem = ({
             textAlign: "left",
           }}
         >
-          <Typography
-            variant="h6"
-            color="text.secondary"
-            component="p"
-            mb="10px"
-          >
+          <Typography variant="h6" color="text.secondary" component="p" mb="10px">
             {store_name}
           </Typography>
           <Typography variant="h4" mb="10px">
@@ -122,9 +113,7 @@ const CartItem = ({
             {price.toLocaleString()}원
           </Typography>
           <Typography variant="h5" color="text.secondary" component="p">
-            {shippingFee > 0
-              ? "택배배송 / " + shippingFee.toLocaleString() + " 원"
-              : "무료배송"}
+            {shippingFee > 0 ? "택배배송 / " + shippingFee.toLocaleString() + " 원" : "무료배송"}
           </Typography>
         </Box>
       </Box>
@@ -135,17 +124,9 @@ const CartItem = ({
       >
         <QuantityButton>
           <div className="quantity-btn">
-            <button
-              className="minus-btn"
-              onClick={handleQuantity}
-              name="decrement"
-            ></button>
+            <button className="minus-btn" onClick={handleQuantity} name="decrement"></button>
             <span className="quantity">{quantity}</span>
-            <button
-              className="plus-btn"
-              onClick={handleQuantity}
-              name="increment"
-            ></button>
+            <button className="plus-btn" onClick={handleQuantity} name="increment"></button>
           </div>
         </QuantityButton>
       </Box>
@@ -156,16 +137,12 @@ const CartItem = ({
           gap: "260x",
         }}
       >
-        <Typography
-          variant="h4"
-          component="p"
-          color="text.red"
-          fontWeight="700"
-          mb="26px"
-        >
+        <Typography variant="h4" component="p" color="text.red" fontWeight="700" mb="26px">
           {totalPrice}원
         </Typography>
-        <Button width="130px">주문하기</Button>
+        <Button width="130px" onClick={() => MoveToOrderOne(cart_item_id)}>
+          주문하기
+        </Button>
       </Box>
       <Box
         sx={{
@@ -174,10 +151,7 @@ const CartItem = ({
           right: "18px",
         }}
       >
-        <button
-          className="btn-cart-delete"
-          onClick={() => onClickModal("open", cart_item_id)}
-        >
+        <button className="btn-cart-delete" onClick={() => onClickModal("open", cart_item_id)}>
           <img src={Delete} alt="장바구니 삭제" />
         </button>
       </Box>

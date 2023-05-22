@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { InnerWrapper } from "../components/common/Wrapper/InnerWrapper";
 import { Typography } from "@mui/material";
 import { CartHeader } from "../components/common/CartHeader/CartHeader";
+import getOrderList from "../api/order/getOrderList";
 
 const Cart = () => {
   const [cartLists, setCartLists] = useState([]);
@@ -77,6 +78,14 @@ const Cart = () => {
     });
   };
 
+  const MoveToOrderOne = () => {
+    navigate("/order", {
+      state: {
+        one: 1,
+      },
+    });
+  };
+
   return (
     <DefaultWrapper>
       <InnerWrapper>
@@ -96,10 +105,9 @@ const Cart = () => {
           cartLists={cartLists}
           setCartLists={setCartLists}
           onClickModal={onClickModal}
+          MoveToOrderOne={MoveToOrderOne}
         />
-        {cartLists.length > 0 && (
-          <TotalSection payment={payment} MoveToOrder={MoveToOrder} />
-        )}
+        {cartLists.length > 0 && <TotalSection payment={payment} MoveToOrder={MoveToOrder} />}
       </InnerWrapper>
       {isOpen && (
         <Modal

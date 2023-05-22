@@ -1,7 +1,7 @@
-import { accessInstance } from '../axios-api';
+import { accessInstance } from "../axios-api";
 
 const getOrderList = async () => {
-  const res = await accessInstance.get('/order');
+  const res = await accessInstance.get("/order");
   return res.data;
 };
 
