@@ -1,12 +1,7 @@
 import { Box, Paper, Typography } from "@mui/material";
 import Button from "../../common/Button/Button";
 
-const SalesProduct = ({
-  sellerProduct,
-  handleEditProduct,
-  handleDeleteProduct,
-  handleToEditProduct,
-}) => {
+const SalesProduct = ({ sellerProduct, handleDeleteProduct, handleToEditProduct }) => {
   console.log(sellerProduct);
 
   const itemData = {
@@ -49,12 +44,7 @@ const SalesProduct = ({
             <Typography variant="h4" component="p" className="product-name">
               {item.product_name}
             </Typography>
-            <Typography
-              variant="h5"
-              component="p"
-              className="stock"
-              color="text.grey"
-            >
+            <Typography variant="h5" component="p" className="stock" color="text.grey">
               재고 : {item.stock}개
             </Typography>
           </Box>
@@ -69,9 +59,7 @@ const SalesProduct = ({
           </Button>
         </Box>
         <Box width="10%">
-          <Button onClick={() => handleDeleteProduct(item.product_id)}>
-            삭제
-          </Button>
+          <Button onClick={() => handleDeleteProduct(item.product_id)}>삭제</Button>
         </Box>
       </Box>
     );

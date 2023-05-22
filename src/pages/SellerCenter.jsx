@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import getSellerProduct from "../api/product/getSellerProduct";
 import { useState } from "react";
-import putProduct from "../api/product/putProduct";
 import deleteSellerProduct from "../api/product/deleteSellerProduct";
 
 const SellerCenter = () => {
@@ -36,32 +35,12 @@ const SellerCenter = () => {
       });
   }, []);
 
-  const handleEditProduct = (product_id) => {
-    console.log(product_id);
-    putProduct(product_id)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const handleToEditProduct = (product_id) => {
     navigate("/sellercenter/editproduct", {
       state: {
         product_id,
       },
     });
-  };
-
-  const itemData = {
-    product_name: "product_name",
-    price: "price",
-    shipping_method: "shipping_method",
-    shipping_fee: "shipping_fee",
-    stock: "stock",
-    products_info: "products_info",
   };
 
   // 모달창 띄워야 함
@@ -71,12 +50,26 @@ const SellerCenter = () => {
     });
   };
 
+  const [inputValue, setInputValue] = useState({
+    product_name: "",
+    image: "",
+    price: 0,
+    shipping_method: "",
+    shipping_fee: 0,
+    stock: 0,
+    products_info: "",
+  });
+
+  const handleData = (e) => {
+    const { name, value } = e.target;
+    setInputValue({ ...inputValue, [name]: value });
+  };
+
   return (
     <>
       <Dashboard
         onClickUpdate={onClickUpdate}
         sellerProduct={sellerProduct}
-        handleEditProduct={handleEditProduct}
         handleDeleteProduct={handleDeleteProduct}
         handleToEditProduct={handleToEditProduct}
       />

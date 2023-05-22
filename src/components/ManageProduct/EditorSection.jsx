@@ -1,8 +1,11 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const EditorSection = ({ registProduct }) => {
+const EditorSection = ({ registProduct, handleEditProduct }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const pathname = location.pathname;
 
   return (
     <Box>
@@ -50,7 +53,7 @@ const EditorSection = ({ registProduct }) => {
         </Button>
         <Button
           variant="contained"
-          onClick={registProduct}
+          onClick={pathname.includes("addproduct") ? registProduct : handleEditProduct}
           disableElevation
           sx={{
             width: "200px",

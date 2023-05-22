@@ -16,13 +16,7 @@ import {
 } from "@mui/material";
 import { ControlPoint } from "@mui/icons-material";
 
-const Dashboard = ({
-  sellerProduct,
-  onClickUpdate,
-  handleEditProduct,
-  handleDeleteProduct,
-  handleToEditProduct,
-}) => {
+const Dashboard = ({ sellerProduct, onClickUpdate, handleDeleteProduct, handleToEditProduct }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -45,12 +39,7 @@ const Dashboard = ({
       >
         <Typography variant="h1">
           대시보드{" "}
-          <Typography
-            variant="h2"
-            fontWeight="500"
-            component="span"
-            color="primary.main"
-          >
+          <Typography variant="h2" fontWeight="500" component="span" color="primary.main">
             백엔드글로벌
           </Typography>
         </Typography>
@@ -172,19 +161,14 @@ const Dashboard = ({
           {location.pathname === "/sellercenter/dashboard/salesproduct" && (
             <SalesProduct
               sellerProduct={sellerProduct}
-              handleEditProduct={handleEditProduct}
               handleDeleteProduct={handleDeleteProduct}
               handleToEditProduct={handleToEditProduct}
             />
           )}
-          {location.pathname === "/sellercenter/dashboard/ordership" && (
-            <OrderShip />
-          )}
+          {location.pathname === "/sellercenter/dashboard/ordership" && <OrderShip />}
           {location.pathname === "/sellercenter/dashboard/stats" && <Stats />}
           {location.pathname === "/sellercenter/dashboard/ask" && <Ask />}
-          {location.pathname === "/sellercenter/dashboard/setting" && (
-            <Setting />
-          )}
+          {location.pathname === "/sellercenter/dashboard/setting" && <Setting />}
         </Box>
       </Box>
     </DefaultWrapper>

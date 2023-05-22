@@ -1,21 +1,8 @@
-import {
-  Box,
-  Button,
-  InputAdornment,
-  OutlinedInput,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, Button, InputAdornment, OutlinedInput, Paper, Typography } from "@mui/material";
 import UploadBtn from "../../assets/img/icon-img.png";
 import { useRef, useState } from "react";
 
-const ProductInfo = ({
-  inputValue,
-  valueTest,
-  handleDataTest,
-  handleData,
-  productData = {},
-}) => {
+const ProductInfo = ({ inputValue, valueTest, handleDataTest, handleData, productData }) => {
   const [inputLength, setInputLength] = useState(0);
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
@@ -38,8 +25,6 @@ const ProductInfo = ({
     imgRef.current.click();
   };
 
-  console.log(productData, productData === "{}");
-
   return (
     <>
       <Box
@@ -54,13 +39,11 @@ const ProductInfo = ({
           <Typography variant="h5" color="text.grey">
             상품 이미지
           </Typography>
-          {imgFile || productData.image ? (
+          {imgFile || productData?.image ? (
             <Paper
               onClick={onClickInput}
               component="img"
-              src={
-                imgFile ? imgFile : productData.image ? productData.image : null
-              }
+              src={imgFile ? imgFile : productData.image ? productData.image : null}
               alt="상품 이미지"
               elevation={0}
               sx={{
@@ -107,13 +90,11 @@ const ProductInfo = ({
             상품명
           </Typography>
           <OutlinedInput
-            value={valueTest?.product_name || inputValue?.product_name}
-            onChange={productData !== {} ? handleDataTest : handleData}
+            value={valueTest?.product_name || inputValue?.product_name || ""}
+            onChange={productData ? handleDataTest : handleData}
             onInput={changeInputLength}
             name="product_name"
-            endAdornment={
-              <InputAdornment position="start">{inputLength}/20</InputAdornment>
-            }
+            endAdornment={<InputAdornment position="start">{inputLength}/20</InputAdornment>}
             inputProps={{
               maxLength: "20",
             }}
@@ -123,7 +104,7 @@ const ProductInfo = ({
             판매가
           </Typography>
           <OutlinedInput
-            value={valueTest?.price || ""}
+            value={valueTest?.price || inputValue?.price || ""}
             onChange={productData ? handleDataTest : handleData}
             name="price"
             endAdornment={<InputAdornment position="start">원</InputAdornment>}
@@ -149,7 +130,7 @@ const ProductInfo = ({
             기본 배송비
           </Typography>
           <OutlinedInput
-            value={valueTest?.shipping_fee || ""}
+            value={valueTest?.shipping_fee || inputValue?.shipping_fee || ""}
             onChange={productData ? handleDataTest : handleData}
             name="shipping_fee"
             endAdornment={<InputAdornment position="start">원</InputAdornment>}
@@ -159,7 +140,7 @@ const ProductInfo = ({
             재고
           </Typography>
           <OutlinedInput
-            value={valueTest?.stock ? productData?.stock : ""}
+            value={valueTest?.stock || inputValue?.stock || ""}
             onChange={productData ? handleDataTest : handleData}
             name="stock"
             endAdornment={<InputAdornment position="start">개</InputAdornment>}
