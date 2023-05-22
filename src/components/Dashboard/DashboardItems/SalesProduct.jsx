@@ -1,18 +1,12 @@
 import { Box, Paper, Typography } from "@mui/material";
 import Button from "../../common/Button/Button";
 
-const SalesProduct = ({ sellerProduct, handleDeleteProduct, handleToEditProduct }) => {
-  console.log(sellerProduct);
-
-  const itemData = {
-    product_name: sellerProduct.product_name,
-    price: sellerProduct.price,
-    shipping_method: sellerProduct.shipping_method,
-    shipping_fee: sellerProduct.shipping_fee,
-    stock: sellerProduct.stock,
-    products_info: sellerProduct.products_info,
-  };
-
+const SalesProduct = ({
+  sellerProduct,
+  handleDeleteProduct,
+  handleToEditProduct,
+  handleModalOpen,
+}) => {
   return sellerProduct.map((item) => {
     return (
       <Box
@@ -59,7 +53,8 @@ const SalesProduct = ({ sellerProduct, handleDeleteProduct, handleToEditProduct 
           </Button>
         </Box>
         <Box width="10%">
-          <Button onClick={() => handleDeleteProduct(item.product_id)}>삭제</Button>
+          <Button onClick={() => handleModalOpen(item.product_id)}>삭제</Button>
+          {/* <Button onClick={() => handleDeleteProduct(item.product_id)}>삭제</Button> */}
         </Box>
       </Box>
     );

@@ -5,10 +5,15 @@ import { useEffect } from "react";
 import getSellerProduct from "../api/product/getSellerProduct";
 import { useState } from "react";
 import deleteSellerProduct from "../api/product/deleteSellerProduct";
+import Modal from "../components/Modal/Modal";
+import { useRecoilState } from "recoil";
+import { modalIsOpen } from "../atoms";
 
 const SellerCenter = () => {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
   const [sellerProduct, setSellerProduct] = useState([]);
+  const [productId, setProductId] = useState(0);
 
   const onClickUpdate = (text) => {
     if (text === "판매중인 상품") {
@@ -27,7 +32,6 @@ const SellerCenter = () => {
   useEffect(() => {
     getSellerProduct()
       .then((data) => {
-        console.log(data);
         setSellerProduct(data);
       })
       .catch((error) => {
@@ -44,25 +48,15 @@ const SellerCenter = () => {
   };
 
   // 모달창 띄워야 함
-  const handleDeleteProduct = (product_id) => {
-    deleteSellerProduct(product_id).then((data) => {
+  const handleDeleteProduct = () => {
+    deleteSellerProduct(productId).then((data) => {
       console.log(data);
     });
   };
 
-  const [inputValue, setInputValue] = useState({
-    product_name: "",
-    image: "",
-    price: 0,
-    shipping_method: "",
-    shipping_fee: 0,
-    stock: 0,
-    products_info: "",
-  });
-
-  const handleData = (e) => {
-    const { name, value } = e.target;
-    setInputValue({ ...inputValue, [name]: value });
+  const handleModalOpen = (product_id) => {
+    setProductId(product_id);
+    setIsOpen((prev) => !prev);
   };
 
   return (
@@ -72,7 +66,18 @@ const SellerCenter = () => {
         sellerProduct={sellerProduct}
         handleDeleteProduct={handleDeleteProduct}
         handleToEditProduct={handleToEditProduct}
+        handleModalOpen={handleModalOpen}
       />
+      {isOpen ? (
+        <Modal
+          rejectText="취소"
+          resultText="확인"
+          onClickReject={handleModalOpen}
+          onClickResult={handleDeleteProduct}
+        >
+          상품을 삭제하시겠습니까?
+        </Modal>
+      ) : null}
     </>
   );
 };

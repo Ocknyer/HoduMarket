@@ -16,7 +16,13 @@ import {
 } from "@mui/material";
 import { ControlPoint } from "@mui/icons-material";
 
-const Dashboard = ({ sellerProduct, onClickUpdate, handleDeleteProduct, handleToEditProduct }) => {
+const Dashboard = ({
+  sellerProduct,
+  onClickUpdate,
+  handleDeleteProduct,
+  handleToEditProduct,
+  handleModalOpen,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -163,6 +169,7 @@ const Dashboard = ({ sellerProduct, onClickUpdate, handleDeleteProduct, handleTo
               sellerProduct={sellerProduct}
               handleDeleteProduct={handleDeleteProduct}
               handleToEditProduct={handleToEditProduct}
+              handleModalOpen={handleModalOpen}
             />
           )}
           {location.pathname === "/sellercenter/dashboard/ordership" && <OrderShip />}

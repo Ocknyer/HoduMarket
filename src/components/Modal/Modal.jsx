@@ -1,13 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Button from "../common/Button/Button";
 
-const Modal = ({
-  children,
-  rejectText,
-  resultText,
-  onClickReject,
-  onClickResult,
-}) => {
+const Modal = ({ children, rejectText, resultText, onClickReject, onClickResult }) => {
   return (
     <>
       <Box
@@ -27,6 +21,7 @@ const Modal = ({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
+          zIndex: "10",
         }}
       >
         <Typography variant="h5" mb="20px">
