@@ -10,7 +10,7 @@ const Login = () => {
   const [tempUserType, setTempUserType] = useState('BUYER');
   const setUserType = useSetRecoilState(userTypeValue);
 
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errormsg, setErrormsg] = useState('');
   const [inputValue, setInputValue] = useState({
     username: '',
     password: '',
@@ -38,10 +38,11 @@ const Login = () => {
         localStorage.setItem('token', data.token);
         setUserType(tempUserType === 'BUYER' ? 'BUYER' : 'SELLER');
         navigate('/');
+        window.location.reload();
       })
       .catch((error) => {
         if (error.request.status === 401) {
-          setErrorMsg('아이디 또는 비밀번호가 일치하지 않습니다.');
+          setErrormsg('아이디 또는 비밀번호가 일치하지 않습니다.');
         }
       });
   };
@@ -52,7 +53,7 @@ const Login = () => {
       onClick={handleUserType}
       onChange={handleData}
       onSubmit={handleLogin}
-      errorMsg={errorMsg}
+      errormsg={errormsg}
     />
   );
 };

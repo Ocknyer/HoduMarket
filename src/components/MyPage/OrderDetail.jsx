@@ -36,7 +36,7 @@ const OrderDetail = ({ flexTextBox, orderItem }) => {
           <Typography variant='h5' component='p' width='10%'>
             {order_number}
           </Typography>
-          <Typography variant='h6' component='p' width='20%' color='text.grey'>
+          <Typography variant='h6' component='p' width='15%' color='text.grey'>
             {`${created_at.slice(0, 10)} ${created_at.slice(11, 19)}`}
           </Typography>
           <Box
@@ -53,7 +53,7 @@ const OrderDetail = ({ flexTextBox, orderItem }) => {
               sx={{
                 width: '50px',
                 height: '50px',
-                ml: '20%',
+                ml: '15%',
               }}
             />
 
@@ -61,13 +61,13 @@ const OrderDetail = ({ flexTextBox, orderItem }) => {
               {orderDetail.product_name} {leftItem > 1 ? `외 ${leftItem - 1}건` : null}
             </Typography>
             <Typography variant='h6' component='p' color='text.grey'>
-              수량 : {order_quantity}개
+              총 수량 : {order_quantity}개
             </Typography>
           </Box>
           <Typography variant='h6' component='p' width='10%'>
             {receiver}
           </Typography>
-          <Typography variant='h6' component='p' width='20%'>
+          <Typography variant='h6' component='p' width='25%'>
             {address}
           </Typography>
           <Typography variant='h5' component='p' width='10%'>

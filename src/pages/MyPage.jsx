@@ -16,6 +16,7 @@ const MyPage = ({ authorization }) => {
     resetUserType();
     localStorage.clear();
     navigate('/');
+    window.location.reload();
   };
 
   useEffect(() => {

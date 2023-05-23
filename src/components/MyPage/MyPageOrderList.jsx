@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import OrderDetail from './OrderDetail';
 
 const MyPageOrderList = ({ orderData }) => {
-  console.log(orderData);
-
   const flexTextBox = {
     display: 'flex',
     width: '100%',
@@ -35,7 +33,7 @@ const MyPageOrderList = ({ orderData }) => {
         <Typography component='p' variant='h4' width='10%'>
           주문번호
         </Typography>
-        <Typography component='p' variant='h4' width='20%'>
+        <Typography component='p' variant='h4' width='15%'>
           주문일시
         </Typography>
         <Typography component='p' variant='h4' width='30%'>
@@ -44,7 +42,7 @@ const MyPageOrderList = ({ orderData }) => {
         <Typography component='p' variant='h4' width='10%'>
           수령인
         </Typography>
-        <Typography component='p' variant='h4' width='20%'>
+        <Typography component='p' variant='h4' width='25%'>
           주소
         </Typography>
         <Typography component='p' variant='h4' width='10%'>
