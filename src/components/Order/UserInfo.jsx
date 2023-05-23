@@ -1,7 +1,14 @@
 import { Box, Checkbox, FormControlLabel, TextField, Typography } from '@mui/material';
 import Button from '../common/Button/Button';
+import { useState } from 'react';
 
 const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
+  const [isAgree, setIsAgree] = useState(false);
+
+  const handleAgree = () => {
+    setIsAgree((prev) => !prev);
+  };
+
   const flexBox = { display: 'flex', flexDirection: 'column' };
   const textBox = {
     display: 'flex',
@@ -175,12 +182,18 @@ const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
             >
               <FormControlLabel
                 control={<Checkbox size='md' />}
+                onChange={handleAgree}
                 label='주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.'
                 sx={{
                   mb: '30px',
                 }}
               />
-              <Button width={'220px'} size={'md'} onClick={handleMakeOrder}>
+              <Button
+                width={'220px'}
+                size={'md'}
+                onClick={handleMakeOrder}
+                disabled={isAgree ? false : true}
+              >
                 결제하기
               </Button>
             </Box>

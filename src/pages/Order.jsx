@@ -31,15 +31,26 @@ const Order = () => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
+  console.log(order_kind);
   // api 서버 상 오류 있음. reciver -> receiver
   const handleMakeOrder = () => {
-    postOrder({ ...inputValue, order_kind, quantity, product_id, total_price: totalPayment })
-      .then(() => {
-        navigate('/mypage');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (order_kind === 'cart_one_order') {
+      postOrder({ ...inputValue, order_kind, quantity, product_id, total_price: totalPayment })
+        .then(() => {
+          navigate('/mypage');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (order_kind === 'cart_order') {
+      postOrder({ ...inputValue, order_kind, total_price: totalPayment })
+        .then(() => {
+          navigate('/mypage');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (

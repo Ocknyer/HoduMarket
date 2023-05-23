@@ -1,5 +1,4 @@
-import { Box, Paper, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
 import OrderDetail from './OrderDetail';
 
 const MyPageOrderList = ({ orderData }) => {
@@ -36,13 +35,13 @@ const MyPageOrderList = ({ orderData }) => {
         <Typography component='p' variant='h4' width='15%'>
           주문일시
         </Typography>
-        <Typography component='p' variant='h4' width='30%'>
+        <Typography component='p' variant='h4' width='40%'>
           주문상세
         </Typography>
         <Typography component='p' variant='h4' width='10%'>
           수령인
         </Typography>
-        <Typography component='p' variant='h4' width='25%'>
+        <Typography component='p' variant='h4' width='15%'>
           주소
         </Typography>
         <Typography component='p' variant='h4' width='10%'>
