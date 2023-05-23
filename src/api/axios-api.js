@@ -27,9 +27,9 @@ accessInstance.interceptors.request.use((config) => {
   return config;
 });
 
-export const getProductList = async () => {
-  // const res = await instance.get(`/products/?page=${params}`);
-  const res = await instance.get(`/products/`);
+export const getProductList = async (params) => {
+  const res = await instance.get(`/products/?page=${params}`);
+  // const res = await instance.get(`/products/`);
   return res.data;
 };
 

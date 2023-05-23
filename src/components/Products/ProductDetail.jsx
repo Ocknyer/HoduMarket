@@ -201,7 +201,13 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
               >
                 {productData.stock > 0 ? '바로 구매' : '품절'}
               </Button>
-              <Button size='lg' width='200px' bc='var(--grey76)' onClick={handleModalOpen}>
+              <Button
+                size='lg'
+                width='200px'
+                bc='var(--grey76)'
+                onClick={handleModalOpen}
+                disabled={productData.stock > 0 ? false : true}
+              >
                 장바구니
               </Button>
             </Box>

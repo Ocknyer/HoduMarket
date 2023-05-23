@@ -20,6 +20,7 @@ import PrivateRoutes from './components/Router/PrivateRoutes';
 import PrivateRoutesBuyer from './components/Router/PrivateRoutesBuyer';
 import AddProduct from './pages/AddProduct';
 import EditProduct from './pages/EditProduct';
+import NotFound from './pages/NotFound';
 
 function App() {
   const userType = useRecoilValue(userTypeValue);
@@ -52,6 +53,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
         </Route>
+        <Route path='/*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
