@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import DefaultWrapper from '../components/common/Wrapper/DefaultWrapper';
 import { InnerWrapper, InnerHeader } from '../components/common/Wrapper/InnerWrapper';
 import OrderList from '../components/Order/OrderList';
@@ -9,6 +9,7 @@ import postOrder from '../api/order/postOrder';
 
 const Order = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const cartData = location.state.cartLists;
   const payment = location.state.payment;
@@ -33,8 +34,8 @@ const Order = () => {
   // api 서버 상 오류 있음. reciver -> receiver
   const handleMakeOrder = () => {
     postOrder({ ...inputValue, order_kind, quantity, product_id, total_price: totalPayment })
-      .then((data) => {
-        console.log(data);
+      .then(() => {
+        navigate('/mypage');
       })
       .catch((error) => {
         console.log(error);

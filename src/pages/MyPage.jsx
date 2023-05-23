@@ -1,35 +1,62 @@
-import { Box, Button } from "@mui/material";
-import DefaultWrapper from "../components/common/Wrapper/DefaultWrapper";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useResetRecoilState } from "recoil";
-import { userTypeValue } from "../atoms";
+import { Box, Button } from '@mui/material';
+import DefaultWrapper from '../components/common/Wrapper/DefaultWrapper';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useResetRecoilState } from 'recoil';
+import { userTypeValue } from '../atoms';
+import { useEffect, useState } from 'react';
+import getOrderList from '../api/order/getOrderList';
+import MyPageOrderList from '../components/MyPage/MyPageOrderList';
 
 const MyPage = ({ authorization }) => {
   const navigate = useNavigate();
   const resetUserType = useResetRecoilState(userTypeValue);
+  const [orderData, setOrderData] = useState([]);
 
   const handleLogout = () => {
     resetUserType();
     localStorage.clear();
-    navigate("/");
+    navigate('/');
   };
+
+  useEffect(() => {
+    getOrderList()
+      .then((data) => {
+        setOrderData(data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return authorization ? (
     <>
       <DefaultWrapper>
         <Box
           sx={{
-            mt: "30px",
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+            m: '50px 0px',
+            p: '0px 0px',
           }}
         >
-          <Button variant="contained" onClick={handleLogout}>
+          <MyPageOrderList orderData={orderData} />
+          <Button
+            variant='contained'
+            onClick={handleLogout}
+            sx={{
+              width: '120px',
+              mt: '30px',
+            }}
+          >
             로그아웃
           </Button>
         </Box>
       </DefaultWrapper>
     </>
   ) : (
-    <Navigate to="/" />
+    <Navigate to='/' />
   );
 };
 
