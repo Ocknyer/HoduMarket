@@ -25,17 +25,11 @@ const CartItem = ({ setCartLists, item, onClickModal, selected, MoveToOrderOne }
   const totalPrice = (price * quantity).toLocaleString();
   const shippingFee = item.shipping_fee;
 
-  console.log(item);
-
   const [formData, setFormData] = useState({
     product_id: product_id,
     quantity: quantity,
     is_active: is_active,
   });
-
-  // const cartItemIdx = cartLists.findIndex(
-  //   (el) => el.product_id === item.product_id
-  // );
 
   const handleQuantity = (e) => {
     if (e.target.name === "increment" && quantity <= stock) {
@@ -140,7 +134,7 @@ const CartItem = ({ setCartLists, item, onClickModal, selected, MoveToOrderOne }
         <Typography variant="h4" component="p" color="text.red" fontWeight="700" mb="26px">
           {totalPrice}원
         </Typography>
-        <Button width="130px" onClick={() => MoveToOrderOne(cart_item_id)}>
+        <Button width="130px" onClick={() => MoveToOrderOne(product_id)}>
           주문하기
         </Button>
       </Box>

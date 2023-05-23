@@ -13,13 +13,13 @@ import { useNavigate } from "react-router-dom";
 import { InnerWrapper } from "../components/common/Wrapper/InnerWrapper";
 import { Typography } from "@mui/material";
 import { CartHeader } from "../components/common/CartHeader/CartHeader";
-import getOrderList from "../api/order/getOrderList";
 
 const Cart = () => {
   const [cartLists, setCartLists] = useState([]);
   const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
   const [deletedItem, setDeletedItem] = useState();
   const [selected, setSelected] = useState(false);
+  const [item_id, setItem_id] = useState();
   // const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -42,10 +42,8 @@ const Cart = () => {
       }
       return acc;
     },
-    { price: 0, shipping_fee: 0 }
+    { price: 0, shipping_fee: 0, stock: 0 }
   );
-
-  const [item_id, setItem_id] = useState();
 
   const onClickModal = (type, cart_item_id) => {
     type === "open" ? setIsOpen(true) : setIsOpen(false);
@@ -74,14 +72,26 @@ const Cart = () => {
       state: {
         cartLists: cartLists,
         payment: payment,
+        order_kind: "cart_order",
       },
     });
   };
 
-  const MoveToOrderOne = () => {
+  const MoveToOrderOne = (product_id) => {
+    const cartItemIdx = cartLists.findIndex((el) => el.product_id === product_id);
+
+    const curItem = cartLists[cartItemIdx];
+
+    const payment = {
+      price: curItem.price * curItem.quantity,
+      shipping_fee: curItem.shipping_fee,
+    };
+
     navigate("/order", {
       state: {
-        one: 1,
+        cartLists: [cartLists[cartItemIdx]],
+        payment: payment,
+        order_kind: "cart_one_order",
       },
     });
   };

@@ -22,8 +22,6 @@ const Product = () => {
       });
   }, [id]);
 
-  console.log(productData);
-
   const handleQuantity = (e) => {
     if (e.target.name === "increment" && quantity < productData.stock) {
       setQuantity((prev) => prev + 1);

@@ -20,7 +20,6 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
 
   const navigate = useNavigate();
 
-  // const totalPrice = (productData.price * quantity).toLocaleString();
   const shippingFee = productData.shipping_fee;
 
   useEffect(() => {
@@ -33,9 +32,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
       });
   }, [isIn]);
 
-  const isInCart = cartData.filter(
-    (item) => item.product_id === productData.product_id
-  ).length;
+  const isInCart = cartData.filter((item) => item.product_id === productData.product_id).length;
 
   const handleModalOpen = () => {
     postCartItems({
@@ -62,6 +59,21 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
     setIsOpen(false);
   };
 
+  const MoveToOrderOne = () => {
+    const payment = {
+      price: productData.price * quantity,
+      shipping_fee: productData.shipping_fee,
+    };
+
+    navigate("/order", {
+      state: {
+        cartLists: [{ ...productData, quantity }],
+        payment: payment,
+        order_kind: "direct_order",
+      },
+    });
+  };
+
   return (
     <DefaultWrapper>
       <h2 className="ir">{productData.product_name + " 상품 디테일 페이지"}</h2>
@@ -84,12 +96,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
           }}
         >
           <Box>
-            <Typography
-              variant="h4"
-              component="p"
-              color={"text.secondary"}
-              mb="16px"
-            >
+            <Typography variant="h4" component="p" color={"text.secondary"} mb="16px">
               {productData.store_name}
             </Typography>
             <Typography variant="h2" mb="20px" component="p">
@@ -118,31 +125,16 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
           </Box>
 
           <Box>
-            <Typography
-              variant="h5"
-              component="p"
-              color={"text.secondary"}
-              mb="20px"
-            >
-              {shippingFee > 0
-                ? "택배배송 / " + shippingFee.toLocaleString() + " 원"
-                : "무료배송"}
+            <Typography variant="h5" component="p" color={"text.secondary"} mb="20px">
+              {shippingFee > 0 ? "택배배송 / " + shippingFee.toLocaleString() + " 원" : "무료배송"}
             </Typography>
             <Divider />
             <Box m="30px 0">
               <QuantityButton>
                 <div className="quantity-btn">
-                  <button
-                    className="minus-btn"
-                    onClick={handleQuantity}
-                    name="decrement"
-                  ></button>
+                  <button className="minus-btn" onClick={handleQuantity} name="decrement"></button>
                   <span className="quantity">{quantity}</span>
-                  <button
-                    className="plus-btn"
-                    onClick={handleQuantity}
-                    name="increment"
-                  ></button>
+                  <button className="plus-btn" onClick={handleQuantity} name="increment"></button>
                 </div>
               </QuantityButton>
             </Box>
@@ -160,12 +152,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
                 총 상품 금액
               </Typography>
               <Box sx={{ display: "flex", alignItems: "end" }}>
-                <Typography
-                  variant="h4"
-                  display="flex"
-                  color="text.secondary"
-                  component="p"
-                >
+                <Typography variant="h4" display="flex" color="text.secondary" component="p">
                   총 수량{" "}
                   <Typography variant="h4" color="primary" component="span">
                     {quantity}
@@ -209,16 +196,12 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
               <Button
                 size="lg"
                 width="100%"
+                onClick={MoveToOrderOne}
                 disabled={productData.stock > 0 ? false : true}
               >
                 {productData.stock > 0 ? "바로 구매" : "품절"}
               </Button>
-              <Button
-                size="lg"
-                width="200px"
-                bc="var(--grey76)"
-                onClick={handleModalOpen}
-              >
+              <Button size="lg" width="200px" bc="var(--grey76)" onClick={handleModalOpen}>
                 장바구니
               </Button>
             </Box>

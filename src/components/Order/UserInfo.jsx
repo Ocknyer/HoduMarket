@@ -1,10 +1,4 @@
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material";
 import Button from "../common/Button/Button";
 
 const UserInfo = ({ payment, totalPayment }) => {
@@ -169,7 +163,7 @@ const UserInfo = ({ payment, totalPayment }) => {
                 ...textBox,
                 borderTop: "1px solid",
                 borderColor: "border.primary",
-                p: "20px 34px",
+                p: "19px 34px",
               }}
             >
               <Typography>- 결제금액</Typography>
