@@ -1,18 +1,18 @@
-import DefaultWrapper from "../components/common/Wrapper/DefaultWrapper";
-import { useEffect } from "react";
-import getCartItems from "../api/cart/getCartItems";
-import { useState } from "react";
-import CartList from "../components/Cart/CartList";
-import TotalSection from "../components/Cart/TotalSection";
-import { useRecoilState } from "recoil";
-import { modalIsOpen } from "../atoms";
-import Modal from "../components/Modal/Modal";
-import deleteCartItem from "../api/cart/deleteCartItem";
-import { CheckBox } from "../components/common/Input/CheckBox";
-import { useNavigate } from "react-router-dom";
-import { InnerWrapper } from "../components/common/Wrapper/InnerWrapper";
-import { Typography } from "@mui/material";
-import { CartHeader } from "../components/common/CartHeader/CartHeader";
+import DefaultWrapper from '../components/common/Wrapper/DefaultWrapper';
+import { useEffect } from 'react';
+import getCartItems from '../api/cart/getCartItems';
+import { useState } from 'react';
+import CartList from '../components/Cart/CartList';
+import TotalSection from '../components/Cart/TotalSection';
+import { useRecoilState } from 'recoil';
+import { modalIsOpen } from '../atoms';
+import Modal from '../components/Modal/Modal';
+import deleteCartItem from '../api/cart/deleteCartItem';
+import { CheckBox } from '../components/common/Input/CheckBox';
+import { useNavigate } from 'react-router-dom';
+import { InnerWrapper } from '../components/common/Wrapper/InnerWrapper';
+import { Typography } from '@mui/material';
+import { CartHeader } from '../components/common/CartHeader/CartHeader';
 
 const Cart = () => {
   const [cartLists, setCartLists] = useState([]);
@@ -46,7 +46,7 @@ const Cart = () => {
   );
 
   const onClickModal = (type, cart_item_id) => {
-    type === "open" ? setIsOpen(true) : setIsOpen(false);
+    type === 'open' ? setIsOpen(true) : setIsOpen(false);
     setItem_id(cart_item_id);
   };
 
@@ -68,11 +68,11 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const MoveToOrder = () => {
-    navigate("/order", {
+    navigate('/order', {
       state: {
         cartLists: cartLists,
         payment: payment,
-        order_kind: "cart_order",
+        order_kind: 'cart_order',
       },
     });
   };
@@ -87,11 +87,11 @@ const Cart = () => {
       shipping_fee: curItem.shipping_fee,
     };
 
-    navigate("/order", {
+    navigate('/order', {
       state: {
         cartLists: [cartLists[cartItemIdx]],
         payment: payment,
-        order_kind: "cart_one_order",
+        order_kind: 'cart_one_order',
       },
     });
   };
@@ -99,16 +99,16 @@ const Cart = () => {
   return (
     <DefaultWrapper>
       <InnerWrapper>
-        <Typography variant="h1">장바구니</Typography>
+        <Typography variant='h1'>장바구니</Typography>
         <CartHeader>
           <CheckBox
-            type={"checkbox"}
+            type={'checkbox'}
             onChange={handleChecked}
             // checked={isActive}
           />
-          <p className="product-info">상품정보</p>
-          <p className="quantity">수량</p>
-          <p className="product-price">상품금액</p>
+          <p className='product-info'>상품정보</p>
+          <p className='quantity'>수량</p>
+          <p className='product-price'>상품금액</p>
         </CartHeader>
         <CartList
           selected={selected}
@@ -121,9 +121,9 @@ const Cart = () => {
       </InnerWrapper>
       {isOpen && (
         <Modal
-          rejectText={"취소"}
-          resultText={"확인"}
-          onClickReject={() => onClickModal("close")}
+          rejectText={'취소'}
+          resultText={'확인'}
+          onClickReject={() => onClickModal('close')}
           onClickResult={deleteItem}
         >
           상품을 삭제하시겠습니까?

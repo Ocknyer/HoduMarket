@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import Button from "../common/Button/Button";
-import DefaultWrapper from "../common/Wrapper/DefaultWrapper";
-import { QuantityButton } from "../common/Button/QuantityButton/QuantityButton";
-import { useNavigate } from "react-router-dom";
-import postCartItems from "../../api/cart/postCartItems";
-import getCartItems from "../../api/cart/getCartItems";
-import Modal from "../Modal/Modal";
-import { useRecoilState } from "recoil";
-import { modalIsOpen } from "../../atoms";
-import { Box, Container, Divider, Typography } from "@mui/material";
-import ProductTabs from "./ProductTabs";
+import { useState, useEffect } from 'react';
+import Button from '../common/Button/Button';
+import DefaultWrapper from '../common/Wrapper/DefaultWrapper';
+import { QuantityButton } from '../common/Button/QuantityButton/QuantityButton';
+import { useNavigate } from 'react-router-dom';
+import postCartItems from '../../api/cart/postCartItems';
+import getCartItems from '../../api/cart/getCartItems';
+import Modal from '../Modal/Modal';
+import { useRecoilState } from 'recoil';
+import { modalIsOpen } from '../../atoms';
+import { Box, Container, Divider, Typography } from '@mui/material';
+import ProductTabs from './ProductTabs';
 
 const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const price = productData.price.toLocaleString();
@@ -55,7 +55,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
 
   const navigateToCart = (e) => {
     e.preventDefault();
-    navigate("/cart");
+    navigate('/cart');
     setIsOpen(false);
   };
 
@@ -65,58 +65,58 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
       shipping_fee: productData.shipping_fee,
     };
 
-    navigate("/order", {
+    navigate('/order', {
       state: {
         cartLists: [{ ...productData, quantity }],
         payment: payment,
-        order_kind: "direct_order",
+        order_kind: 'direct_order',
       },
     });
   };
 
   return (
     <DefaultWrapper>
-      <h2 className="ir">{productData.product_name + " 상품 디테일 페이지"}</h2>
+      <h2 className='ir'>{productData.product_name + ' 상품 디테일 페이지'}</h2>
       <Container
         sx={{
-          display: "flex",
-          height: "600px",
-          mt: "80px",
-          mb: "140px",
-          gap: "50px",
+          display: 'flex',
+          height: '600px',
+          mt: '80px',
+          mb: '140px',
+          gap: '50px',
         }}
       >
-        <img src={productData.image} alt="" />
+        <img src={productData.image} alt='' />
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            width: "100%",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            width: '100%',
           }}
         >
           <Box>
-            <Typography variant="h4" component="p" color={"text.secondary"} mb="16px">
+            <Typography variant='h4' component='p' color={'text.secondary'} mb='16px'>
               {productData.store_name}
             </Typography>
-            <Typography variant="h2" mb="20px" component="p">
+            <Typography variant='h2' mb='20px' component='p'>
               {productData.product_name}
             </Typography>
             <Box
               sx={{
-                display: "flex",
-                alignItems: "flex-end",
-                verticalAlign: "bottom",
+                display: 'flex',
+                alignItems: 'flex-end',
+                verticalAlign: 'bottom',
               }}
             >
-              <Typography variant="h1" component="p">
+              <Typography variant='h1' component='p'>
                 {price}
               </Typography>
               <Typography
-                variant="h4"
-                component="p"
+                variant='h4'
+                component='p'
                 sx={{
-                  ml: "2px",
+                  ml: '2px',
                 }}
               >
                 원
@@ -125,83 +125,83 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
           </Box>
 
           <Box>
-            <Typography variant="h5" component="p" color={"text.secondary"} mb="20px">
-              {shippingFee > 0 ? "택배배송 / " + shippingFee.toLocaleString() + " 원" : "무료배송"}
+            <Typography variant='h5' component='p' color={'text.secondary'} mb='20px'>
+              {shippingFee > 0 ? '택배배송 / ' + shippingFee.toLocaleString() + ' 원' : '무료배송'}
             </Typography>
             <Divider />
-            <Box m="30px 0">
+            <Box m='30px 0'>
               <QuantityButton>
-                <div className="quantity-btn">
-                  <button className="minus-btn" onClick={handleQuantity} name="decrement"></button>
-                  <span className="quantity">{quantity}</span>
-                  <button className="plus-btn" onClick={handleQuantity} name="increment"></button>
+                <div className='quantity-btn'>
+                  <button className='minus-btn' onClick={handleQuantity} name='decrement'></button>
+                  <span className='quantity'>{quantity}</span>
+                  <button className='plus-btn' onClick={handleQuantity} name='increment'></button>
                 </div>
               </QuantityButton>
             </Box>
             <Divider />
             <Box
               sx={{
-                height: "45px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "end",
-                m: "30px 0",
+                height: '45px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'end',
+                m: '30px 0',
               }}
             >
-              <Typography variant="h4" fontWeight="500" component="p">
+              <Typography variant='h4' fontWeight='500' component='p'>
                 총 상품 금액
               </Typography>
-              <Box sx={{ display: "flex", alignItems: "end" }}>
-                <Typography variant="h4" display="flex" color="text.secondary" component="p">
-                  총 수량{" "}
-                  <Typography variant="h4" color="primary" component="span">
+              <Box sx={{ display: 'flex', alignItems: 'end' }}>
+                <Typography variant='h4' display='flex' color='text.secondary' component='p'>
+                  총 수량{' '}
+                  <Typography variant='h4' color='primary' component='span'>
                     {quantity}
                   </Typography>
                   개
                 </Typography>
                 <Divider
-                  orientation="vertical"
-                  variant="middle"
+                  orientation='vertical'
+                  variant='middle'
                   flexItem
                   sx={{
-                    m: "0 10px",
-                    height: "23px",
-                    alignSelf: "flex-end",
+                    m: '0 10px',
+                    height: '23px',
+                    alignSelf: 'flex-end',
                   }}
                 />
                 <Typography
-                  variant="h1"
-                  component="p"
-                  color="primary"
+                  variant='h1'
+                  component='p'
+                  color='primary'
                   sx={{
-                    display: "flex",
-                    alignItems: "end",
+                    display: 'flex',
+                    alignItems: 'end',
                   }}
                 >
                   {priceSum}
-                  <Typography variant="h4" component="span">
+                  <Typography variant='h4' component='span'>
                     원
                   </Typography>
                 </Typography>
               </Box>
             </Box>
             <Box
-              className="btn"
+              className='btn'
               sx={{
-                display: "flex",
-                width: "100%",
-                gap: "14px",
+                display: 'flex',
+                width: '100%',
+                gap: '14px',
               }}
             >
               <Button
-                size="lg"
-                width="100%"
+                size='lg'
+                width='100%'
                 onClick={MoveToOrderOne}
                 disabled={productData.stock > 0 ? false : true}
               >
-                {productData.stock > 0 ? "바로 구매" : "품절"}
+                {productData.stock > 0 ? '바로 구매' : '품절'}
               </Button>
-              <Button size="lg" width="200px" bc="var(--grey76)" onClick={handleModalOpen}>
+              <Button size='lg' width='200px' bc='var(--grey76)' onClick={handleModalOpen}>
                 장바구니
               </Button>
             </Box>
@@ -211,8 +211,8 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
       <ProductTabs />
       {isOpen && (
         <Modal
-          rejectText={"아니오"}
-          resultText={"예"}
+          rejectText={'아니오'}
+          resultText={'예'}
           onClickReject={handleModalClose}
           onClickResult={navigateToCart}
         >

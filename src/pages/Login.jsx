@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import postUserLogin from "../api/login/postUserLogin";
-import { userTypeValue } from "../atoms";
-import UserLogin from "../components/User/UserLogin";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import postUserLogin from '../api/login/postUserLogin';
+import { userTypeValue } from '../atoms';
+import UserLogin from '../components/User/UserLogin';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [tempUserType, setTempUserType] = useState("BUYER");
+  const [tempUserType, setTempUserType] = useState('BUYER');
   const setUserType = useSetRecoilState(userTypeValue);
 
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
   const [inputValue, setInputValue] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
   const { username, password } = inputValue;
 
@@ -23,9 +23,7 @@ const Login = () => {
   };
 
   const handleUserType = (e) => {
-    e.target.id === "BUYER"
-      ? setTempUserType("BUYER")
-      : setTempUserType("SELLER");
+    e.target.id === 'BUYER' ? setTempUserType('BUYER') : setTempUserType('SELLER');
   };
 
   const handleLogin = (e) => {
@@ -37,13 +35,13 @@ const Login = () => {
       login_type: tempUserType,
     })
       .then((data) => {
-        localStorage.setItem("token", data.token);
-        setUserType(tempUserType === "BUYER" ? "BUYER" : "SELLER");
-        navigate("/");
+        localStorage.setItem('token', data.token);
+        setUserType(tempUserType === 'BUYER' ? 'BUYER' : 'SELLER');
+        navigate('/');
       })
       .catch((error) => {
         if (error.request.status === 401) {
-          setErrorMsg("아이디 또는 비밀번호가 일치하지 않습니다.");
+          setErrorMsg('아이디 또는 비밀번호가 일치하지 않습니다.');
         }
       });
   };
