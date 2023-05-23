@@ -59,7 +59,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
     setIsOpen(false);
   };
 
-  const MoveToOrderDirect = () => {
+  const MoveToOrder = () => {
     const payment = {
       price: productData.price * quantity,
       shipping_fee: productData.shipping_fee,
@@ -196,7 +196,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
               <Button
                 size='lg'
                 width='100%'
-                onClick={MoveToOrderDirect}
+                onClick={MoveToOrder}
                 disabled={productData.stock > 0 ? false : true}
               >
                 {productData.stock > 0 ? '바로 구매' : '품절'}

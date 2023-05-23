@@ -20,6 +20,8 @@ const OrderDetail = ({ flexTextBox, orderItem }) => {
 
   const leftItem = order_items.length;
 
+  const totalQuantity = order_quantity.reduce((acc, cur) => (acc += cur), 0);
+
   return (
     <>
       {orderDetail ? (
@@ -68,7 +70,7 @@ const OrderDetail = ({ flexTextBox, orderItem }) => {
               {orderDetail.product_name} {leftItem > 1 ? `외 ${leftItem - 1}건` : null}
             </Typography>
             <Typography variant='h6' component='p' color='text.grey' width='20%'>
-              총 수량 : {order_quantity}개
+              총 수량 : {totalQuantity}개
             </Typography>
           </Box>
           <Typography variant='h6' component='p' width='10%'>

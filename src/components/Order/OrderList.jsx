@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 
 const OrderList = ({ cartData }) => {
+  console.log(cartData);
   return cartData.map((item) => (
     <Box
       key={item.product_id}

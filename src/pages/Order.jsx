@@ -18,6 +18,8 @@ const Order = () => {
   const quantity = location.state.cartLists[0].quantity;
   const product_id = location.state.cartLists[0].product_id;
 
+  console.log(quantity);
+
   const [inputValue, setInputValue] = useState({
     receiver: '',
     receiver_phone_number: '',
@@ -31,10 +33,9 @@ const Order = () => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
-  console.log(order_kind);
   // api 서버 상 오류 있음. reciver -> receiver
   const handleMakeOrder = () => {
-    if (order_kind === 'cart_one_order') {
+    if (order_kind === 'cart_one_order' || order_kind === 'direct_order') {
       postOrder({ ...inputValue, order_kind, quantity, product_id, total_price: totalPayment })
         .then(() => {
           navigate('/mypage');
@@ -44,7 +45,8 @@ const Order = () => {
         });
     } else if (order_kind === 'cart_order') {
       postOrder({ ...inputValue, order_kind, total_price: totalPayment })
-        .then(() => {
+        .then((data) => {
+          console.log(data);
           navigate('/mypage');
         })
         .catch((error) => {
