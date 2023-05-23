@@ -49,7 +49,7 @@ const MyPageOrderList = ({ orderData }) => {
         </Typography>
       </Box>
       {orderData ? (
-        <>
+        <Box component='ul'>
           {orderData.map((orderItem) => {
             return (
               <OrderDetail
@@ -59,7 +59,7 @@ const MyPageOrderList = ({ orderData }) => {
               />
             );
           })}
-        </>
+        </Box>
       ) : null}
     </Box>
   );
