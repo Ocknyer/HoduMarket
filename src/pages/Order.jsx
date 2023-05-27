@@ -18,8 +18,6 @@ const Order = () => {
   const quantity = location.state.cartLists[0].quantity;
   const product_id = location.state.cartLists[0].product_id;
 
-  console.log(quantity);
-
   const [inputValue, setInputValue] = useState({
     receiver: '',
     receiver_phone_number: '',

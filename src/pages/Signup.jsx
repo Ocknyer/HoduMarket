@@ -124,7 +124,6 @@ const Signup = () => {
     if (tempUserType === 'BUYER') {
       postSignUpBuyer(inputValue)
         .then((data) => {
-          console.log(data);
           navigate('/login');
         })
         .catch((error) => {
@@ -133,7 +132,6 @@ const Signup = () => {
     } else if (tempUserType === 'SELLER') {
       postSignUpSeller(inputValue)
         .then((data) => {
-          console.log(data);
           navigate('/login');
         })
         .catch((error) => {
@@ -157,7 +155,6 @@ const Signup = () => {
   };
 
   const passwordCheck = () => {
-    console.log(password, password2);
     if (password !== password2) {
       setPasswordMsg('비밀번호가 일치하지 않습니다.');
     } else {
@@ -202,9 +199,6 @@ const Signup = () => {
       }
     }
   }, [isValid, tempUserType]);
-
-  console.log(tempUserType, valid, isValid);
-  console.log(errors);
 
   return (
     <>
