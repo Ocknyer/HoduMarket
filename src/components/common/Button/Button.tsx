@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const setSize = (size) => {
+const setSize = (size: string) => {
   switch (size) {
     case 'lg':
       return css`

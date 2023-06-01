@@ -6,13 +6,18 @@ import sellerCenter from '../../assets/img/icon-shopping-bag.svg';
 import Button from '../common/Button/Button';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import search from '../../api/search/search';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { onSearch, searchProducts } from '../../atoms';
 import { Box, IconButton, InputBase, Paper, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { UserType } from '../Layout/Layout';
 
-const Header = ({ userType }) => {
+type UserTypeProps = {
+  userType: UserType;
+};
+
+const Header = ({ userType }: UserTypeProps) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,7 +27,7 @@ const Header = ({ userType }) => {
   const resetSearchData = useResetRecoilState(searchProducts);
   const setSearchCount = useSetRecoilState(onSearch);
 
-  const handleData = (e) => {
+  const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -41,7 +46,7 @@ const Header = ({ userType }) => {
       });
   };
 
-  const onSubmitSearch = (e) => {
+  const onSubmitSearch = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       search(inputValue)
@@ -68,7 +73,7 @@ const Header = ({ userType }) => {
     gap: '4px',
     alignItems: 'center',
     fontSize: '12px',
-    color: 'text.grey',
+    color: 'text.secondary',
   };
 
   const innerWrapper = {
@@ -85,7 +90,7 @@ const Header = ({ userType }) => {
       sx={{
         width: '100%',
         height: '90px',
-        backgroundColor: '#fff',
+        backgroundColor: 'background.default',
         boxShadow: '0 3px 5px rgba(0, 0, 0, 0.1)',
       }}
     >
@@ -102,7 +107,7 @@ const Header = ({ userType }) => {
               display: 'flex',
               width: '400px',
               border: '3px solid',
-              borderColor: 'border.main',
+              borderColor: 'primary.main',
               borderRadius: '50px',
               ml: '30px',
             }}
