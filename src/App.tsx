@@ -22,9 +22,12 @@ import AddProduct from './pages/AddProduct';
 import EditProduct from './pages/EditProduct';
 import NotFound from './pages/NotFound';
 
+export type UserType = string;
+export type Token = string | null;
+
 function App() {
-  const userType = useRecoilValue(userTypeValue);
-  const token = localStorage.getItem('token');
+  const userType = useRecoilValue<UserType>(userTypeValue);
+  const token: Token = localStorage.getItem('token');
 
   return (
     <BrowserRouter>
@@ -34,7 +37,16 @@ function App() {
           <Route path='/product/:id' element={<Product />} />
           <Route element={<PrivateRoutesSeller authorization={userType} />}>
             <Route path='/sellercenter/dashboard' element={<SellerCenter />}>
-              <Route path='/sellercenter/dashboard/salesproduct' element={<SalesProduct />} />
+              {/* <Route
+                path='/sellercenter/dashboard/salesproduct'
+                element={
+                  <SalesProduct
+                    sellerProduct={undefined}
+                    handleToEditProduct={undefined}
+                    handleModalOpen={undefined}
+                  />
+                }
+              /> */}
               <Route path='/sellercenter/dashboard/ordership' element={<OrderShip />} />
               <Route path='/sellercenter/dashboard/ask' element={<Ask />} />
               <Route path='/sellercenter/dashboard/stats' element={<Stats />} />
