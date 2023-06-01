@@ -1,6 +1,6 @@
-import { accessInstance } from "../axios-api";
+import { accessInstance } from '../axios-api';
 
-const putProduct = async (product_id, itemData) => {
+const putProduct = async (product_id: number, itemData: {}) => {
   const res = await accessInstance.put(`/products/${product_id}/`, itemData);
   return res.data;
 };
