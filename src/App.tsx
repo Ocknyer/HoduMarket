@@ -35,9 +35,14 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/product/:id' element={<Product />} />
-          <Route element={<PrivateRoutesSeller authorization={userType} />}>
-            <Route path='/sellercenter/dashboard' element={<SellerCenter />}>
-              {/* <Route
+          <Route
+            element={<PrivateRoutesSeller authorization={userType} />}
+          >
+            <Route
+              path='/sellercenter/dashboard'
+              element={<SellerCenter />}
+            >
+              <Route
                 path='/sellercenter/dashboard/salesproduct'
                 element={
                   <SalesProduct
@@ -46,20 +51,43 @@ function App() {
                     handleModalOpen={undefined}
                   />
                 }
-              /> */}
-              <Route path='/sellercenter/dashboard/ordership' element={<OrderShip />} />
-              <Route path='/sellercenter/dashboard/ask' element={<Ask />} />
-              <Route path='/sellercenter/dashboard/stats' element={<Stats />} />
-              <Route path='/sellercenter/dashboard/setting' element={<Setting />} />
+              />
+              <Route
+                path='/sellercenter/dashboard/ordership'
+                element={<OrderShip />}
+              />
+              <Route
+                path='/sellercenter/dashboard/ask'
+                element={<Ask />}
+              />
+              <Route
+                path='/sellercenter/dashboard/stats'
+                element={<Stats />}
+              />
+              <Route
+                path='/sellercenter/dashboard/setting'
+                element={<Setting />}
+              />
             </Route>
-            <Route path='/sellercenter/addproduct' element={<AddProduct />} />
-            <Route path='/sellercenter/editproduct' element={<EditProduct />} />
+            <Route
+              path='/sellercenter/addproduct'
+              element={<AddProduct />}
+            />
+            <Route
+              path='/sellercenter/editproduct'
+              element={<EditProduct />}
+            />
           </Route>
-          <Route element={<PrivateRoutesBuyer authorization={userType} />}>
+          <Route
+            element={<PrivateRoutesBuyer authorization={userType} />}
+          >
             <Route path='/cart' element={<Cart />} />
             <Route path='/order' element={<Order />} />
           </Route>
-          <Route path='/mypage' element={<MyPage authorization={token} />} />
+          <Route
+            path='/mypage'
+            element={<MyPage authorization={token} />}
+          />
         </Route>
         <Route element={<PrivateRoutes authorization={token} />}>
           <Route path='/login' element={<Login />} />
