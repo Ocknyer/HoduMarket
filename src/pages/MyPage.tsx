@@ -6,11 +6,12 @@ import { userTypeValue } from '../atoms';
 import { useEffect, useState } from 'react';
 import getOrderList from '../api/order/getOrderList';
 import MyPageOrderList from '../components/MyPage/MyPageOrderList';
+import { OrderData } from '../types/types';
 
 const MyPage = ({ authorization }) => {
   const navigate = useNavigate();
   const resetUserType = useResetRecoilState(userTypeValue);
-  const [orderData, setOrderData] = useState([]);
+  const [orderData, setOrderData] = useState<OrderData[]>([]);
 
   const handleLogout = () => {
     resetUserType();
