@@ -18,6 +18,7 @@ export interface CartItem {
   cart_item_id?: number;
   product_id?: number;
   quantity?: number;
+  // curItem?: TotalPrice;
 }
 
 export interface OrderData {
@@ -31,4 +32,10 @@ export interface OrderData {
   address_message?: string;
   payment_method?: string;
   total_price?: number;
+}
+
+export interface TotalPrice {
+  price?: number;
+  quantity?: number;
+  shipping_fee?: number;
 }

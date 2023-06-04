@@ -13,13 +13,14 @@ import { useNavigate } from 'react-router-dom';
 import { InnerWrapper } from '../components/common/Wrapper/InnerWrapper';
 import { Typography } from '@mui/material';
 import { CartHeader } from '../components/common/CartHeader/CartHeader';
+import { CartItem } from '../types/types';
 
 const Cart = () => {
-  const [cartLists, setCartLists] = useState([]);
+  const [cartLists, setCartLists] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
-  const [deletedItem, setDeletedItem] = useState();
+  const [deletedItem, setDeletedItem] = useState<number>();
   const [selected, setSelected] = useState(false);
-  const [item_id, setItem_id] = useState();
+  const [item_id, setItem_id] = useState<number>();
   // const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const Cart = () => {
   }, [deletedItem]);
 
   const payment = cartLists.reduce(
-    (acc, cur) => {
+    (acc: any, cur: any) => {
       if (cur.is_active) {
         return (acc = {
           price: acc.price + cur.price * cur.quantity,
@@ -45,19 +46,21 @@ const Cart = () => {
     { price: 0, shipping_fee: 0, stock: 0 }
   );
 
-  const onClickModal = (type, cart_item_id) => {
+  const onClickModal = (type, cart_item_id?: number) => {
     type === 'open' ? setIsOpen(true) : setIsOpen(false);
     setItem_id(cart_item_id);
   };
 
   const deleteItem = () => {
-    deleteCartItem(item_id)
-      .then(() => {
-        setDeletedItem(item_id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (item_id) {
+      deleteCartItem(item_id)
+        .then(() => {
+          setDeletedItem(item_id);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     setIsOpen(false);
   };
 
@@ -77,10 +80,12 @@ const Cart = () => {
     });
   };
 
-  const MoveToOrderOne = (product_id) => {
-    const cartItemIdx = cartLists.findIndex((el) => el.product_id === product_id);
+  const MoveToOrderOne = (product_id: number | undefined) => {
+    const cartItemIdx = cartLists.findIndex(
+      (el) => el.product_id === product_id
+    );
 
-    const curItem = cartLists[cartItemIdx];
+    const curItem: any = cartLists[cartItemIdx];
 
     const payment = {
       price: curItem.price * curItem.quantity,
@@ -117,7 +122,9 @@ const Cart = () => {
           onClickModal={onClickModal}
           MoveToOrderOne={MoveToOrderOne}
         />
-        {cartLists.length > 0 && <TotalSection payment={payment} MoveToOrder={MoveToOrder} />}
+        {cartLists.length > 0 && (
+          <TotalSection payment={payment} MoveToOrder={MoveToOrder} />
+        )}
       </InnerWrapper>
       {isOpen && (
         <Modal
