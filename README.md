@@ -15,6 +15,7 @@
 ## 💻 개발환경
 
 - React.js
+- TypeScript
 - Material UI
 - styled components
 - Recoil
