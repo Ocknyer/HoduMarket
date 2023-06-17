@@ -35,12 +35,14 @@ const Login = () => {
       login_type: tempUserType,
     })
       .then((data) => {
+        console.log(data);
         localStorage.setItem('token', data.token);
         setUserType(tempUserType === 'BUYER' ? 'BUYER' : 'SELLER');
         navigate('/');
         window.location.reload();
       })
       .catch((error) => {
+        console.log(error);
         if (error.request.status === 401) {
           setErrormsg('아이디 또는 비밀번호가 일치하지 않습니다.');
         }

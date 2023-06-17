@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import getCartItems from '../../api/cart/getCartItems';
 
-const CartItem = ({ setCartLists, item, onClickModal, selected, MoveToOrderOne }) => {
+const CartItem = ({ setCartLists, item, onClickModal, selected, MoveToOrderOne, cartLists }) => {
   const {
     is_active,
     image,
