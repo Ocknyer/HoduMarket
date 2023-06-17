@@ -36,7 +36,7 @@ accessInstance.interceptors.request.use((config: any): AxiosRequestConfig => {
   return config;
 });
 
-export const getProductList = async (params: string) => {
+export const getProductList = async (params: string | number) => {
   const res = await instance.get(`/products/?page=${params}`);
   return res.data;
 };

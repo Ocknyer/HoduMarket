@@ -10,13 +10,14 @@ import { useRecoilState } from 'recoil';
 import { modalIsOpen } from '../../atoms';
 import { Box, Container, Divider, Typography } from '@mui/material';
 import ProductTabs from './ProductTabs';
+import { CartItem } from '../../types/types';
 
 const ProductDetail = ({ productData, handleQuantity, quantity }) => {
   const price = productData.price.toLocaleString();
   const priceSum = (productData.price * quantity).toLocaleString();
   const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
   const [isIn, setIsIn] = useState([]);
-  const [cartData, setCartData] = useState([]);
+  const [cartData, setCartData] = useState<CartItem[]>([]);
 
   const navigate = useNavigate();
 
@@ -96,7 +97,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
           }}
         >
           <Box>
-            <Typography variant='h4' component='p' color={'text.secondary'} mb='16px'>
+            <Typography variant='h4' component='p' color='text.secondary' mb='16px'>
               {productData.store_name}
             </Typography>
             <Typography variant='h2' mb='20px' component='p'>
@@ -125,7 +126,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
           </Box>
 
           <Box>
-            <Typography variant='h5' component='p' color={'text.secondary'} mb='20px'>
+            <Typography variant='h5' component='p' color='text.secondary' mb='20px'>
               {shippingFee > 0 ? '택배배송 / ' + shippingFee.toLocaleString() + ' 원' : '무료배송'}
             </Typography>
             <Divider />

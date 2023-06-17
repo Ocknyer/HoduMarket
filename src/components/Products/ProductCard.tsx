@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Link } from 'react-router-dom';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 
 const ProductCard = ({ data }) => {
   return (
@@ -16,15 +16,15 @@ const ProductCard = ({ data }) => {
           sx={{
             width: 380,
             height: 380,
-            borderRadius: "5px",
+            borderRadius: '5px',
           }}
           image={data.image}
           title={data.product_name}
         />
         <CardContent>
           <Typography
-            variant="h5"
-            color="text.secondary"
+            variant='h5'
+            color='text.secondary'
             sx={{
               mb: 1,
             }}
@@ -33,8 +33,8 @@ const ProductCard = ({ data }) => {
           </Typography>
           <Typography
             gutterBottom
-            variant="h4"
-            color="text.primary"
+            variant='h4'
+            color='text.primary'
             sx={{
               mb: 1,
             }}
@@ -42,18 +42,18 @@ const ProductCard = ({ data }) => {
             {data.product_name}
           </Typography>
           <Typography
-            variant="h3"
+            variant='h3'
             sx={{
-              display: "flex",
-              alignItems: "end",
+              display: 'flex',
+              alignItems: 'end',
             }}
           >
             {data.price.toLocaleString()}
             <Typography
-              variant="h4"
-              component="span"
+              variant='h4'
+              component='span'
               sx={{
-                ml: "2px",
+                ml: '2px',
               }}
             >
               원

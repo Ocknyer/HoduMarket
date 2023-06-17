@@ -6,10 +6,11 @@ import { onSearch, searchProducts } from '../../atoms';
 import { useRecoilValue } from 'recoil';
 import { Box, Typography } from '@mui/material';
 import { useInView } from 'react-intersection-observer';
+import { ProductData } from '../../types/types';
 
 const ProductList = () => {
-  const searchData = useRecoilValue(searchProducts);
-  const [productData, setProductData] = useState([]);
+  const searchData = useRecoilValue<ProductData[]>(searchProducts);
+  const [productData, setProductData] = useState<ProductData[]>([]);
   const [ref, inView] = useInView();
   const [page, setPage] = useState(1);
 
