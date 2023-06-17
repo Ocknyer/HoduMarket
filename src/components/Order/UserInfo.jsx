@@ -19,7 +19,7 @@ const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
     fontWeight: '500',
     p: '18px 0',
     borderBottom: '2px solid',
-    borderColor: 'border.primary',
+    borderColor: 'grey.200',
   };
 
   const secondaryHeaderBox = {
@@ -27,7 +27,7 @@ const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
     p: '8px 0',
     mt: '40px',
     borderBottom: '2px solid',
-    borderColor: 'border.primary',
+    borderColor: 'grey.200',
   };
 
   const paymentMethod = [
@@ -57,7 +57,7 @@ const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
     fontSize: '16px',
     p: '8px 0',
     borderBottom: '1px solid',
-    borderColor: 'border.primary',
+    borderColor: 'grey.200',
   };
 
   return (
@@ -108,7 +108,7 @@ const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
               p: '18px 8px',
               gap: '20px',
               borderBottom: '2px solid',
-              borderColor: 'border.primary',
+              borderColor: 'grey.200',
             }}
           >
             {paymentMethod.map((item) => (
@@ -161,12 +161,12 @@ const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
               sx={{
                 ...textBox,
                 borderTop: '1px solid',
-                borderColor: 'border.primary',
+                borderColor: 'grey.200',
                 p: '19px 34px',
               }}
             >
               <Typography>- 결제금액</Typography>
-              <Typography variant='h3' component='span' color='text.red'>
+              <Typography variant='h3' component='span' color='error.main'>
                 {totalPayment.toLocaleString()}원
               </Typography>
             </Box>
@@ -177,7 +177,7 @@ const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
                 height: '190px',
                 borderRadius: '0 0 10px 10px',
                 p: '30px',
-                backgroundColor: 'grey.primary',
+                backgroundColor: 'grey.100',
               }}
             >
               <FormControlLabel

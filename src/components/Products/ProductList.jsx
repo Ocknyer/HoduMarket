@@ -51,7 +51,7 @@ const ProductList = () => {
               <ProductCard data={data} key={data.product_id} />
             ))}
           </Box>
-          <Box ref={ref} textAlign='center' color='text.grey'>
+          <Box ref={ref} textAlign='center' color='text.secondary'>
             상품 불러오는 중...
           </Box>
         </Box>

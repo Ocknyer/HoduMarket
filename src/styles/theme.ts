@@ -4,21 +4,21 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#21BF48',
-      grey: '#C4C4C4',
-      lightGrey: '#F2F2F2',
     },
     text: {
       primary: '#000',
       secondary: '#767676',
-      red: '#eb5757',
-      grey: '#767676',
-    },
-    border: {
-      primary: '#c4c4c4',
-      main: '#21BF48',
     },
     grey: {
-      primary: '#f2f2f2',
+      '100': '#F2F2F2',
+      '200': '#C4C4C4',
+      '300': '#767676',
+    },
+    error: {
+      main: '#eb5757',
+    },
+    background: {
+      default: '#fff',
     },
   },
 

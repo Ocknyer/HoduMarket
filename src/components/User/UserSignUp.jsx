@@ -179,7 +179,7 @@ const UserSignUp = ({
             height: '22px',
           }}
         />
-        <Typography color='text.grey' variant='h5' component='p' id='policy'>
+        <Typography color='text.secodary' variant='h5' component='p' id='policy'>
           호두샵의{' '}
           <Typography component='span' sx={{ textDecoration: 'underline' }}>
             이용약관

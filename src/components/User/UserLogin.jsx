@@ -66,7 +66,7 @@ const UserLogin = ({ tempUserType, onClick, onChange, onSubmit, errormsg }) => {
         />
 
         {errormsg ? (
-          <Typography variant='h5' component='p' color='text.red' m='26px 0'>
+          <Typography variant='h5' component='p' color='error.main' m='26px 0'>
             {errormsg}
           </Typography>
         ) : null}

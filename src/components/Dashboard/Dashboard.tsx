@@ -16,12 +16,7 @@ import {
 } from '@mui/material';
 import { ControlPoint } from '@mui/icons-material';
 
-const Dashboard = ({
-  sellerProduct,
-  onClickUpdate,
-  handleToEditProduct,
-  handleModalOpen,
-}) => {
+const Dashboard = ({ sellerProduct, onClickUpdate, handleToEditProduct, handleModalOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -44,12 +39,7 @@ const Dashboard = ({
       >
         <Typography variant='h1'>
           대시보드{' '}
-          <Typography
-            variant='h2'
-            fontWeight='500'
-            component='span'
-            color='primary.main'
-          >
+          <Typography variant='h2' fontWeight='500' component='span' color='primary.main'>
             백엔드글로벌
           </Typography>
         </Typography>
@@ -148,7 +138,7 @@ const Dashboard = ({
           sx={{
             width: '100%',
             border: '1px solid',
-            borderColor: 'border.primary',
+            borderColor: 'grey.200',
             borderRadius: '5px',
           }}
         >
@@ -160,7 +150,7 @@ const Dashboard = ({
               textAlign: 'center',
               fontSize: '18px',
               borderBottom: '1px solid',
-              borderColor: 'border.primary',
+              borderColor: 'grey.200',
             }}
           >
             <Typography width='50%'>상품정보</Typography>
@@ -168,24 +158,17 @@ const Dashboard = ({
             <Typography width='10%'>수정</Typography>
             <Typography width='10%'>삭제</Typography>
           </Box>
-          {location.pathname ===
-            '/sellercenter/dashboard/salesproduct' && (
+          {location.pathname === '/sellercenter/dashboard/salesproduct' && (
             <SalesProduct
               sellerProduct={sellerProduct}
               handleToEditProduct={handleToEditProduct}
               handleModalOpen={handleModalOpen}
             />
           )}
-          {location.pathname ===
-            '/sellercenter/dashboard/ordership' && <OrderShip />}
-          {location.pathname === '/sellercenter/dashboard/stats' && (
-            <Stats />
-          )}
-          {location.pathname === '/sellercenter/dashboard/ask' && (
-            <Ask />
-          )}
-          {location.pathname ===
-            '/sellercenter/dashboard/setting' && <Setting />}
+          {location.pathname === '/sellercenter/dashboard/ordership' && <OrderShip />}
+          {location.pathname === '/sellercenter/dashboard/stats' && <Stats />}
+          {location.pathname === '/sellercenter/dashboard/ask' && <Ask />}
+          {location.pathname === '/sellercenter/dashboard/setting' && <Setting />}
         </Box>
       </Box>
     </DefaultWrapper>

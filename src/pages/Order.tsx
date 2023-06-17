@@ -4,7 +4,7 @@ import { InnerWrapper, InnerHeader } from '../components/common/Wrapper/InnerWra
 import OrderList from '../components/Order/OrderList';
 import UserInfo from '../components/Order/UserInfo';
 import { Box, Typography } from '@mui/material';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import postOrder from '../api/order/postOrder';
 
 const Order = () => {
@@ -26,7 +26,7 @@ const Order = () => {
     payment_method: '',
   });
 
-  const handleData = (e) => {
+  const handleData = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
   };
@@ -73,7 +73,7 @@ const Order = () => {
         >
           <Typography variant='h4' component='p' fontWeight='500'>
             총 주문금액{' '}
-            <Typography variant='h3' component='span' color='text.red'>
+            <Typography variant='h3' component='span' color='error.main'>
               {totalPayment.toLocaleString()}원
             </Typography>
           </Typography>
