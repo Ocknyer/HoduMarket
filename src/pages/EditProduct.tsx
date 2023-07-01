@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { getProductDetail } from "../api/axios-api";
-import DefaultWrapper from "../components/common/Wrapper/DefaultWrapper";
-import { Box, Typography } from "@mui/material";
-import SideNotice from "../components/ManageProduct/SideNotice";
-import ProductInfo from "../components/ManageProduct/ProductInfo";
-import EditorSection from "../components/ManageProduct/EditorSection";
-import { useState } from "react";
-import putProduct from "../api/product/putProduct";
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getProductDetail } from '../api/axios-api';
+import DefaultWrapper from '../components/common/Wrapper/DefaultWrapper';
+import { Box, Typography } from '@mui/material';
+import SideNotice from '../components/ManageProduct/SideNotice';
+import ProductInfo from '../components/ManageProduct/ProductInfo';
+import EditorSection from '../components/ManageProduct/EditorSection';
+import { useState } from 'react';
+import putProduct from '../api/product/putProduct';
 
 const EditProduct = () => {
   const navigate = useNavigate();
@@ -17,13 +17,13 @@ const EditProduct = () => {
   const productId = location.state.product_id;
 
   const [valueTest, setValueTest] = useState({
-    image: "",
-    product_name: "",
+    image: '',
+    product_name: '',
     price: 0,
     shipping_fee: 0,
-    shipping_method: "",
+    shipping_method: '',
     stock: 0,
-    products_info: "",
+    products_info: '',
   });
 
   const handleEditProduct = () => {
@@ -61,28 +61,28 @@ const EditProduct = () => {
   };
 
   console.log(productData);
-  console.log("---");
+  console.log('---');
   console.log(valueTest);
 
   return (
     <DefaultWrapper>
-      <Typography variant="h1" mt="44px">
+      <Typography variant='h1' mt='44px'>
         상품 수정
       </Typography>
       <Box
         sx={{
-          display: "flex",
-          mt: "42px",
-          width: "100%",
+          display: 'flex',
+          mt: '42px',
+          width: '100%',
         }}
       >
         <SideNotice />
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
+            display: 'flex',
+            flexDirection: 'column',
             flex: 1,
-            ml: "80px",
+            ml: '80px',
           }}
         >
           <ProductInfo
