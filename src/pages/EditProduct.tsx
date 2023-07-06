@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getProductDetail } from '../api/axios-api';
 import DefaultWrapper from '../components/common/Wrapper/DefaultWrapper';
@@ -9,6 +9,16 @@ import EditorSection from '../components/ManageProduct/EditorSection';
 import { useState } from 'react';
 import putProduct from '../api/product/putProduct';
 
+export interface InputValue {
+  image: string;
+  product_name: string;
+  price: number;
+  shipping_fee: number;
+  shipping_method: string;
+  stock: number;
+  products_info: string;
+}
+
 const EditProduct = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,7 +26,7 @@ const EditProduct = () => {
 
   const productId = location.state.product_id;
 
-  const [valueTest, setValueTest] = useState({
+  const [valueTest, setValueTest] = useState<InputValue>({
     image: '',
     product_name: '',
     price: 0,
@@ -47,7 +57,7 @@ const EditProduct = () => {
           shipping_fee: data.shipping_fee,
           shipping_method: data.shipping_method,
           stock: data.stock,
-          product_info: data.product_info,
+          products_info: data.product_info,
         });
       })
       .catch((error) => {
@@ -55,7 +65,7 @@ const EditProduct = () => {
       });
   }, [productId]);
 
-  const handleDataTest = (e) => {
+  const handleDataTest = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValueTest({ ...valueTest, [name]: value });
   };
