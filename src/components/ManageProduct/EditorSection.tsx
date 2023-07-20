@@ -1,7 +1,12 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const EditorSection = ({ registProduct, handleEditProduct }) => {
+interface IProps {
+  registProduct?: () => void;
+  handleEditProduct?: () => void;
+}
+
+const EditorSection = ({ registProduct, handleEditProduct }: IProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 

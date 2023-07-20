@@ -1,8 +1,17 @@
 import { Box, Button, InputAdornment, OutlinedInput, Paper, Typography } from '@mui/material';
 import UploadBtn from '../../assets/img/icon-img.png';
 import { ChangeEvent, useRef, useState } from 'react';
+import { ProductData } from '../../types/types';
 
-const ProductInfo = ({ inputValue, valueTest, handleDataTest, handleData, productData }) => {
+interface IProps {
+  inputValue?: any;
+  valueTest?: any;
+  handleDataTest?: () => void;
+  handleData?: (e) => void;
+  productData?: ProductData;
+}
+
+const ProductInfo = ({ inputValue, valueTest, handleDataTest, handleData, productData }: IProps) => {
   const [inputLength, setInputLength] = useState(0);
   const [imgFile, setImgFile] = useState('');
   const imgRef = useRef<any>();
@@ -43,7 +52,7 @@ const ProductInfo = ({ inputValue, valueTest, handleDataTest, handleData, produc
             <Paper
               onClick={onClickInput}
               component='img'
-              src={imgFile ? imgFile : productData.image ? productData.image : null}
+              // src={imgFile ? imgFile : productData.image ? productData.image : null}
               alt='상품 이미지'
               elevation={0}
               sx={{
