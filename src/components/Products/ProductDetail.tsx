@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import Button from '../common/Button/Button';
 import DefaultWrapper from '../common/Wrapper/DefaultWrapper';
 import { QuantityButton } from '../common/Button/QuantityButton/QuantityButton';
@@ -10,18 +10,25 @@ import { useRecoilState } from 'recoil';
 import { modalIsOpen } from '../../atoms';
 import { Box, Container, Divider, Typography } from '@mui/material';
 import ProductTabs from './ProductTabs';
-import { CartItem } from '../../types/types';
+import { CartItem, ProductData } from '../../types/types';
 
-const ProductDetail = ({ productData, handleQuantity, quantity }) => {
-  const price = productData.price.toLocaleString();
-  const priceSum = (productData.price * quantity).toLocaleString();
+interface IProps {
+  productData?: ProductData;
+  handleQuantity: (e: ChangeEvent<HTMLButtonElement>) => void;
+  quantity: number;
+}
+
+const ProductDetail = ({ productData, handleQuantity, quantity }: IProps) => {
+  const productPrice = productData?.price
+  const price = productPrice?.toLocaleString();
+  const priceSum = productPrice && (productPrice * quantity).toLocaleString();
   const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
   const [isIn, setIsIn] = useState([]);
   const [cartData, setCartData] = useState<CartItem[]>([]);
 
   const navigate = useNavigate();
 
-  const shippingFee = productData.shipping_fee;
+  const shippingFee = productData?.shipping_fee;
 
   useEffect(() => {
     getCartItems()
@@ -33,11 +40,11 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
       });
   }, [isIn]);
 
-  const isInCart = cartData.filter((item) => item.product_id === productData.product_id).length;
+  const isInCart = cartData.filter((item) => item.product_id === productData?.product_id).length;
 
   const handleModalOpen = () => {
     postCartItems({
-      product_id: productData.product_id,
+      product_id: productData?.product_id,
       quantity: quantity,
       check: isInCart,
     })
@@ -62,8 +69,8 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
 
   const MoveToOrder = () => {
     const payment = {
-      price: productData.price * quantity,
-      shipping_fee: productData.shipping_fee,
+      price: productPrice && productPrice * quantity,
+      shipping_fee: productData?.shipping_fee,
     };
 
     navigate('/order', {
@@ -77,7 +84,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
 
   return (
     <DefaultWrapper>
-      <h2 className='ir'>{productData.product_name + ' 상품 디테일 페이지'}</h2>
+      <h2 className='ir'>{productData?.product_name + ' 상품 디테일 페이지'}</h2>
       <Container
         sx={{
           display: 'flex',
@@ -87,7 +94,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
           gap: '50px',
         }}
       >
-        <img src={productData.image} alt='' />
+        <img src={productData?.image} alt='' />
         <Box
           sx={{
             display: 'flex',
@@ -98,10 +105,10 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
         >
           <Box>
             <Typography variant='h4' component='p' color='text.secondary' mb='16px'>
-              {productData.store_name}
+              {productData?.store_name}
             </Typography>
             <Typography variant='h2' mb='20px' component='p'>
-              {productData.product_name}
+              {productData?.product_name}
             </Typography>
             <Box
               sx={{
@@ -198,16 +205,16 @@ const ProductDetail = ({ productData, handleQuantity, quantity }) => {
                 size='lg'
                 width='100%'
                 onClick={MoveToOrder}
-                disabled={productData.stock > 0 ? false : true}
+                disabled={productData?.stock > 0 ? false : true}
               >
-                {productData.stock > 0 ? '바로 구매' : '품절'}
+                {productData?.stock > 0 ? '바로 구매' : '품절'}
               </Button>
               <Button
                 size='lg'
                 width='200px'
                 bc='var(--grey76)'
                 onClick={handleModalOpen}
-                disabled={productData.stock > 0 ? false : true}
+                disabled={productData?.stock > 0 ? false : true}
               >
                 장바구니
               </Button>
