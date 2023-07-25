@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProductDetail } from "../api/axios-api";
@@ -21,7 +21,7 @@ const Product = () => {
       });
   }, [id]);
 
-  const handleQuantity = (e: ChangeEvent<HTMLButtonElement>) => {
+  const handleQuantity = (e: any) => {
     if (stock) {
       if (e.target.name === "increment" && quantity < stock) {
         setQuantity((prev) => prev + 1);

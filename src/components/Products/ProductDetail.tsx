@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../common/Button/Button';
 import DefaultWrapper from '../common/Wrapper/DefaultWrapper';
 import { QuantityButton } from '../common/Button/QuantityButton/QuantityButton';
@@ -14,7 +14,7 @@ import { CartItem, ProductData } from '../../types/types';
 
 interface IProps {
   productData?: ProductData;
-  handleQuantity: (e: ChangeEvent<HTMLButtonElement>) => void;
+  handleQuantity: (e: any) => void;
   quantity: number;
 }
 
@@ -134,7 +134,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }: IProps) => {
 
           <Box>
             <Typography variant='h5' component='p' color='text.secondary' mb='20px'>
-              {shippingFee > 0 ? '택배배송 / ' + shippingFee.toLocaleString() + ' 원' : '무료배송'}
+              {shippingFee && shippingFee > 0 ? '택배배송 / ' + shippingFee.toLocaleString() + ' 원' : '무료배송'}
             </Typography>
             <Divider />
             <Box m='30px 0'>
@@ -205,16 +205,16 @@ const ProductDetail = ({ productData, handleQuantity, quantity }: IProps) => {
                 size='lg'
                 width='100%'
                 onClick={MoveToOrder}
-                disabled={productData?.stock > 0 ? false : true}
+                disabled={productData?.stock && productData?.stock > 0 ? false : true}
               >
-                {productData?.stock > 0 ? '바로 구매' : '품절'}
+                {productData?.stock && productData?.stock > 0 ? '바로 구매' : '품절'}
               </Button>
               <Button
                 size='lg'
                 width='200px'
                 bc='var(--grey76)'
                 onClick={handleModalOpen}
-                disabled={productData?.stock > 0 ? false : true}
+                disabled={productData?.stock && productData?.stock > 0 ? false : true}
               >
                 장바구니
               </Button>
