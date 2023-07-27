@@ -117,7 +117,7 @@ const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
                 name='payment_method'
                 value={item.value}
                 onChange={handleData}
-                control={<Checkbox size='md' />}
+                control={<Checkbox size='medium' />}
                 label={item.method}
               />
             ))}
@@ -181,7 +181,7 @@ const UserInfo = ({ payment, totalPayment, handleData, handleMakeOrder }) => {
               }}
             >
               <FormControlLabel
-                control={<Checkbox size='md' />}
+                control={<Checkbox size='medium' />}
                 onChange={handleAgree}
                 label='주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.'
                 sx={{

@@ -3,14 +3,13 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProductDetail } from "../api/axios-api";
 import ProductDetail from "../components/Products/ProductDetail";
+import { ProductData } from "../types/types";
 
 const Product = () => {
   const { id } = useParams();
-  const [productData, setProductData] = useState();
+  const [productData, setProductData] = useState<ProductData>();
   const [quantity, setQuantity] = useState(1);
-
-  const token = localStorage.getItem("token");
-  // console.log(token);
+  const stock: number | undefined = productData?.stock;
 
   useEffect(() => {
     getProductDetail(id)
@@ -22,12 +21,14 @@ const Product = () => {
       });
   }, [id]);
 
-  const handleQuantity = (e) => {
-    if (e.target.name === "increment" && quantity < productData.stock) {
-      setQuantity((prev) => prev + 1);
-    }
-    if (e.target.name === "decrement" && quantity > 0) {
-      setQuantity((prev) => prev - 1);
+  const handleQuantity = (e: any) => {
+    if (stock) {
+      if (e.target.name === "increment" && quantity < stock) {
+        setQuantity((prev) => prev + 1);
+      }
+      if (e.target.name === "decrement" && quantity > 0) {
+        setQuantity((prev) => prev - 1);
+      }
     }
   };
 
