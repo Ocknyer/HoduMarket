@@ -46,7 +46,7 @@ const Cart = () => {
     { price: 0, shipping_fee: 0, stock: 0 }
   );
 
-  const onClickModal = (type, cart_item_id?: number) => {
+  const onClickModal = (type: string, cart_item_id?: number) => {
     type === 'open' ? setIsOpen(true) : setIsOpen(false);
     setItem_id(cart_item_id);
   };
@@ -81,9 +81,7 @@ const Cart = () => {
   };
 
   const MoveToOrderOne = (product_id: number | undefined) => {
-    const cartItemIdx = cartLists.findIndex(
-      (el) => el.product_id === product_id
-    );
+    const cartItemIdx = cartLists.findIndex((el) => el.product_id === product_id);
 
     const curItem: any = cartLists[cartItemIdx];
 
@@ -122,9 +120,7 @@ const Cart = () => {
           onClickModal={onClickModal}
           MoveToOrderOne={MoveToOrderOne}
         />
-        {cartLists.length > 0 && (
-          <TotalSection payment={payment} MoveToOrder={MoveToOrder} />
-        )}
+        {cartLists.length > 0 && <TotalSection payment={payment} MoveToOrder={MoveToOrder} />}
       </InnerWrapper>
       {isOpen && (
         <Modal

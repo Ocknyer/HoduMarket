@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { useSetRecoilState } from "recoil";
 import postDoubleCheck from '../api/login/postDoubleCheck';
 import { postSignUpBuyer, postSignUpSeller } from '../api/login/postSignUp';
-// import { userTypeValue } from "../atoms";
 import UserSignUp from '../components/User/UserSignUp';
 import postCrnCheck from '../api/login/postCrnCheck';
 import { UserData } from '../types/types';
@@ -42,7 +40,7 @@ const Signup = () => {
 
   const { username, password, password2, company_registration_number }: UserData = inputValue;
 
-  const regEx = (target, targetName) => {
+  const regEx = (target: any, targetName: string) => {
     if (targetName === 'username') {
       return /^[a-z]+[a-zA-Z0-9]{5,19}$/g.test(target);
     } else if (targetName === 'password') {
@@ -58,7 +56,7 @@ const Signup = () => {
     }
   };
 
-  const handleData = (e) => {
+  const handleData = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
 
@@ -102,16 +100,11 @@ const Signup = () => {
     }
   };
 
-  // const handleData = (e) => {
-  //   const { name, value } = e.target;
-  //   setInputValue({ ...inputValue, [name]: value });
-  // };
-
-  const handleUserType = (e) => {
+  const handleUserType = (e: ChangeEvent<HTMLButtonElement>) => {
     e.target.id === 'BUYER' ? setTempUserType('BUYER') : setTempUserType('SELLER');
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = (e: MouseEvent) => {
     e.preventDefault();
 
     if (tempUserType === 'BUYER') {
@@ -133,7 +126,7 @@ const Signup = () => {
     }
   };
 
-  const handleDoubleCheck = (e) => {
+  const handleDoubleCheck = (e: MouseEvent) => {
     e.preventDefault();
 
     postDoubleCheck(username)
@@ -155,7 +148,7 @@ const Signup = () => {
     }
   };
 
-  const crnCheck = (e) => {
+  const crnCheck = (e: MouseEvent) => {
     e.preventDefault();
 
     company_registration_number &&

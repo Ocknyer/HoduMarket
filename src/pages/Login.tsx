@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import postUserLogin from '../api/login/postUserLogin';
@@ -17,16 +17,16 @@ const Login = () => {
   });
   const { username, password } = inputValue;
 
-  const handleData = (e) => {
-    const { name, value } = e.target;
+  const handleData = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
     setInputValue({ ...inputValue, [name]: value });
   };
 
-  const handleUserType = (e) => {
-    e.target.id === 'BUYER' ? setTempUserType('BUYER') : setTempUserType('SELLER');
+  const handleUserType = (e: ChangeEvent<HTMLButtonElement>) => {
+    e.currentTarget.id === 'BUYER' ? setTempUserType('BUYER') : setTempUserType('SELLER');
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     postUserLogin({
