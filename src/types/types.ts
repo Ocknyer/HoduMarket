@@ -39,3 +39,13 @@ export interface TotalPrice {
   quantity?: number;
   shipping_fee?: number;
 }
+
+export interface UserData {
+  username: string;
+  password: string;
+  password2: string;
+  phone_number: string;
+  name: string;
+  company_registration_number?: string;
+  store_name?: string;
+}

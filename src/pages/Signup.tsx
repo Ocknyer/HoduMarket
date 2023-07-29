@@ -6,9 +6,10 @@ import { postSignUpBuyer, postSignUpSeller } from '../api/login/postSignUp';
 // import { userTypeValue } from "../atoms";
 import UserSignUp from '../components/User/UserSignUp';
 import postCrnCheck from '../api/login/postCrnCheck';
+import { UserData } from '../types/types';
 
 const Signup = () => {
-  const initialState = {
+  const initialState: UserData = {
     username: '',
     password: '',
     password2: '',
@@ -39,15 +40,7 @@ const Signup = () => {
 
   const [valid, setValid] = useState(false);
 
-  const {
-    username,
-    password,
-    password2,
-    phone_number,
-    name,
-    company_registration_number,
-    store_name,
-  } = inputValue;
+  const { username, password, password2, company_registration_number }: UserData = inputValue;
 
   const regEx = (target, targetName) => {
     if (targetName === 'username') {
@@ -143,7 +136,7 @@ const Signup = () => {
   const handleDoubleCheck = (e) => {
     e.preventDefault();
 
-    postDoubleCheck({ username })
+    postDoubleCheck(username)
       .then((data) => {
         setUsernameMsg(data.Success);
       })
@@ -165,15 +158,16 @@ const Signup = () => {
   const crnCheck = (e) => {
     e.preventDefault();
 
-    postCrnCheck({ company_registration_number })
-      .then((data) => {
-        setCrnMsg('사용 가능한 사업자등록번호입니다.');
-      })
-      .catch((error) => {
-        if (error.request.response.includes('이미 등록된')) {
-          setCrnMsg('이미 등록된 사업자등록번호입니다.');
-        }
-      });
+    company_registration_number &&
+      postCrnCheck(company_registration_number)
+        .then((data) => {
+          setCrnMsg('사용 가능한 사업자등록번호입니다.');
+        })
+        .catch((error) => {
+          if (error.request.response.includes('이미 등록된')) {
+            setCrnMsg('이미 등록된 사업자등록번호입니다.');
+          }
+        });
   };
 
   useEffect(() => {
