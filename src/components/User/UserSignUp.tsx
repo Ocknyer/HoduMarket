@@ -87,7 +87,6 @@ const UserSignUp = ({
               type='button'
               onClick={onDoubleCheck}
               disableElevation
-              required
               sx={{
                 width: '122px',
               }}
@@ -142,23 +141,11 @@ const UserSignUp = ({
                     flex: 1,
                   }}
                 />
-                <Button
-                  variant='contained'
-                  size='medium'
-                  disableElevation
-                  onClick={crnCheck}
-                  sx={{ width: '122px' }}
-                >
+                <Button variant='contained' size='medium' disableElevation onClick={crnCheck} sx={{ width: '122px' }}>
                   인증
                 </Button>
               </Box>
-              <TextField
-                label='스토어 이름'
-                type='text'
-                name='store_name'
-                onChange={handleData}
-                required
-              />
+              <TextField label='스토어 이름' type='text' name='store_name' onChange={handleData} required />
             </>
           ) : null}
         </Box>
