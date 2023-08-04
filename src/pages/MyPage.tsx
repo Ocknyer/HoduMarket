@@ -6,7 +6,7 @@ import { userTypeValue } from '../atoms';
 import { useEffect, useState } from 'react';
 import getOrderList from '../api/order/getOrderList';
 import MyPageOrderList from '../components/MyPage/MyPageOrderList';
-import { OrderData } from '../types/types';
+import { OrderData } from '../interface/types';
 
 const MyPage = ({ authorization }) => {
   const navigate = useNavigate();
@@ -22,10 +22,10 @@ const MyPage = ({ authorization }) => {
 
   useEffect(() => {
     getOrderList()
-      .then((data) => {
+      .then(data => {
         setOrderData(data.results);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }, []);

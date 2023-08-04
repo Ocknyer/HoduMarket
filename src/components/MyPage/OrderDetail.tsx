@@ -1,7 +1,7 @@
 import { Box, Paper, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { getProductDetail } from '../../api/axios-api';
-import { ProductData } from '../../types/types';
+import { ProductData } from '../../interface/types';
 
 const OrderDetail = ({ flexTextBox, orderItem }) => {
   const [orderDetail, setOrderDetail] = useState<ProductData>();
@@ -11,10 +11,10 @@ const OrderDetail = ({ flexTextBox, orderItem }) => {
 
   useEffect(() => {
     getProductDetail(order_items[0])
-      .then((data) => {
+      .then(data => {
         setOrderDetail(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }, []);

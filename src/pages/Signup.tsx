@@ -4,7 +4,7 @@ import postDoubleCheck from '../api/login/postDoubleCheck';
 import { postSignUpBuyer, postSignUpSeller } from '../api/login/postSignUp';
 import UserSignUp from '../components/User/UserSignUp';
 import postCrnCheck from '../api/login/postCrnCheck';
-import { UserData } from '../types/types';
+import { UserData } from '../interface/types';
 
 const Signup = () => {
   const initialState: UserData = {
@@ -109,18 +109,18 @@ const Signup = () => {
 
     if (tempUserType === 'BUYER') {
       postSignUpBuyer(inputValue)
-        .then((data) => {
+        .then(data => {
           navigate('/login');
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     } else if (tempUserType === 'SELLER') {
       postSignUpSeller(inputValue)
-        .then((data) => {
+        .then(data => {
           navigate('/login');
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     }
@@ -130,10 +130,10 @@ const Signup = () => {
     e.preventDefault();
 
     postDoubleCheck(username)
-      .then((data) => {
+      .then(data => {
         setUsernameMsg(data.Success);
       })
-      .catch((error) => {
+      .catch(error => {
         if (error.request.response.includes('사용 중인')) {
           setUsernameMsg('이미 사용 중인 아이디입니다.');
         }
@@ -153,10 +153,10 @@ const Signup = () => {
 
     company_registration_number &&
       postCrnCheck(company_registration_number)
-        .then((data) => {
+        .then(data => {
           setCrnMsg('사용 가능한 사업자등록번호입니다.');
         })
-        .catch((error) => {
+        .catch(error => {
           if (error.request.response.includes('이미 등록된')) {
             setCrnMsg('이미 등록된 사업자등록번호입니다.');
           }

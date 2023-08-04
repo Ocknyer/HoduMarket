@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { InnerWrapper } from '../components/common/Wrapper/InnerWrapper';
 import { Typography } from '@mui/material';
 import { CartHeader } from '../components/common/CartHeader/CartHeader';
-import { CartItem } from '../types/types';
+import { CartItem } from '../interface/types';
 
 const Cart = () => {
   const [cartLists, setCartLists] = useState<CartItem[]>([]);
@@ -25,10 +25,10 @@ const Cart = () => {
 
   useEffect(() => {
     getCartItems()
-      .then((data) => {
+      .then(data => {
         setCartLists(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }, [deletedItem]);
@@ -43,7 +43,7 @@ const Cart = () => {
       }
       return acc;
     },
-    { price: 0, shipping_fee: 0, stock: 0 }
+    { price: 0, shipping_fee: 0, stock: 0 },
   );
 
   const onClickModal = (type: string, cart_item_id?: number) => {
@@ -57,7 +57,7 @@ const Cart = () => {
         .then(() => {
           setDeletedItem(item_id);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     }
@@ -65,7 +65,7 @@ const Cart = () => {
   };
 
   const handleChecked = () => {
-    setSelected((prev) => !prev);
+    setSelected(prev => !prev);
   };
 
   const navigate = useNavigate();
@@ -81,7 +81,7 @@ const Cart = () => {
   };
 
   const MoveToOrderOne = (product_id: number | undefined) => {
-    const cartItemIdx = cartLists.findIndex((el) => el.product_id === product_id);
+    const cartItemIdx = cartLists.findIndex(el => el.product_id === product_id);
 
     const curItem: any = cartLists[cartItemIdx];
 

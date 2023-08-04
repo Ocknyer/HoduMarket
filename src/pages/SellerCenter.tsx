@@ -8,14 +8,12 @@ import deleteSellerProduct from '../api/product/deleteSellerProduct';
 import Modal from '../components/Modal/Modal';
 import { useRecoilState } from 'recoil';
 import { modalIsOpen } from '../atoms';
-import { ProductData } from '../types/types';
+import { ProductData } from '../interface/types';
 
 const SellerCenter = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
-  const [sellerProduct, setSellerProduct] = useState<ProductData[]>(
-    []
-  );
+  const [sellerProduct, setSellerProduct] = useState<ProductData[]>([]);
   const [productId, setProductId] = useState(0);
 
   const onClickUpdate = (text: string) => {
@@ -34,10 +32,10 @@ const SellerCenter = () => {
 
   useEffect(() => {
     getSellerProduct()
-      .then((data) => {
+      .then(data => {
         setSellerProduct(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }, []);
@@ -52,16 +50,14 @@ const SellerCenter = () => {
 
   // 모달창 띄워야 함
   const handleDeleteProduct = () => {
-    deleteSellerProduct(productId).then((data) => {
+    deleteSellerProduct(productId).then(data => {
       console.log(data);
     });
   };
 
-  const handleModalOpen = (
-    product_id: React.SetStateAction<number>
-  ) => {
+  const handleModalOpen = (product_id: React.SetStateAction<number>) => {
     setProductId(product_id);
-    setIsOpen((prev) => !prev);
+    setIsOpen(prev => !prev);
   };
 
   return (

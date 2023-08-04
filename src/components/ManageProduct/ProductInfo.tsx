@@ -2,7 +2,7 @@ import { Box, Button, InputAdornment, OutlinedInput, Paper, Typography } from '@
 import UploadBtn from '../../assets/img/icon-img.png';
 import { ChangeEvent, useRef, useState } from 'react';
 import { InputValue } from '../../pages/EditProduct';
-import { ProductData } from '../../types/types';
+import { ProductData } from '../../interface/types';
 
 interface ProductInfoProps {
   productData?: ProductData;

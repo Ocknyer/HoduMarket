@@ -10,7 +10,7 @@ import { useRecoilState } from 'recoil';
 import { modalIsOpen } from '../../atoms';
 import { Box, Container, Divider, Typography } from '@mui/material';
 import ProductTabs from './ProductTabs';
-import { CartItem, ProductData } from '../../types/types';
+import { CartItem, ProductData } from '../../interface/types';
 
 interface IProps {
   productData?: ProductData;
@@ -19,7 +19,7 @@ interface IProps {
 }
 
 const ProductDetail = ({ productData, handleQuantity, quantity }: IProps) => {
-  const productPrice = productData?.price
+  const productPrice = productData?.price;
   const price = productPrice?.toLocaleString();
   const priceSum = productPrice && (productPrice * quantity).toLocaleString();
   const [isOpen, setIsOpen] = useRecoilState(modalIsOpen);
@@ -32,15 +32,15 @@ const ProductDetail = ({ productData, handleQuantity, quantity }: IProps) => {
 
   useEffect(() => {
     getCartItems()
-      .then((data) => {
+      .then(data => {
         setCartData(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }, [isIn]);
 
-  const isInCart = cartData.filter((item) => item.product_id === productData?.product_id).length;
+  const isInCart = cartData.filter(item => item.product_id === productData?.product_id).length;
 
   const handleModalOpen = () => {
     postCartItems({
@@ -48,10 +48,10 @@ const ProductDetail = ({ productData, handleQuantity, quantity }: IProps) => {
       quantity: quantity,
       check: isInCart,
     })
-      .then((data) => {
+      .then(data => {
         setIsIn(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
     setIsOpen(true);
@@ -61,7 +61,7 @@ const ProductDetail = ({ productData, handleQuantity, quantity }: IProps) => {
     setIsOpen(false);
   };
 
-  const navigateToCart = (e) => {
+  const navigateToCart = e => {
     e.preventDefault();
     navigate('/cart');
     setIsOpen(false);
@@ -134,7 +134,9 @@ const ProductDetail = ({ productData, handleQuantity, quantity }: IProps) => {
 
           <Box>
             <Typography variant='h5' component='p' color='text.secondary' mb='20px'>
-              {shippingFee && shippingFee > 0 ? '택배배송 / ' + shippingFee.toLocaleString() + ' 원' : '무료배송'}
+              {shippingFee && shippingFee > 0
+                ? '택배배송 / ' + shippingFee.toLocaleString() + ' 원'
+                : '무료배송'}
             </Typography>
             <Divider />
             <Box m='30px 0'>

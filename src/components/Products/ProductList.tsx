@@ -6,7 +6,7 @@ import { onSearch, searchProducts } from '../../atoms';
 import { useRecoilValue } from 'recoil';
 import { Box, Typography } from '@mui/material';
 import { useInView } from 'react-intersection-observer';
-import { ProductData } from '../../types/types';
+import { ProductData } from '../../interface/types';
 
 const ProductList = () => {
   const searchData = useRecoilValue<ProductData[]>(searchProducts);
@@ -16,11 +16,11 @@ const ProductList = () => {
 
   const infinityScroll = () => {
     getProductList(page)
-      .then((data) => {
+      .then(data => {
         setProductData([...productData, ...data.results]);
-        setPage((prev) => prev + 1);
+        setPage(prev => prev + 1);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   };
@@ -48,7 +48,7 @@ const ProductList = () => {
         <Box>
           <Box sx={productListBox}>
             <h2 className='ir'>상품리스트</h2>
-            {productData.map((data) => (
+            {productData.map(data => (
               <ProductCard data={data} key={data.product_id} />
             ))}
           </Box>
@@ -72,7 +72,7 @@ const ProductList = () => {
       ) : (
         <Box sx={productListBox}>
           <h2 className='ir'>상품리스트</h2>
-          {searchData.map((data) => (
+          {searchData.map(data => (
             <ProductCard data={data} key={data.product_id} />
           ))}
         </Box>
