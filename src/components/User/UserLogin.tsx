@@ -28,7 +28,7 @@ const UserLogin = ({ tempUserType, onClick, onChange, onSubmit, errormsg }) => {
       <Paper
         component='form'
         onSubmit={onSubmit}
-        errormsg={errormsg ? errormsg : ''}
+        // errormsg={errormsg ? errormsg : ''}
         elevation={0}
         sx={{
           display: 'flex',
@@ -71,7 +71,13 @@ const UserLogin = ({ tempUserType, onClick, onChange, onSubmit, errormsg }) => {
           </Typography>
         ) : null}
 
-        <Button variant='contained' width='100%' size='large' type='submit' disableElevation>
+        <Button
+          variant='contained'
+          size='large'
+          type='submit'
+          disableElevation
+          sx={{ width: '100%' }}
+        >
           로그인
         </Button>
       </Paper>
