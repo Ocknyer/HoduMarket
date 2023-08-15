@@ -20,6 +20,3 @@
 - styled components
 - Recoil
 - REST API (제주코딩베이스캠프 제공)
-
-## 💥 트러블 슈팅
-- 
